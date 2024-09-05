@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
+            $table->longText('description');
             $table->foreignIdFor(App\Models\User::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(App\Models\Category::class)->constrained()->onDelete('cascade');
             $table->timestamps();
