@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -28,7 +29,19 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        logger($request);
+        $user = User::where('email', '=', $request->email)->first();
+        logger($user);
+        if($user->role == 1)
+        {
+            // return redirect()->intended(route('dashboard', absolute: false));
+            return redirect()->intended(route('admin.goToUserList', absolute: false));
+        }
+        else
+        {
+            return redirect()->intended(route('user.home', absolute: false));
+        }
+
     }
 
     /**
