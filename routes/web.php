@@ -10,7 +10,7 @@ Route::get('/', function () {
     // return view('auth.login');
 });
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('/dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 

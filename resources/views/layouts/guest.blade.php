@@ -44,7 +44,7 @@
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Entertainment</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Log In</a>
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="{{ route('register') }}">Register</a>
                             </li>
                         </ul>
 
