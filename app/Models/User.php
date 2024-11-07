@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Comment;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\View;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -56,6 +58,6 @@ class User extends Authenticatable
 
     public function views () : HasMany
     {
-        return $this->hasMany(App\Models\View::class);
+        return $this->hasMany(View::class); 
     }
 }

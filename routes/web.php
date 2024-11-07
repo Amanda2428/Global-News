@@ -5,13 +5,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('admin.user-list');
-    // return view('landing');
+    return view('landing');
     // return view('auth.register');
-    return view('auth.login');
+    // return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/', function () {
+    return view('/dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

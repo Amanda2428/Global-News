@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Author;
 use App\Models\CategoryType;
@@ -30,7 +32,7 @@ class Category extends Model
 
     public function views () : HasMany
     {
-        return $this->hasMany(App\Models\View::class);
+        return $this->hasMany(View::class);
     }
 
 }

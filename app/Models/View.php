@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class View extends Model
 {
@@ -12,12 +13,12 @@ class View extends Model
 
     public function user () : BelongsTo
     {
-        return $this->belongsTo(App\Models\User::class);
+        return $this->belongsTo(User::class);
     }
 
 
     public function category () : BelongsTo
     {
-        return $this->belongsTo(App\Models\Category::class);
+        return $this->belongsTo(Category::class);
     }
 }

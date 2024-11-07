@@ -20,31 +20,28 @@
         <nav class="bg-black">
             <div class="xl:container mx-auto px-3 sm:px-4 xl:px-2">
                 <div class="flex justify-between">
-                    <div class="mx-w-10 text-2xl font-bold capitalize text-white flex items-center">Tailnews</div>
+                    <div class="mx-w-10 text-2xl font-bold capitalize text-white flex items-center">Worldview Wave</div>
 
                     <div class="flex flex-row">
                         <!-- nav menu -->
                         <ul class="navbar hidden lg:flex lg:flex-row text-gray-400 text-sm items-center font-bold">
-                            <li class="active relative border-l border-gray-800 hover:bg-gray-900">
+                            <li class="active relative border-l border-gray-800 hover:bg-gray-900 ">
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="index.html">Home</a>
-                            </li>
-                            <li class="dropdown relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Pages</a>
+                            </li>   
+                            <li class="relative border-l border-gray-800 hover:bg-gray-900">
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">World</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Sport</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Travel</a>
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Business</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Techno</a>
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Politics</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Worklife</a>
-                            </li>
-                            <li class="relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Future</a>
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Entertainment</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Log In</a>
