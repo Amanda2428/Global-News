@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/user-list', [AdminUserController::class, 'goToUserListPage'])->name('admin.goToUserList');
+    Route::get('/admin/admin-register', [AdminUserController::class, 'goToAdminRegister'])->name('admin.goToAdminRegister');
 });
 
 require __DIR__.'/auth.php';
