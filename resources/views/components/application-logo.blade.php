@@ -3,9 +3,13 @@
 
 </svg> -->
 
-<svg viewBox="0 0 316 316" xmlns="http://www.w3.org/2000/svg" {{ $attributes }}>
-    <image xlink:href="{{ asset('images/logo2.png') }}" width="400" height="316" />
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" {{ $attributes->merge(['width' => '50', 'height' => '50']) }}>
+    <image xlink:href="{{ asset('images/WVlogo2.png') }}" width="100" height="100" />
 </svg>
+
+
+
+
 
 
 
