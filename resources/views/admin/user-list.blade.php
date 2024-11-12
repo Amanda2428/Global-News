@@ -21,14 +21,18 @@
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal ">
 
-    <nav id="header" class="bg-black fixed w-full z-10 top-0 shadow">
+<!-- Navigation Header -->
+
+<nav id="header" class="bg-black fixed w-full z-10 top-0 shadow">
         <div class="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
             <div class="w-1/2 pl-2 md:pl-0">
                 <a class="text-gray-50 text-base xl:text-xl no-underline hover:no-underline font-bold" href="#">
                     Worldview Waves Admin
                     <i class="fas fa-newspaper text-pink-600 pl-3"></i>
                 </a>
+            
             </div>
+            
             <div class="w-1/2 pr-0">
                 <div class="flex relative inline-block float-right">
                     <div class="relative text-sm">
@@ -53,6 +57,15 @@
                                 </form>
                             </ul>
                         </div>
+                        
+                    </div>
+                    <div class="block lg:hidden pr-4">
+                        <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-teal-500 appearance-none focus:outline-none">
+                            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <title>Menu</title>
+                                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -72,9 +85,9 @@
                             <i class="fas fa-users mr-3"></i><span class="pb-1 md:pb-0 text-sm">Manage Lists</span><i class="fas fa-sort-down ml-2"></i>
                         </a>
                         <div id="adminDropdown" class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
-                            <ul class="list-reset p-2">
-                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-user mr-2"></i>Users</a></li>
-                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-users-cog mr-2"></i>Admins</a></li>
+                            <ul class="list-reset w p-2">
+                                <li><a href="user-list" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-user mr-2"></i>Users</a></li>
+                                <li><a href="admin-list" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-users-cog mr-2"></i>Admins</a></li>
                                 <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-user-edit mr-2"></i>Authors Listing</a></li>
                             </ul>
                         </div>
@@ -104,12 +117,12 @@
                     
                     
                     <li class="mr-6 my-2 md:my-0">
-                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
+                        <a href="admin-register" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
                             <i class="fas fa-user-plus mr-2"></i><span class="pb-1 md:pb-0 text-sm">Admin Create</span>
                         </a>
                     </li>
                     <li class="mr-6 my-2 md:my-0">
-                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
+                        <a href="category-types" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
                             <i class="fas fa-bars mr-2"></i><span class="pb-1 md:pb-0 text-sm">Category Types Manage</span>
                         </a>
                     </li>
@@ -127,7 +140,7 @@
             </div>
 
         </div>
-    </nav>
+    </nav> 
 
 
     <!--Container-->
@@ -447,78 +460,72 @@
         </div>
     </footer>
 
-    <script>
-        /*Toggle dropdown list*/
-        /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
 
-        var userMenuDiv = document.getElementById("userMenu");
-        var userMenu = document.getElementById("userButton");
+<script>
+    /*Toggle dropdown list*/
+    /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
 
-        var navMenuDiv = document.getElementById("nav-content");
-        var navMenu = document.getElementById("nav-toggle");
+    var userMenuDiv = document.getElementById("userMenu");
+    var userMenu = document.getElementById("userButton");
 
-        document.onclick = check;
+    var navMenuDiv = document.getElementById("nav-content");
+    var navMenu = document.getElementById("nav-toggle");
 
-        function check(e) {
-            var target = (e && e.target) || (event && event.srcElement);
+    document.onclick = check;
 
-            //User Menu
-            if (!checkParent(target, userMenuDiv)) {
-                // click NOT on the menu
-                if (checkParent(target, userMenu)) {
-                    // click on the link
-                    if (userMenuDiv.classList.contains("invisible")) {
-                        userMenuDiv.classList.remove("invisible");
-                    } else {
-                        userMenuDiv.classList.add("invisible");
-                    }
-                } else {
-                    // click both outside link and outside menu, hide menu
-                    userMenuDiv.classList.add("invisible");
-                }
+    function check(e) {
+        var target = (e && e.target) || (event && event.srcElement);
+
+        //User Menu
+        if (!checkParent(target, userMenuDiv)) {
+            // click NOT on the menu
+            if (checkParent(target, userMenu)) {
+                // click on the link
+                if (userMenuDiv.classList.contains("invisible")) {
+                    userMenuDiv.classList.remove("invisible");
+                } else { userMenuDiv.classList.add("invisible"); }
+            } else {
+                // click both outside link and outside menu, hide menu
+                userMenuDiv.classList.add("invisible");
             }
-
-            //Nav Menu
-            if (!checkParent(target, navMenuDiv)) {
-                // click NOT on the menu
-                if (checkParent(target, navMenu)) {
-                    // click on the link
-                    if (navMenuDiv.classList.contains("hidden")) {
-                        navMenuDiv.classList.remove("hidden");
-                    } else {
-                        navMenuDiv.classList.add("hidden");
-                    }
-                } else {
-                    // click both outside link and outside menu, hide menu
-                    navMenuDiv.classList.add("hidden");
-                }
-            }
-
         }
 
-        function checkParent(t, elm) {
-            while (t.parentNode) {
-                if (t == elm) {
-                    return true;
-                }
-                t = t.parentNode;
+        //Nav Menu
+        if (!checkParent(target, navMenuDiv)) {
+            // click NOT on the menu
+            if (checkParent(target, navMenu)) {
+                // click on the link
+                if (navMenuDiv.classList.contains("hidden")) {
+                    navMenuDiv.classList.remove("hidden");
+                } else { navMenuDiv.classList.add("hidden"); }
+            } else {
+                // click both outside link and outside menu, hide menu
+                navMenuDiv.classList.add("hidden");
             }
-            return false;
         }
-    </script>
-    <script>
-    // Toggle for Manage Lists dropdown
-    document.getElementById('adminListLink').addEventListener('click', function(e) {
+
+    }
+
+    function checkParent(t, elm) {
+        while (t.parentNode) {
+            if (t == elm) { return true; }
+            t = t.parentNode;
+        }
+        return false;
+    }
+
+     // Manage Lists Dropdown Toggle
+     document.getElementById('adminListLink').addEventListener('click', function (e) {
         e.preventDefault();
         document.getElementById('adminDropdown').classList.toggle('hidden');
     });
 
-    // Toggle for Categories dropdown
-    document.getElementById('categoriesLink').addEventListener('click', function(e) {
+    // Categories Dropdown Toggle
+    document.getElementById('categoriesLink').addEventListener('click', function (e) {
         e.preventDefault();
         document.getElementById('categoriesDropdown').classList.toggle('hidden');
     });
-</script>
+    </script>
 </body>
 
 </html>

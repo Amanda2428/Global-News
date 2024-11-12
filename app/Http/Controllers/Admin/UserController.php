@@ -16,4 +16,12 @@ class UserController extends Controller
     {
         return view('admin.admin-register');
     }
+    public function goToCategoryTypes () : View
+    {
+        return view('admin.category-types');
+    }
+    public function goToAdminList () : View
+    {
+        return view('admin.admin-list');
+    }
 }
