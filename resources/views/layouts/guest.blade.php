@@ -38,7 +38,7 @@
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Business</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Politics</a>
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Education</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Entertainment</a>

@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
-    
+
     <!--Replace with your tailwind.css once created-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js" integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
 
@@ -21,11 +21,8 @@
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal ">
 
-    <nav id="header" class="bg-black fixed w-full z-10 top-0 shadow ">
-
-
+    <nav id="header" class="bg-black fixed w-full z-10 top-0 shadow">
         <div class="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
-
             <div class="w-1/2 pl-2 md:pl-0">
                 <a class="text-gray-50 text-base xl:text-xl no-underline hover:no-underline font-bold" href="#">
                     Worldview Waves Admin
@@ -34,11 +31,10 @@
             </div>
             <div class="w-1/2 pr-0">
                 <div class="flex relative inline-block float-right">
-
                     <div class="relative text-sm">
                         <button id="userButton" class="flex items-center focus:outline-none mr-1">
                             <img class="w-8 h-8 rounded-full mr-4 border-current" src="http://i.pravatar.cc/300" alt="Avatar of User">
-                            <span class="hidden md:inline-block text-gray-50">Hi, User </span>
+                            <span class="hidden md:inline-block text-gray-50">Hi, Admin </span>
                             <svg class="pl-2 h-2 fill-current text-white" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
                                 <g>
                                     <path d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" />
@@ -51,57 +47,75 @@
                                 <li>
                                     <hr class="border-t mx-2 border-gray-400">
                                 </li>
-                                <li>
-                                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline">Logout</a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </li>
+                                <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline">Logout</a></li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </ul>
                         </div>
                     </div>
-                    <div class="block lg:hidden pr-4">
-                        <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-50 hover:text-gray-400 hover:border-teal-400 appearance-none focus:outline-none">
-                            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <title>Menu</title>
-                                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
-
             </div>
 
-
-            <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white z-20" id="nav-content">
+            <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white z-20" id="nav-content">
                 <ul class="list-reset lg:flex flex-1 items-center px-4 md:px-0">
+                    <!-- Home -->
                     <li class="mr-6 my-2 md:my-0">
                         <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-pink-600 no-underline hover:text-gray-900 border-b-2 border-orange-600 hover:border-orange-600">
-                            <i class="fas fa-home fa-fw mr-3 text-pink-600 "></i><span class="pb-1 md:pb-0 text-sm">Home</span>
+                            <i class="fas fa-home fa-fw mr-3 text-pink-600"></i><span class="pb-1 md:pb-0 text-sm">Home</span>
                         </a>
                     </li>
-                    <li class="mr-6 my-2 md:my-0">
-                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-pink-500">
-                        <i class="fas fa-user mr-3"></i><span class="pb-1 md:pb-0 text-sm">User List</span>
+
+                    <!-- Manage Lists Dropdown -->
+                    <li class="mr-6 my-2 md:my-0 relative">
+                        <a href="#" id="adminListLink" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-pink-500">
+                            <i class="fas fa-users mr-3"></i><span class="pb-1 md:pb-0 text-sm">Manage Lists</span><i class="fas fa-sort-down ml-2"></i>
                         </a>
+                        <div id="adminDropdown" class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
+                            <ul class="list-reset p-2">
+                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-user mr-2"></i>Users</a></li>
+                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-users-cog mr-2"></i>Admins</a></li>
+                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-user-edit mr-2"></i>Authors Listing</a></li>
+                            </ul>
+                        </div>
                     </li>
-                    <li class="mr-6 my-2 md:my-0">
-                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-purple-500">
-                        <i class="fas fa-users mr-3"></i><span class="pb-1 md:pb-0 text-sm">Admin List</span>
-                        </a>
-                    </li>
+                    
                     <li class="mr-6 my-2 md:my-0">
                         <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-green-500">
                             <i class="fas fa-chart-area fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Analytics</span>
                         </a>
                     </li>
+                    <!-- Categories Dropdown -->
+                    <li class="mr-6 my-2 md:my-0 relative">
+                        <a href="#" id="categoriesLink" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-green-500">
+                            <i class="fas fa-th-list mr-3"></i><span class="pb-1 md:pb-0 text-sm">Categories</span><i class="fas fa-sort-down ml-2"></i>
+                        </a>
+                        <div id="categoriesDropdown" class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
+                            <ul class="list-reset p-2">
+                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-globe-asia mr-2"></i>World</a></li>
+                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-futbol mr-2"></i>Sport</a></li>
+                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-briefcase mr-2"></i>Business</a></li>
+                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-book mr-2"></i>Education</a></li>
+                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i class="fas fa-film mr-2"></i>Entertainment</a></li>  
+                            </ul>
+                        </div>
+                    </li>
+
+                    
+                    
                     <li class="mr-6 my-2 md:my-0">
                         <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
-                            <i class="fa fa-wallet fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Payments</span>
+                            <i class="fas fa-user-plus mr-2"></i><span class="pb-1 md:pb-0 text-sm">Admin Create</span>
+                        </a>
+                    </li>
+                    <li class="mr-6 my-2 md:my-0">
+                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
+                            <i class="fas fa-bars mr-2"></i><span class="pb-1 md:pb-0 text-sm">Category Types Manage</span>
                         </a>
                     </li>
                 </ul>
 
+                <!-- Search Bar -->
                 <div class="relative pull-right pl-4 pr-4 md:pr-0">
                     <input type="search" placeholder="Search" class="w-full bg-gray-100 text-sm text-gray-800 transition border focus:outline-none focus:border-gray-700 rounded py-1 px-2 pl-10 appearance-none leading-normal">
                     <div class="absolute search-icon" style="top: 0.375rem;left: 1.75rem;">
@@ -110,11 +124,11 @@
                         </svg>
                     </div>
                 </div>
-
             </div>
 
         </div>
     </nav>
+
 
     <!--Container-->
     <div class="container w-full mx-auto pt-20 p-4">
@@ -308,7 +322,7 @@
                         <div class="border-b p-2">
                             <h5 class="font-bold uppercase text-gray-600">User Table</h5>
                         </div>
-                        
+
                         <table class="table-fixed min-w-full divide-y divide-gray-200 bg-white border rounded shadow">
 
                             <thead class="bg-gray-100">
@@ -337,7 +351,7 @@
                                         class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                                         Action
                                     </th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -492,7 +506,19 @@
             return false;
         }
     </script>
+    <script>
+    // Toggle for Manage Lists dropdown
+    document.getElementById('adminListLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('adminDropdown').classList.toggle('hidden');
+    });
 
+    // Toggle for Categories dropdown
+    document.getElementById('categoriesLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('categoriesDropdown').classList.toggle('hidden');
+    });
+</script>
 </body>
 
 </html>
