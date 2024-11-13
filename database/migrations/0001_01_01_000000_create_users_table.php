@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->integer('role')->default(0);
             $table->integer('subscribed')->default(0);
+            $table->integer('owner')->default(0);
+            $table->integer('category_type')->nullable(true);
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();

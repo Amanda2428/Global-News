@@ -196,84 +196,92 @@
                 <div id="main-content" class="h-full w-full bg-gray-50 ">
 
 
-            <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
-                <div class="mb-1 w-full">
-                    <div class="mb-4">
-                        <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">All User</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col">
-                <div class="overflow-x-auto">
-                    <div class="align-middle inline-block min-w-full">
-                        <div class="shadow overflow-hidden">
-                            <table class="table-fixed min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-100">
-                                    <tr>
-                                        <th scope="col" class="p-4">
-                                            <div class="flex items-center">
-                                                <input id="checkbox-all" aria-describedby="checkbox-1"
-                                                    type="checkbox"
-                                                    class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded">
-                                                <label for="checkbox-all" class="sr-only">checkbox</label>
-                                            </div>
-                                        </th>
-                                        <th scope="col"
-                                            class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            Profile
-                                        </th>
-                                        <th scope="col"
-                                            class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            Name
-                                        </th>
-                                        <th scope="col"
-                                            class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            Email
-                                        </th>
-
-                                        <th scope="col"
-                                            class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            Subscribed
-                                        </th>
-
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-
-                                    <tr class="hover:bg-gray-100">
-                                        <td class="p-4 w-4">
-                                            <div class="flex items-center">
-                                                <input id="checkbox-1" aria-describedby="checkbox-1" type="checkbox"
-                                                    class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded">
-                                                <label for="checkbox-1" class="sr-only">checkbox</label>
-                                            </div>
-                                        </td>
-                                        <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-                                            <img class="h-10 w-10 rounded-full"
-                                                src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
-                                                alt="Neil Sims avatar">
-                                        </td>
-                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            Neil Sim</td>
-                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            Front-end developer</td>
-                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            Yes/No
-                                        </td>
-
-
-                                    </tr>
-
-                                </tbody>
-                            </table>
+                    <div
+                        class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+                        <div class="mb-1 w-full">
+                            <div class="mb-4">
+                                <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">All User</h1>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            
+                    <div class="flex flex-col">
+                        <div class="overflow-x-auto">
+                            <div class="align-middle inline-block min-w-full">
+                                <div class="shadow overflow-hidden">
+                                    <table class="table-fixed min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-100">
+                                            <tr>
+                                                <th scope="col" class="p-4">
+                                                    <div class="flex items-center">
+                                                        <input id="checkbox-all" aria-describedby="checkbox-1"
+                                                            type="checkbox"
+                                                            class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded">
+                                                        <label for="checkbox-all" class="sr-only">checkbox</label>
+                                                    </div>
+                                                </th>
+                                                <th scope="col"
+                                                    class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                                    Profile
+                                                </th>
+                                                <th scope="col"
+                                                    class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                                    Name
+                                                </th>
+                                                <th scope="col"
+                                                    class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                                    Email
+                                                </th>
 
-       
-    </div>
+                                                <th scope="col"
+                                                    class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                                    Subscribed
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+
+                                            @foreach ($users as $item)
+                                                <tr class="hover:bg-gray-100">
+                                                    <td class="p-4 w-4">
+                                                        <div class="flex items-center">
+                                                            <input id="checkbox-1" aria-describedby="checkbox-1"
+                                                                type="checkbox"
+                                                                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded">
+                                                            <label for="checkbox-1" class="sr-only">checkbox</label>
+                                                        </div>
+                                                    </td>
+                                                    <td
+                                                        class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
+                                                        <img class="h-10 w-10 rounded-full"
+                                                            src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
+                                                            alt="Neil Sims avatar">
+                                                    </td>
+                                                    <td
+                                                        class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                                        {{ $item->name }}</td>
+                                                    <td
+                                                        class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                                        {{ $item->email }}</td>
+                                                    <td
+                                                        class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                                        {{ $item->subscribed ? 'Yes' : 'No' }}
+                                                    </td>
+
+
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
                 <!--/Table Card-->
 
             </div>

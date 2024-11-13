@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             'email' => env('ADMIN_EMAIL'),
             'password' => env('ADMIN_PASSWORD'),
             'role' => 1,
-            'subscribed' => 1
+            'subscribed' => 1,
+            'owner' => 1
         ]);
     }
 }

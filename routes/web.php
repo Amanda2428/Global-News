@@ -11,9 +11,9 @@ Route::get('/', function () {
     // return view('auth.login');
 })->name('user.home');
 
-Route::get('/dashboard', function () {
-    return view('/dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('/dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/business', [AdminUserController::class, 'goToBusinessPage'])->name('admin.goToBusinessPage');
     Route::get('/admin/education', [AdminUserController::class, 'goToEducationPage'])->name('admin.goToEducationPage');
     Route::get('/admin/entertainment', [AdminUserController::class, 'goToEntertainmentPage'])->name('admin.goToEntertainmentPage');
+    Route::get('/dashboard', [AdminUserController::class, 'goToDashBoard'])->name('admin.goToDashBoard');
 });
 
 

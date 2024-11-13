@@ -9,11 +9,6 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index()
-{
-    $users = User::paginate(20); // Adjust number to control items per page
-    return view('admin.users.index', compact('users'));
-}
     public function goToUserListPage(): View
     {
         return view('admin.user-list');
@@ -62,5 +57,12 @@ class UserController extends Controller
     public function goToEntertainmentPage(): View
     {
         return view('admin.entertainment');
+    }
+
+    public function goToDashBoard() : View
+    {
+        $users = User::get();
+        $admins = User::where('role', '=', 1)->get();
+        return view('dashboard', compact('users', 'admins'));
     }
 }
