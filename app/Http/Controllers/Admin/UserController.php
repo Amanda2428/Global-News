@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\User;
 
 class UserController extends Controller
 {
+    public function index()
+{
+    $users = User::paginate(20); // Adjust number to control items per page
+    return view('admin.users.index', compact('users'));
+}
     public function goToUserListPage(): View
     {
         return view('admin.user-list');
