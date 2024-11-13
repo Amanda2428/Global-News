@@ -1,3 +1,3 @@
 <x-admin-layout>
-    category type
+ business
 </x-admin-layout>

@@ -1,3 +1,3 @@
 <x-admin-layout>
-    category type
+    sport
 </x-admin-layout>

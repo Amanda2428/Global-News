@@ -8,6 +8,21 @@
     <title>Tailwind Starter Template - Day Admin Template: Tailwind Toolbox</title>
     <meta name="description" content="description here">
     <meta name="keywords" content="keywords,here">
+    <link rel="canonical" href="https://themesberg.com/product/tailwind-css/dashboard-windster">
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://demo.themesberg.com/windster/app.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://demo.themesberg.com/windster/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://demo.themesberg.com/windster/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://demo.themesberg.com/windster/favicon-16x16.png">
+    <link rel="icon" type="image/png" href="https://demo.themesberg.com/windster/favicon.ico">
+    <link rel="manifest" href="https://demo.themesberg.com/windster/site.webmanifest">
+    <link rel="mask-icon" href="https://demo.themesberg.com/windster/safari-pinned-tab.svg" color="#5bbad5">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -28,7 +43,7 @@
     <nav id="header" class="bg-black fixed w-full z-10 top-0 shadow">
         <div class="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
             <div class="w-1/2 pl-2 md:pl-0">
-                <a class="text-gray-50 text-base xl:text-xl no-underline hover:no-underline font-bold" href="#">
+                <a class="text-gray-50 text-base xl:text-xl no-underline hover:no-underline font-bold" href="{{ route('dashboard') }}">
                     Worldview Waves Admin
                     <i class="fas fa-newspaper text-pink-600 pl-3"></i>
                 </a>
@@ -111,7 +126,7 @@
                                 <li><a href="{{ route('admin.goToAdminList') }}"
                                         class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-users-cog mr-2"></i>Admins</a></li>
-                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToAuthorList') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-user-edit mr-2"></i>Authors Listing</a></li>
                             </ul>
                         </div>
@@ -134,15 +149,15 @@
                         <div id="categoriesDropdown"
                             class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
                             <ul class="list-reset p-2">
-                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToWorldPage') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-globe-asia mr-2"></i>World</a></li>
-                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToSportPage') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-futbol mr-2"></i>Sport</a></li>
-                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToBusinessPage') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-briefcase mr-2"></i>Business</a></li>
-                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToEducationPage') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-book mr-2"></i>Education</a></li>
-                                <li><a href="#" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToEntertainmentPage') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-film mr-2"></i>Entertainment</a></li>
                             </ul>
                         </div>
@@ -151,14 +166,14 @@
 
 
                     <li class="mr-6 my-2 md:my-0">
-                        <a href="admin-register"
+                        <a href="{{ route('admin.goToAdminRegister') }}"
                             class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
                             <i class="fas fa-user-plus mr-2"></i><span class="pb-1 md:pb-0 text-sm">Admin
                                 Create</span>
                         </a>
                     </li>
                     <li class="mr-6 my-2 md:my-0">
-                        <a href="category-types"
+                        <a href="{{ route('admin.goToCategoryTypes') }}"
                             class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
                             <i class="fas fa-bars mr-2"></i><span class="pb-1 md:pb-0 text-sm">Category Types
                                 Manage</span>
@@ -303,6 +318,14 @@
             document.getElementById('categoriesDropdown').classList.toggle('hidden');
         });
     </script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
+    <script defer
+        src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+        data-cf-beacon='{"rayId":"8e058c9b5aeb4933","version":"2024.10.5","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}'
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

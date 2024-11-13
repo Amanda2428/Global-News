@@ -26,6 +26,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/admin-register', [AdminUserController::class, 'goToAdminRegister'])->name('admin.goToAdminRegister');
     Route::get('/admin/category-types', [AdminUserController::class, 'goToCategoryTypes'])->name('admin.goToCategoryTypes');
     Route::get('/admin/admin-list', [AdminUserController::class, 'goToAdminList'])->name('admin.goToAdminList');
+    Route::get('/admin/author-list', [AdminUserController::class, 'goToAuthorList'])->name('admin.goToAuthorList');
+    Route::get('/admin/world', [AdminUserController::class, 'goToWorldPage'])->name('admin.goToWorldPage');
+    Route::get('/admin/sport', [AdminUserController::class, 'goToSportPage'])->name('admin.goToSportPage');
+    Route::get('/admin/business', [AdminUserController::class, 'goToBusinessPage'])->name('admin.goToBusinessPage');
+    Route::get('/admin/education', [AdminUserController::class, 'goToEducationPage'])->name('admin.goToEducationPage');
+    Route::get('/admin/entertainment', [AdminUserController::class, 'goToEntertainmentPage'])->name('admin.goToEntertainmentPage');
 });
 
 

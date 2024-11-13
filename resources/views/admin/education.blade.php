@@ -1,3 +1,3 @@
 <x-admin-layout>
-    category type
+ education
 </x-admin-layout>
