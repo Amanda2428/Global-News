@@ -53,7 +53,7 @@
                                             ID
                                         </th>
                                         <th scope="col"
-                                            class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                            class="p-4 text-left text-xs font-medium text-gray-500 uppercase text-center align-middle">
                                             Category Types Name
                                         </th>
 
@@ -62,7 +62,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-
+                                    @foreach ($category_types as $item )
                                     <tr class="hover:bg-gray-100">
                                         <td class="p-4 w-4">
                                             <div class="flex items-center">
@@ -72,9 +72,11 @@
                                             </div>
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            1</td>
-                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            Neil Sim</td>
+                                            {{ $item->id }}
+                                        </td>
+                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900 text-center align-middle">
+                                            {{ $item->name }}
+                                        </td>
 
                                         <td class="p-4 whitespace-nowrap space-x-2 text-right">
                                             <button type="button" data-modal-toggle="user-modal"
@@ -102,14 +104,16 @@
                                             </button>
                                         </td>
                                     </tr>
-                                
+                                    @endforeach
+
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-         
+
 
             <!-- Edit User Modal -->
             <div class="hidden overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center h-modal sm:h-full"

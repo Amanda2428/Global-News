@@ -3,6 +3,12 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\AuthorController as AuthorController;
+use App\Http\Controllers\CategoryController as CategoryController;
+use App\Http\Controllers\CategoryTypeController as CategoryTypeController;
+use App\Http\Controllers\CommentController as CommentController;
+use App\Http\Controllers\ViewController as ViewController;
+
 
 Route::get('/', function () {
     // return view('admin.user-list');
@@ -23,15 +29,20 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/user-list', [AdminUserController::class, 'goToUserListPage'])->name('admin.goToUserList');
-    Route::get('/admin/admin-register', [AdminUserController::class, 'goToAdminRegister'])->name('admin.goToAdminRegister');
-    Route::get('/admin/category-types', [AdminUserController::class, 'goToCategoryTypes'])->name('admin.goToCategoryTypes');
     Route::get('/admin/admin-list', [AdminUserController::class, 'goToAdminList'])->name('admin.goToAdminList');
-    Route::get('/admin/author-list', [AdminUserController::class, 'goToAuthorList'])->name('admin.goToAuthorList');
-    Route::get('/admin/world', [AdminUserController::class, 'goToWorldPage'])->name('admin.goToWorldPage');
-    Route::get('/admin/sport', [AdminUserController::class, 'goToSportPage'])->name('admin.goToSportPage');
-    Route::get('/admin/business', [AdminUserController::class, 'goToBusinessPage'])->name('admin.goToBusinessPage');
-    Route::get('/admin/education', [AdminUserController::class, 'goToEducationPage'])->name('admin.goToEducationPage');
-    Route::get('/admin/entertainment', [AdminUserController::class, 'goToEntertainmentPage'])->name('admin.goToEntertainmentPage');
+
+    Route::get('/admin/author-list', [AuthorController::class, 'goToAuthorList'])->name('admin.goToAuthorList');
+
+    Route::get('/admin/world/{id}', [CategoryController::class, 'goToWorldPage'])->name('admin.goToWorldPage');
+    Route::get('/admin/sport/{id}', [CategoryController::class, 'goToSportPage'])->name('admin.goToSportPage');
+    Route::get('/admin/business/{id}', [CategoryController::class, 'goToBusinessPage'])->name('admin.goToBusinessPage');
+    Route::get('/admin/education/{id}', [CategoryController::class, 'goToEducationPage'])->name('admin.goToEducationPage');
+    Route::get('/admin/entertainment/{id}', [CategoryController::class, 'goToEntertainmentPage'])->name('admin.goToEntertainmentPage');
+    Route::get('/admin/category-types', [CategoryTypeController::class, 'goToCategoryTypes'])->name('admin.goToCategoryTypes');
+
+    Route::get('/admin/comment', [CommentController::class, 'goToComments'])->name('admin.goToComments');
+    Route::get('/admin/view', [ViewController::class, 'goToViews'])->name('admin.goToViews');
+    
     Route::get('/dashboard', [AdminUserController::class, 'goToDashBoard'])->name('admin.goToDashBoard');
 });
 

@@ -50,6 +50,10 @@
                                         </th>
                                         <th scope="col"
                                             class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                            ID
+                                        </th>
+                                        <th scope="col"
+                                            class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                                             Profile
                                         </th>
                                         <th scope="col"
@@ -80,7 +84,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-
+                                    @foreach ($authors as $info )
                                     <tr class="hover:bg-gray-100">
                                         <td class="p-4 w-4">
                                             <div class="flex items-center">
@@ -89,22 +93,25 @@
                                                 <label for="checkbox-1" class="sr-only">checkbox</label>
                                             </div>
                                         </td>
+                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                        {{ $info->id }}</td>
                                         <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
                                             <img class="h-10 w-10 rounded-full"
                                                 src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
                                                 alt="Neil Sims avatar">
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            Neil Sim</td>
+                                        {{ $info->name }}</td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            Front-end developer</td>
-                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">United
-                                            States</td>
+                                            {{ $info->email }}</td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            phone-number
+                                        {{ Str::limit($info->bio, 50, '...') }}
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            Address
+                                            {{ $info->phone }}
+                                        </td>
+                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                        {{ Str::limit($info->address, 100, '...') }}
                                         </td>
                                         <td class="p-4 whitespace-nowrap space-x-2">
                                             <button type="button" data-modal-toggle="user-modal"
@@ -132,6 +139,8 @@
                                             </button>
                                         </td>
                                     </tr>
+                                    @endforeach
+
 
                                 </tbody>
                             </table>
@@ -213,7 +222,7 @@
                         <!-- Modal body -->
                         <div class="p-6 space-y-6">
                             <form action="#">
-                            <div class="grid grid-cols-6 gap-6">
+                                <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="name"
                                             class="text-sm font-medium text-gray-900 block mb-2">Name</label>

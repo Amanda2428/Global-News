@@ -11,53 +11,20 @@ class UserController extends Controller
 {
     public function goToUserListPage(): View
     {
-        return view('admin.user-list');
+        $users = User::get();
+        return view('admin.user-list', compact('users'));
     }
 
-    public function goToAdminRegister(): View
-    {
-        return view('admin.admin-register');
-    }
 
-    public function goToCategoryTypes(): View
-    {
-        return view('admin.category-types');
-    }
+
 
     public function goToAdminList(): View
     {
-        return view('admin.admin-list');
+        $admins = User::where('role', '=', 1)->get();
+        return view('admin.admin-list', compact( 'admins'));
     }
 
-    public function goToAuthorList(): View
-    {
-        return view('admin.author-list');
-    }
-
-    public function goToWorldPage(): View
-    {
-        return view('admin.world');
-    }
-
-    public function goToSportPage(): View
-    {
-        return view('admin.sport');
-    }
-
-    public function goToBusinessPage(): View
-    {
-        return view('admin.business');
-    }
-
-    public function goToEducationPage(): View
-    {
-        return view('admin.education');
-    }
-
-    public function goToEntertainmentPage(): View
-    {
-        return view('admin.entertainment');
-    }
+   
 
     public function goToDashBoard() : View
     {

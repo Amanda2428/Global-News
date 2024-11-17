@@ -71,7 +71,8 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
 
-                        <tr class="hover:bg-gray-100">
+                    @foreach ($categories as $items )
+                    <tr class="hover:bg-gray-100">
                             <td class="p-4 w-4">
                                 <div class="flex items-center">
                                     <input id="checkbox-1" aria-describedby="checkbox-1" type="checkbox"
@@ -79,23 +80,26 @@
                                     <label for="checkbox-1" class="sr-only">checkbox</label>
                                 </div>
                             </td>
-                            <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">1</td>
+                            <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{ $items->id }}</td>
                             <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
                                 <img class="h-30 w-30 "
                                     src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
                                     alt="Neil Sims avatar">
                             </td>
                             <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                <video class="h-30 w-30" controls>
+                                <video class="h-50 w-50" controls>
                                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </td>
-                            <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">Sample Title</td>
-                            <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">This is a sample description for the content.</td>
+                            <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{ $items->title }}</td>
                             <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                <a href="https://www.example.com" target="_blank">https://www.example.com</a>
+                            {{ Str::limit($items->description, 40, '...') }}
                             </td>
+                            <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                <a href="{{ $items->social_media_link }}" target="_blank">{{ $items->social_media_link }}</a>
+                            </td>
+                            <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">John Doe  </td>
                             <td class="p-4 whitespace-nowrap space-x-2">
                                 <button type="button" data-modal-toggle="user-modal"
                                     class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
@@ -121,6 +125,7 @@
                                 </button>
                             </td>
                         </tr>
+                    @endforeach
 
                     </tbody>
                 </table>

@@ -38,20 +38,19 @@
                                         </th>
                                         <th scope="col"
                                             class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            Profile
+                                            View ID
                                         </th>
                                         <th scope="col"
                                             class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            Name
+                                            User Name
                                         </th>
                                         <th scope="col"
                                             class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            Email
+                                            Category id
                                         </th>
-
                                         <th scope="col"
                                             class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            Subscribed
+                                            Category Name
                                         </th>
 
                                         <th scope="col" class="p-4">
@@ -59,7 +58,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($users as $item)
+
                                     <tr class="hover:bg-gray-100">
                                         <td class="p-4 w-4">
                                             <div class="flex items-center">
@@ -68,18 +67,15 @@
                                                 <label for="checkbox-1" class="sr-only">checkbox</label>
                                             </div>
                                         </td>
-                                        <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-                                            <img class="h-10 w-10 rounded-full"
-                                                src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
-                                                alt="Neil Sims avatar">
-                                        </td>
+
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                        {{ $item->name }}</td>
+                                            fff</td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            {{ $item->email }}</td>
+                                            fff</td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                        {{ $item->subscribed ? 'Yes' : 'No' }}
-                                        </td>
+                                            fff</td>
+                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                            ff</td>
 
                                         <td class="p-4 whitespace-nowrap space-x-2">
                                             <button type="button" data-modal-toggle="delete-user-modal"
@@ -94,9 +90,9 @@
                                             </button>
                                         </td>
 
-                                        
+
                                     </tr>
-                                @endforeach
+
                                 </tbody>
                             </table>
                         </div>

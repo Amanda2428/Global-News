@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tailwind Starter Template - Day Admin Template: Tailwind Toolbox</title>
+     <title>{{ config('app.name', 'Worldview Wave') }}</title>
     <meta name="description" content="description here">
     <meta name="keywords" content="keywords,here">
     <link rel="canonical" href="https://themesberg.com/product/tailwind-css/dashboard-windster">
@@ -17,12 +17,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://demo.themesberg.com/windster/app.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://demo.themesberg.com/windster/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://demo.themesberg.com/windster/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://demo.themesberg.com/windster/favicon-16x16.png">
-    <link rel="icon" type="image/png" href="https://demo.themesberg.com/windster/favicon.ico">
-    <link rel="manifest" href="https://demo.themesberg.com/windster/site.webmanifest">
-    <link rel="mask-icon" href="https://demo.themesberg.com/windster/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -149,27 +145,24 @@
                         <div id="categoriesDropdown"
                             class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
                             <ul class="list-reset p-2">
-                                <li><a href="{{ route('admin.goToWorldPage') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToWorldPage',['id' => 1]) }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-globe-asia mr-2"></i>World</a></li>
-                                <li><a href="{{ route('admin.goToSportPage') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToSportPage',['id' => 2]) }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-futbol mr-2"></i>Sport</a></li>
-                                <li><a href="{{ route('admin.goToBusinessPage') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToBusinessPage',['id' => 3]) }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-briefcase mr-2"></i>Business</a></li>
-                                <li><a href="{{ route('admin.goToEducationPage') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToEducationPage',['id' => 4]) }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-book mr-2"></i>Education</a></li>
-                                <li><a href="{{ route('admin.goToEntertainmentPage') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToEntertainmentPage',['id' => 5]) }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-film mr-2"></i>Entertainment</a></li>
                             </ul>
                         </div>
                     </li>
-
-
-
+                    
                     <li class="mr-6 my-2 md:my-0">
-                        <a href="{{ route('admin.goToAdminRegister') }}"
+                        <a href="{{ route('admin.goToComments') }}"
                             class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
-                            <i class="fas fa-user-plus mr-2"></i><span class="pb-1 md:pb-0 text-sm">Admin
-                                Create</span>
+                            <i class="fas fa-comments mr-2"></i></i><span class="pb-1 md:pb-0 text-sm">Comments  Manage</span>
                         </a>
                     </li>
                     <li class="mr-6 my-2 md:my-0">
@@ -177,6 +170,12 @@
                             class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
                             <i class="fas fa-bars mr-2"></i><span class="pb-1 md:pb-0 text-sm">Category Types
                                 Manage</span>
+                        </a>
+                    </li>
+                    <li class="mr-6 my-2 md:my-0">
+                        <a href="{{ route('admin.goToViews') }}"
+                            class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
+                            <i class="fas fa-eye mr-2"></i></i><span class="pb-1 md:pb-0 text-sm">Views</span>
                         </a>
                     </li>
                 </ul>
