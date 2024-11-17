@@ -33,7 +33,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/admin/author-list', [AuthorController::class, 'goToAuthorList'])->name('admin.goToAuthorList');
 
+    // admin world
     Route::get('/admin/world/{id}', [CategoryController::class, 'goToWorldPage'])->name('admin.goToWorldPage');
+    // admin world
     Route::get('/admin/sport/{id}', [CategoryController::class, 'goToSportPage'])->name('admin.goToSportPage');
     Route::get('/admin/business/{id}', [CategoryController::class, 'goToBusinessPage'])->name('admin.goToBusinessPage');
     Route::get('/admin/education/{id}', [CategoryController::class, 'goToEducationPage'])->name('admin.goToEducationPage');
@@ -42,8 +44,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/admin/comment', [CommentController::class, 'goToComments'])->name('admin.goToComments');
     Route::get('/admin/view', [ViewController::class, 'goToViews'])->name('admin.goToViews');
-    
+
     Route::get('/dashboard', [AdminUserController::class, 'goToDashBoard'])->name('admin.goToDashBoard');
+
+
+    // category
+    Route::post('/admin/category/{id}', [CategoryController::class, 'store'])->name('admin.category.store');
+    Route::get('admin/category-delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
+    // category
 });
 
 

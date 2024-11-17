@@ -86,12 +86,12 @@
                             <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{ $items->id }}</td>
                             <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
                                 <img class="h-30 w-30 "
-                                    src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
+                                    src="/images/{{ $items->image }}"
                                     alt="Neil Sims avatar">
                             </td>
                             <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                 <video class="h-50 w-50" controls>
-                                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                    <source src="/videos/{{ $items->video }}" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </td>
@@ -102,7 +102,7 @@
                             <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                 <a href="{{ $items->social_media_link }}" target="_blank">{{ $items->social_media_link }}</a>
                             </td>
-                            <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">John Doe  </td>
+                            <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{ $items->author->name }}</td>
                             <td class="p-4 whitespace-nowrap space-x-2">
                                 <button type="button" data-modal-toggle="user-modal"
                                     class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
@@ -116,20 +116,12 @@
                                     </svg>
                                     Edit Content
                                 </button>
-                                <button type="button" data-modal-toggle="delete-user-modal"
-                                    class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
-                                    <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    Delete Content
-                                </button>
+
+                                <a href="{{ route('admin.category.destroy', [ 'id' => 1 ])}}?category_id={{ $items->id }}">Delete</a>
                             </td>
                         </tr>
                     @endforeach
-                        
+
 
                     </tbody>
                 </table>
@@ -284,7 +276,8 @@
                         </div>
                         <!-- Modal body -->
                         <div class="p-6 space-y-6">
-                            <form action="#">
+                            <form action="{{ route('admin.category.store', ['id' => 1 ]) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6">
                                         <label for="title" class="text-sm font-medium text-gray-900 block mb-2">Title</label>
@@ -320,11 +313,16 @@
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="https://example.com" required>
                                     </div>
+
+                                    <div class="col-span-6">
+                                        <label for="author_id" class="text-sm font-medium text-gray-900 block mb-2">Authors</label>
+                                        <select name="author_id" id="author_id">
+                                            @foreach ($authors as $author)
+                                                <option value="{{ $author->id }}">{{ $author->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-
-
-
-
                         </div>
                         <!-- Modal footer -->
                         <div class="items-center p-6 border-t border-gray-200 rounded-b">
@@ -365,7 +363,7 @@
                             </svg>
                             <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to delete
                                 this data?</h3>
-                            <a href="#"
+                            <a href=""
                                 class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
                                 Yes, I'm sure
                             </a>

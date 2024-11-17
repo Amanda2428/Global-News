@@ -158,7 +158,7 @@
                             </ul>
                         </div>
                     </li>
-                    
+
                     <li class="mr-6 my-2 md:my-0">
                         <a href="{{ route('admin.goToComments') }}"
                             class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
