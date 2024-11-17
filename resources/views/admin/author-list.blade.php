@@ -94,24 +94,27 @@
                                             </div>
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                        {{ $info->id }}</td>
+                                            {{ $info->id }}
+                                        </td>
                                         <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
                                             <img class="h-10 w-10 rounded-full"
                                                 src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
                                                 alt="Neil Sims avatar">
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                        {{ $info->name }}</td>
+                                            {{ $info->name }}
+                                        </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            {{ $info->email }}</td>
+                                            {{ $info->email }}
+                                        </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                        {{ Str::limit($info->bio, 50, '...') }}
+                                            {{ Str::limit($info->bio, 50, '...') }}
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             {{ $info->phone }}
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                        {{ Str::limit($info->address, 100, '...') }}
+                                            {{ Str::limit($info->address, 100, '...') }}
                                         </td>
                                         <td class="p-4 whitespace-nowrap space-x-2">
                                             <button type="button" data-modal-toggle="user-modal"
@@ -222,37 +225,57 @@
                         <!-- Modal body -->
                         <div class="p-6 space-y-6">
                             <form action="#">
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="name"
-                                            class="text-sm font-medium text-gray-900 block mb-2">Name</label>
+                                <div class="grid grid-cols-1 gap-6">
+                                    <!-- Profile Picture Upload -->
+                                    <div class="flex items-center space-x-6">
+                                        <div class="shrink-0">
+                                            <img id="preview_img_1" class="h-16 w-16 object-cover rounded-full" src="https://lh3.googleusercontent.com/a-/AFdZucpC_6WFBIfaAbPHBwGM9z8SxyM1oV4wB4Ngwp_UyQ=s96-c" alt="Current profile photo" />
+                                        </div>
+                                        <label class="block">
+                                            <span class="sr-only">Choose profile photo</span>
+                                            <input type="file" onchange="loadFile(event, 'preview_img_1')" class="block w-full text-sm text-slate-500
+        file:mr-4 file:py-2 file:px-4
+        file:rounded-full file:border-0
+        file:text-sm file:font-semibold
+        file:bg-violet-50 file:text-violet-700
+        hover:file:bg-violet-100" />
+                                        </label>
+                                    </div>
+
+                                    <!-- Name Field -->
+                                    <div class="col-span-1">
+                                        <label for="name" class="text-sm font-medium text-gray-900 block mb-2">Name</label>
                                         <input type="text" name="name" id="name"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="Bonnie" required>
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="email"
-                                            class="text-sm font-medium text-gray-900 block mb-2">Email</label>
+
+                                    <!-- Email Field -->
+                                    <div class="col-span-1">
+                                        <label for="email" class="text-sm font-medium text-gray-900 block mb-2">Email</label>
                                         <input type="email" name="email" id="email"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="example@company.com" required>
                                     </div>
 
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <!-- Phone Number Field -->
+                                    <div class="col-span-1">
                                         <label for="phone-number" class="text-sm font-medium text-gray-900 block mb-2">Phone Number</label>
                                         <input type="tel" name="phone-number" id="phone-number"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="e.g. +1234567890" pattern="[+0-9]{1,15}" required>
                                     </div>
 
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <!-- Bio Field -->
+                                    <div class="col-span-1">
                                         <label for="bio" class="text-sm font-medium text-gray-900 block mb-2">Bio</label>
                                         <input type="text" name="bio" id="bio"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="Write a short bio" maxlength="150" required>
                                     </div>
 
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <!-- Address Field -->
+                                    <div class="col-span-1">
                                         <label for="address" class="text-sm font-medium text-gray-900 block mb-2">Address</label>
                                         <textarea name="address" id="address"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
@@ -296,37 +319,58 @@
                         <!-- Modal body -->
                         <div class="p-6 space-y-6">
                             <form action="#">
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="name"
-                                            class="text-sm font-medium text-gray-900 block mb-2">Name</label>
+                                <div class="grid grid-cols-1 gap-6">
+                                    <!-- Profile Picture Upload -->
+                                    <div class="flex items-center space-x-6">
+                                        <div class="shrink-0">
+                                            <img id="preview_img_2" class="h-16 w-16 object-cover rounded-full" src="https://lh3.googleusercontent.com/a-/AFdZucpC_6WFBIfaAbPHBwGM9z8SxyM1oV4wB4Ngwp_UyQ=s96-c" alt="Current profile photo" />
+                                        </div>
+                                        <label class="block">
+                                            <span class="sr-only">Choose profile photo</span>
+                                            <input type="file" onchange="loadFile(event, 'preview_img_2')" class="block w-full text-sm text-slate-500
+        file:mr-4 file:py-2 file:px-4
+        file:rounded-full file:border-0
+        file:text-sm file:font-semibold
+        file:bg-violet-50 file:text-violet-700
+        hover:file:bg-violet-100" />
+                                        </label>
+                                    </div>
+
+
+                                    <!-- Name Field -->
+                                    <div class="col-span-1">
+                                        <label for="name" class="text-sm font-medium text-gray-900 block mb-2">Name</label>
                                         <input type="text" name="name" id="name"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="Bonnie" required>
                                     </div>
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="email"
-                                            class="text-sm font-medium text-gray-900 block mb-2">Email</label>
+
+                                    <!-- Email Field -->
+                                    <div class="col-span-1">
+                                        <label for="email" class="text-sm font-medium text-gray-900 block mb-2">Email</label>
                                         <input type="email" name="email" id="email"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="example@company.com" required>
                                     </div>
 
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <!-- Phone Number Field -->
+                                    <div class="col-span-1">
                                         <label for="phone-number" class="text-sm font-medium text-gray-900 block mb-2">Phone Number</label>
                                         <input type="tel" name="phone-number" id="phone-number"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="e.g. +1234567890" pattern="[+0-9]{1,15}" required>
                                     </div>
 
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <!-- Bio Field -->
+                                    <div class="col-span-1">
                                         <label for="bio" class="text-sm font-medium text-gray-900 block mb-2">Bio</label>
                                         <input type="text" name="bio" id="bio"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="Write a short bio" maxlength="150" required>
                                     </div>
 
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <!-- Address Field -->
+                                    <div class="col-span-1">
                                         <label for="address" class="text-sm font-medium text-gray-900 block mb-2">Address</label>
                                         <textarea name="address" id="address"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
@@ -388,4 +432,19 @@
             </div>
         </main>
     </div>
+    <script>
+        var loadFile = function(event, previewId) {
+            var input = event.target;
+            var file = input.files[0];
+            var type = file.type;
+
+            var output = document.getElementById(previewId); // Use the unique id passed to the function
+
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+    </script>
+
 </x-admin-layout>
