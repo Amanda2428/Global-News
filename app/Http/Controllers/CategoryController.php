@@ -54,13 +54,13 @@ class CategoryController extends Controller
             'author_id' => $request->author_id
         ];
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images'), $filename);
             $data['image'] = $filename;
         }
-        if($request->hasFile('video')) {
+        if ($request->hasFile('video')) {
             $file = $request->file('video');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('videos'), $filename);
@@ -68,13 +68,13 @@ class CategoryController extends Controller
         }
 
         $category = Category::create($data);
-        if($id == 1) {
+        if ($id == 1) {
             return redirect()->route('admin.goToWorldPage', ['id' => 1]);
-        } else if($id == 2) {
+        } else if ($id == 2) {
             return redirect()->route('admin.goToSportPage', ['id' => 2]);
-        } else if($id == 3) {
+        } else if ($id == 3) {
             return redirect()->route('admin.goToBusinessPage', ['id' => 3]);
-        } else if($id == 4) {
+        } else if ($id == 4) {
             return redirect()->route('admin.goToEducationPage', ['id' => 4]);
         } else {
             return redirect()->route('admin.goToEntertainmentPage', ['id' => 5]);
@@ -86,16 +86,69 @@ class CategoryController extends Controller
         $category_id = $request->query('category_id');
         $category = Category::find($category_id);
         $category->delete();
-        if($id == 1) {
+        if ($id == 1) {
             return redirect()->route('admin.goToWorldPage', ['id' => 1]);
-        } else if($id == 2) {
+        } else if ($id == 2) {
             return redirect()->route('admin.goToSportPage', ['id' => 2]);
-        } else if($id == 3) {
+        } else if ($id == 3) {
             return redirect()->route('admin.goToBusinessPage', ['id' => 3]);
-        } else if($id == 4) {
+        } else if ($id == 4) {
             return redirect()->route('admin.goToEducationPage', ['id' => 4]);
         } else {
             return redirect()->route('admin.goToEntertainmentPage', ['id' => 5]);
         }
     }
+
+    public function update(Request $request): RedirectResponse
+{
+    $id = $request->input('id');
+    $category = Category::findOrFail($id);
+
+    // Update basic fields
+    $category->title = $request->input('title');
+    $category->description = $request->input('description');
+    $category->social_media_link = $request->input('social_media_link');
+    $category->author_id = $request->input('author_id');
+
+    // Handle image upload  
+    if ($request->hasFile('image')) {
+        // Delete old image if it exists
+        if ($category->image && file_exists(public_path('images/' . $category->image))) {
+            unlink(public_path('images/' . $category->image));
+        }
+        $file = $request->file('image');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('images'), $filename);
+        $category->image = $filename;
+    }
+
+    // Handle video upload
+    if ($request->hasFile('video')) {
+        // Delete old video if it exists
+        if ($category->video && file_exists(public_path('videos/' . $category->video))) {
+            unlink(public_path('videos/' . $category->video));
+        }
+        $file = $request->file('video');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('videos'), $filename);
+        $category->video = $filename;
+    }
+
+    // Save updated category
+    $category->save();
+
+    return redirect()->back();
+}
+public function edit($id)
+{
+    // Fetch the category by its ID
+    $category = Category::findOrFail($id);
+
+    // Return the view and pass the category variable to the view
+    return view('admin.category.edit', compact('category'));
+}
+
+
+
+    
 }
