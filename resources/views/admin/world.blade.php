@@ -2,7 +2,7 @@
     <div id="main-content" class="h-full w-full bg-gray-50 ">
         <main>
 
-            <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+            <div class="p-2 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
                 <div class="mb-1 w-full">
                     <div class="mb-4">
                         <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Create World News</h1>
@@ -108,9 +108,10 @@
                                             <button type="button" onclick="openModal('{{ $items->id }}', '{{ $items->title }}', '{{ $items->description }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{$items->author_id}}')" class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
                                             <i class="fas fa-edit mr-2"></i>Edit Content
                                             </button>
-                                            <button type="button"  class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                            <i class="fas fa-trash-alt mr-2"></i><a href="{{ route('admin.category.destroy', [ 'id' => 1 ])}}?category_id={{ $items->id }}">Delete Content</a>
+                                            <button type="button" onclick="openDeleteModal('{{ $items->id }}')" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                            <i class="fas fa-trash-alt mr-2"></i>Delete Content
                                             </button>
+                                           
                                         </td>
                                     </tr>
                                     @endforeach
@@ -239,13 +240,13 @@
             </div>
 
             <!-- Add User Modal -->
-            <div class="hidden overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center h-modal sm:h-full"
+            <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
                 id="add-user-modal">
                 <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
                     <!-- Modal content -->
                     <div class="bg-white rounded-lg shadow relative">
                         <!-- Modal header -->
-                        <div class="flex items-start justify-between p-5 border-b rounded-t">
+                        <div class="flex items-start justify-between p-2 border-b rounded-t">
                             <h3 class="text-xl font-semibold">
                                 Add More News
                             </h3>
@@ -261,7 +262,7 @@
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <div class="p-6 space-y-6">
+                        <div class="p-2 space-y-3">
                             <form action="{{ route('admin.category.store', ['id' => 1 ]) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="grid grid-cols-6 gap-6">
@@ -302,7 +303,7 @@
 
                                     <div class="col-span-6">
                                         <label for="author_id" class="text-sm font-medium text-gray-900 block mb-2">Authors</label>
-                                        <select name="author_id" id="author_id">
+                                        <select name="author_id" id="modal-author-id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" >
                                             @foreach ($authors as $author)
                                             <option value="{{ $author->id }}">{{ $author->name }}</option>
                                             @endforeach
@@ -317,6 +318,48 @@
                                 type="submit">Add Content</button>
                         </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete User Modal -->
+            <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
+            id="delete-user-modal">
+                <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
+                    <!-- Modal content -->
+                    <div class="bg-white rounded-lg shadow relative">
+                        <!-- Modal header -->
+                        <div class="flex justify-end p-2">
+                            <button type="button"
+                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                                onclick="closeDeleteModal()">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="p-6 pt-0 text-center">
+                            <svg class="w-20 h-20 text-red-600 mx-auto" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to delete
+                                this data?</h3>
+                            <a href="{{ route('admin.category.destroy', [ 'id' => 1 ])}}?category_id={{ $items->id }}"
+                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
+                                Yes, I'm sure
+                            </a>
+                            <a href="#"
+                                class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
+                                data-modal-toggle="delete-user-modal">
+                                No, cancel
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -357,6 +400,17 @@
 
     function closeModal() {
         document.getElementById('user-modal').classList.add('hidden');
+    }
+</script>
+<script>
+    function openDeleteModal(id) {
+        document.getElementById('modal-category-id').value = id;
+
+        document.getElementById('delete-user-modal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('delete-user-modal').classList.add('hidden');
     }
 </script>
 

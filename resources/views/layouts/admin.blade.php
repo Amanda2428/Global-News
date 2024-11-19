@@ -201,7 +201,7 @@
 
 
     <!--Container-->
-    <div class="container w-full mx-auto pt-20 p-4">
+    <div class="container w-full mx-auto pt-20 ">
         {{ $slot}}
     </div>
     <!--/container-->
