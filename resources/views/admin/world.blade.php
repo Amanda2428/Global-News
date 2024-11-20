@@ -9,12 +9,12 @@
                     </div>
                     <div class="sm:flex">
                         <div class="hidden sm:flex items-center sm:divide-x sm:divide-gray-100 mb-3 sm:mb-0">
-                            <form class="lg:pr-3" action="#" method="GET">
-                                <label for="users-search" class="sr-only">Search</label>
+                            <form action="{{ route('admin.category.WorldPagesearch', ['id' => 1]) }}" method="GET">
                                 <div class="mt-1 relative lg:w-64 xl:w-96">
-                                    <input type="text" name="email" id="users-search"
+                                    <input type="text" name="query" id="categories-search"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        placeholder="Search for World News">
+                                        placeholder="Search for World News" value="{{ request('query') }}">
+                                    <button type="submit" class="hidden"></button>
                                 </div>
                             </form>
                         </div>
@@ -74,7 +74,14 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    @foreach ($categories as $items )
+                                    @if($categories->isEmpty())
+                                    <tr>
+                                        <td colspan="9" class="text-center p-4 text-gray-500">
+                                            No results found for "{{ isset($query) ? $query : '' }}".
+                                        </td>
+                                    </tr>
+                                    @else
+                                    @foreach ($categories as $items)
                                     <tr class="hover:bg-gray-100">
                                         <td class="p-4 w-4">
                                             <div class="flex items-center">
@@ -85,9 +92,7 @@
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{ $items->id }}</td>
                                         <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-                                            <img class="h-30 w-30 "
-                                                src="/images/{{ $items->image }}"
-                                                alt="Neil Sims avatar">
+                                            <img class="h-30 w-30" src="/images/{{ $items->image }}" alt="Image">
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             <video class="h-50 w-50" controls>
@@ -102,27 +107,30 @@
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             <a href="{{ $items->social_media_link }}" target="_blank">{{ $items->social_media_link }}</a>
                                         </td>
-                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{ $items->author->name }}</td>
-                                        <td class="p-4 whitespace-nowrap space-x-2">
+                                        <!-- <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{ $items->author->name }}</td> -->
+                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                            {{ $items->author->name ?? 'N/A' }}
+                                        </td>
+
                                         <td class="p-4 whitespace-nowrap space-x-2">
                                             <button type="button" onclick="openModal('{{ $items->id }}', '{{ $items->title }}', '{{ $items->description }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{$items->author_id}}')" class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                            <i class="fas fa-edit mr-2"></i>Edit Content
+                                                <i class="fas fa-edit mr-2"></i>Edit Content
                                             </button>
                                             <button type="button" onclick="openDeleteModal('{{ $items->id }}')" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                            <i class="fas fa-trash-alt mr-2"></i>Delete Content
+                                                <i class="fas fa-trash-alt mr-2"></i>Delete Content
                                             </button>
-                                           
                                         </td>
                                     </tr>
                                     @endforeach
-
-
+                                    @endif
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <div
                 class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
@@ -173,10 +181,10 @@
                 </div>
             </div>
 
-            
+
             <!-- Edit User Modal -->
             <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm" id="user-modal">
-                
+
                 <div class="relative w-full max-w-2xl px-4 h-full md:h-auto ">
                     <!-- Modal content -->
                     <div class="bg-white rounded-lg shadow relative">
@@ -216,10 +224,10 @@
                                         <label for="social-media-link" class="text-sm font-medium text-gray-900 block mb-2">Social Media Link</label>
                                         <input type="url" name="social_media_link" id="modal-social-media-link" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" required>
                                     </div>
-                                    
+
                                     <div class="col-span-6">
                                         <label for="author_id" class="text-sm font-medium text-gray-900 block mb-2">Authors</label>
-                                        <select name="author_id" id="modal-author-id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" >
+                                        <select name="author_id" id="modal-author-id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5">
                                             @foreach ($authors as $author)
                                             <option value="{{ $author->id }}">{{ $author->name }}</option>
                                             @endforeach
@@ -303,7 +311,7 @@
 
                                     <div class="col-span-6">
                                         <label for="author_id" class="text-sm font-medium text-gray-900 block mb-2">Authors</label>
-                                        <select name="author_id" id="modal-author-id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" >
+                                        <select name="author_id" id="modal-author-id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5">
                                             @foreach ($authors as $author)
                                             <option value="{{ $author->id }}">{{ $author->name }}</option>
                                             @endforeach
@@ -322,9 +330,9 @@
                 </div>
             </div>
 
-            <!-- Delete User Modal -->
+            @foreach ($categories as $items )
             <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
-            id="delete-user-modal">
+                id="delete-user-modal">
                 <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
                     <!-- Modal content -->
                     <div class="bg-white rounded-lg shadow relative">
@@ -363,6 +371,9 @@
                     </div>
                 </div>
             </div>
+            @endforeach
+            <!-- Delete User Modal -->
+
 
         </main>
     </div>

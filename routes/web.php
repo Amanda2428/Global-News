@@ -52,6 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/admin/category/{id}', [CategoryController::class, 'store'])->name('admin.category.store');
     Route::get('admin/category-delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
     Route::put('/admin/category-update', [CategoryController::class, 'update'])->name('admin.category.update');    
+    Route::get('/admin/category-search/{id}', [CategoryController::class, 'WorldPagesearch'])->name('admin.category.WorldPagesearch');
 
     // category
 });

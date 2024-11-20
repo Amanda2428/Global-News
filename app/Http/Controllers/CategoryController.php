@@ -139,14 +139,29 @@ class CategoryController extends Controller
 
     return redirect()->back();
 }
-public function edit($id)
+public function WorldPagesearch(Request $request, $id)
 {
-    // Fetch the category by its ID
-    $category = Category::findOrFail($id);
+    $query = $request->input('query'); // Get the search query
 
-    // Return the view and pass the category variable to the view
-    return view('admin.category.edit', compact('category'));
+    // Fetch categories where the title matches or author name matches
+    $categories = Category::with('author')
+        ->where('title', 'LIKE', "%$query%")
+        ->orWhereHas('author', function ($q) use ($query) {
+            $q->where('name', 'LIKE', "%$query%");
+        })
+        ->get();
+    $authors = Author::get();   
+
+    // Pass the results and the query back to the view
+    return view('admin.world', compact('categories', 'query','authors'));
 }
+
+
+
+
+
+
+
 
 
 
