@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/admin/user-list', [AdminUserController::class, 'goToUserListPage'])->name('admin.goToUserList');
+    Route::get('/admin/user-list', [AdminUserController::class, 'goToUserList'])->name('admin.goToUserList');
     Route::get('/admin/admin-list', [AdminUserController::class, 'goToAdminList'])->name('admin.goToAdminList');
 
     Route::get('/admin/author-list', [AuthorController::class, 'goToAuthorList'])->name('admin.goToAuthorList');
@@ -52,9 +52,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/admin/category/{id}', [CategoryController::class, 'store'])->name('admin.category.store');
     Route::get('admin/category-delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
     Route::put('/admin/category-update', [CategoryController::class, 'update'])->name('admin.category.update');    
+   
+    // user delete
+    Route::get('/admin/user-delete/{id}', [AdminUserController::class, 'destroy'])->name('admin.user-list.destroy');
+
+
+     // world page search
     Route::get('/admin/category-search/{id}', [CategoryController::class, 'WorldPagesearch'])->name('admin.category.WorldPagesearch');
 
-    // category
+     // sport page search
+    Route::get('/admin/category-sport-search/{id}', [CategoryController::class, 'SportPagesearch'])->name('admin.category.SportPagesearch');
+
+    // business page search
+    Route::get('/admin/category-business-search/{id}', [CategoryController::class, 'BusinessPagesearch'])->name('admin.category.BusinessPagesearch');
+
+    // education page search
+    Route::get('/admin/category-education-search/{id}', [CategoryController::class, 'EducationPagesearch'])->name('admin.category.EducationPagesearch');
+
+    // entertainment page search
+    Route::get('/admin/category-entertainment-search/{id}', [CategoryController::class, 'EntertainmentPagesearch'])->name('admin.category.EntertainmentPagesearch');
+
 });
 
 

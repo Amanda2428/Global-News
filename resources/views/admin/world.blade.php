@@ -3,7 +3,7 @@
         <main>
 
             <div class="p-2 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
-                <div class="mb-1 w-full">
+                <div class="p-3 mb-1 w-full">
                     <div class="mb-4">
                         <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Create World News</h1>
                     </div>
@@ -11,12 +11,21 @@
                         <div class="hidden sm:flex items-center sm:divide-x sm:divide-gray-100 mb-3 sm:mb-0">
                             <form action="{{ route('admin.category.WorldPagesearch', ['id' => 1]) }}" method="GET">
                                 <div class="mt-1 relative lg:w-64 xl:w-96">
+                                    <!-- Search input field -->
                                     <input type="text" name="query" id="categories-search"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        placeholder="Search for World News" value="{{ request('query') }}">
+                                        placeholder="Search for World News with title" value="{{ request('query') }}">
+
+                                    <!-- Submit button -->
                                     <button type="submit" class="hidden"></button>
+
+                                    <!-- Cancel button -->
+                                    <a href="{{ route('admin.goToWorldPage', ['id' => 1]) }}" class="absolute right-2 top-2 bg-gray-300 text-gray-700 rounded px-4 py-1 text-sm hover:bg-gray-400">
+                                        <i class="fas fa-times"></i>
+                                    </a>
                                 </div>
                             </form>
+
                         </div>
                         <div class="flex items-center space-x-2 sm:space-x-3 ml-auto">
                             <button type="button" data-modal-toggle="add-user-modal"
@@ -131,9 +140,7 @@
                 </div>
             </div>
 
-
-            <div
-                class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
+            <div class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
                 <div class="flex items-center mb-4 sm:mb-0">
                     <a href="#"
                         class="text-gray-500 hover:text-gray-900 cursor-pointer p-1 hover:bg-gray-100 rounded inline-flex justify-center">
@@ -160,7 +167,7 @@
                 <div class="flex items-center space-x-3">
                     <a href="#"
                         class="flex-1 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center">
-                        <svg class="-ml-1 mr-1 h-5 w-5"" fill=" currentColor" viewBox="0 0 20 20"
+                        <svg class="-ml-1 mr-1 h-5 w-5" fill=" currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
@@ -180,6 +187,9 @@
                     </a>
                 </div>
             </div>
+
+
+
 
 
             <!-- Edit User Modal -->
@@ -304,11 +314,10 @@
 
                                     <div class="col-span-6">
                                         <label for="social-media-link" class="text-sm font-medium text-gray-900 block mb-2">Social Media Link</label>
-                                        <input type="url" name="social-media-link" id="social-media-link"
+                                        <input type="url" name="social_media_link" id="social-media-link"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="https://example.com" required>
                                     </div>
-
                                     <div class="col-span-6">
                                         <label for="author_id" class="text-sm font-medium text-gray-900 block mb-2">Authors</label>
                                         <select name="author_id" id="modal-author-id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5">
@@ -330,6 +339,7 @@
                 </div>
             </div>
 
+            <!-- Delete Modal  -->
             @foreach ($categories as $items )
             <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
                 id="delete-user-modal">
@@ -364,65 +374,22 @@
                             </a>
                             <a href="#"
                                 class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
-                                data-modal-toggle="delete-user-modal">
+                                onclick="closeDeleteModal()">
                                 No, cancel
                             </a>
+
                         </div>
                     </div>
                 </div>
             </div>
             @endforeach
-            <!-- Delete User Modal -->
+
 
 
         </main>
     </div>
 </x-admin-layout>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Add User Modal
-        const addUserButton = document.querySelector('[data-modal-toggle="add-user-modal"]');
-        const addUserModal = document.getElementById('add-user-modal');
-        const addUserCloseButton = addUserModal.querySelector('[data-modal-toggle="add-user-modal"]');
 
-        addUserButton.addEventListener('click', () => {
-            addUserModal.classList.remove('hidden');
-        });
-
-        addUserCloseButton.addEventListener('click', () => {
-            addUserModal.classList.add('hidden');
-        });
-
-
-    });
-</script>
-<script>
-    function openModal(id, title, description, image, video, link, author_id) {
-        document.getElementById('modal-category-id').value = id;
-        document.getElementById('modal-title').value = title;
-        document.getElementById('modal-description').value = description;
-        document.getElementById('modal-social-media-link').value = link;
-        document.getElementById('modal-author-id').value = author_id;
-
-
-        document.getElementById('user-modal').classList.remove('hidden');
-    }
-
-    function closeModal() {
-        document.getElementById('user-modal').classList.add('hidden');
-    }
-</script>
-<script>
-    function openDeleteModal(id) {
-        document.getElementById('modal-category-id').value = id;
-
-        document.getElementById('delete-user-modal').classList.remove('hidden');
-    }
-
-    function closeDeleteModal() {
-        document.getElementById('delete-user-modal').classList.add('hidden');
-    }
-</script>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet" />

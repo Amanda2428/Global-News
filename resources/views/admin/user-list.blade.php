@@ -36,6 +36,9 @@
                                                 <label for="checkbox-all" class="sr-only">checkbox</label>
                                             </div>
                                         </th>
+                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                            ID
+                                        </th>
                                         <th scope="col"
                                             class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                                             Profile
@@ -59,7 +62,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($users as $item)
+                                    @foreach ($users as $item)
                                     <tr class="hover:bg-gray-100">
                                         <td class="p-4 w-4">
                                             <div class="flex items-center">
@@ -68,35 +71,33 @@
                                                 <label for="checkbox-1" class="sr-only">checkbox</label>
                                             </div>
                                         </td>
+                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                            {{ $item->id }}
+                                        </td>
                                         <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
                                             <img class="h-10 w-10 rounded-full"
                                                 src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
                                                 alt="Neil Sims avatar">
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                        {{ $item->name }}</td>
+                                            {{ $item->name }}
+                                        </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            {{ $item->email }}</td>
+                                            {{ $item->email }}
+                                        </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                        {{ $item->subscribed ? 'Yes' : 'No' }}
+                                            {{ $item->subscribed ? 'Yes' : 'No' }}
                                         </td>
 
                                         <td class="p-4 whitespace-nowrap space-x-2">
-                                            <button type="button" data-modal-toggle="delete-user-modal"
-                                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
-                                                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                Delete User
+                                            <button type="button" onclick="openDeleteModal('{{ $item->id }}')" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                                <i class="fas fa-trash-alt mr-2"></i>Delete Content
                                             </button>
                                         </td>
 
-                                        
+
                                     </tr>
-                                @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -153,16 +154,16 @@
             </div>
 
             <!-- Delete User Modal -->
-            <div class="hidden overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center h-modal sm:h-full"
+            <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
                 id="delete-user-modal">
-                <div class="relative w-full max-w-md px-4 h-full md:h-auto">
+                <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
                     <!-- Modal content -->
                     <div class="bg-white rounded-lg shadow relative">
                         <!-- Modal header -->
                         <div class="flex justify-end p-2">
                             <button type="button"
                                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                                data-modal-toggle="delete-user-modal">
+                                onclick="closeDeleteModal()">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -179,16 +180,15 @@
                                     d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to delete
-                                this user?</h3>
-                            <a href="#"
+                                this data?</h3>
+                            <a id="confirm-delete-link"
                                 class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
                                 Yes, I'm sure
                             </a>
-                            <a href="#"
-                                class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
-                                data-modal-toggle="delete-user-modal">
+                            <button onclick="closeDeleteModal()"
+                                class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center">
                                 No, cancel
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -196,3 +196,17 @@
         </main>
     </div>
 </x-admin-layout>
+<script>
+    function openDeleteModal(id) {
+        // Update the link dynamically
+        const deleteLink = document.getElementById('confirm-delete-link');
+        deleteLink.href = `/admin/user-delete/${id}?user_id=${id}`;
+
+        // Show the modal
+        document.getElementById('delete-user-modal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('delete-user-modal').classList.add('hidden');
+    }
+</script>

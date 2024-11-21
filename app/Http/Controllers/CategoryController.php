@@ -20,26 +20,30 @@ class CategoryController extends Controller
 
     public function goToSportPage($id): View
     {
-        $categories = Category::where('category_type_id', '=', $id)->get();
-        return view('admin.sport', compact('categories'));
+        $categories = Category::where('category_type_id', '=', $id)->with('author')->get();
+        $authors=Author::get(); 
+        return view('admin.sport', compact('categories','authors'));
     }
 
     public function goToBusinessPage($id): View
     {
-        $categories = Category::where('category_type_id', '=', $id)->get();
-        return view('admin.business', compact('categories'));
+        $categories = Category::where('category_type_id', '=', $id)->with('author')->get();
+        $authors=Author::get();
+        return view('admin.business', compact('categories','authors'));
     }
 
     public function goToEducationPage($id): View
     {
-        $categories = Category::where('category_type_id', '=', $id)->get();
-        return view('admin.education', compact('categories'));
+        $categories = Category::where('category_type_id', '=', $id)->with('author')->get();
+        $authors=Author::get();
+        return view('admin.education', compact('categories','authors'));
     }
 
     public function goToEntertainmentPage($id): View
     {
-        $categories = Category::where('category_type_id', '=', $id)->get();
-        return view('admin.entertainment', compact('categories'));
+        $categories = Category::where('category_type_id', '=', $id)->with('author')->get();
+        $authors=Author::get();
+        return view('admin.entertainment', compact('categories','authors'));
     }
 
 
@@ -103,6 +107,7 @@ class CategoryController extends Controller
 {
     $id = $request->input('id');
     $category = Category::findOrFail($id);
+    
 
     // Update basic fields
     $category->title = $request->input('title');
@@ -139,21 +144,51 @@ class CategoryController extends Controller
 
     return redirect()->back();
 }
+
+
+//searching function for all categories
 public function WorldPagesearch(Request $request, $id)
 {
     $query = $request->input('query'); // Get the search query
+    
 
     // Fetch categories where the title matches or author name matches
-    $categories = Category::with('author')
-        ->where('title', 'LIKE', "%$query%")
-        ->orWhereHas('author', function ($q) use ($query) {
-            $q->where('name', 'LIKE', "%$query%");
-        })
-        ->get();
+    // $categories = Category::with('author')->where('title', 'LIKE', "%$query%")->get(); 
+    $categories = Category::where('title', 'LIKE', "%$query%")->get();
+        
     $authors = Author::get();   
 
     // Pass the results and the query back to the view
     return view('admin.world', compact('categories', 'query','authors'));
+}
+public function SportPagesearch(Request $request, $id)
+{
+    $query = $request->input('query'); 
+    $categories = Category::where('title', 'LIKE', "%$query%")->get();
+    $authors = Author::get();
+    return view('admin.sport', compact('categories', 'query','authors'));
+}
+
+public function BusinessPagesearch(Request $request, $id)
+{
+    $query = $request->input('query'); 
+    $categories = Category::where('title', 'LIKE', "%$query%")->get();
+    $authors = Author::get();
+    return view('admin.business', compact('categories', 'query','authors'));
+}
+public function EntertainmentPagesearch(Request $request, $id)
+{
+    $query = $request->input('query'); 
+    $categories = Category::where('title', 'LIKE', "%$query%")->get();
+    $authors = Author::get();
+    return view('admin.entertainment', compact('categories', 'query','authors'));
+}
+public function EducationPagesearch(Request $request, $id)
+{
+    $query = $request->input('query'); 
+    $categories = Category::where('title', 'LIKE', "%$query%")->get();
+    $authors = Author::get();
+    return view('admin.education', compact('categories', 'query','authors'));
 }
 
 

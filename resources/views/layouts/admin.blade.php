@@ -43,7 +43,6 @@
             <div class="w-1/2 pl-2 md:pl-0">
                 <a class="text-gray-50 text-base xl:text-xl no-underline hover:no-underline font-bold" href="{{ route('admin.goToDashBoard') }}">
                     Worldview Waves Admin
-                    <i class="fas fa-newspaper text-pink-600 pl-3"></i>
                 </a>
 
             </div>
@@ -182,19 +181,7 @@
                     </li>
                 </ul>
 
-                <!-- Search Bar -->
-                <div class="relative pull-right pl-4 pr-4 md:pr-0">
-                    <input type="search" placeholder="Search"
-                        class="w-full bg-gray-100 text-sm text-gray-800 transition border focus:outline-none focus:border-gray-700 rounded py-1 px-2 pl-10 appearance-none leading-normal">
-                    <div class="absolute search-icon" style="top: 0.375rem;left: 1.75rem;">
-                        <svg class="fill-current pointer-events-none text-gray-800 w-4 h-4"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path
-                                d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z">
-                            </path>
-                        </svg>
-                    </div>
-                </div>
+                
             </div>
 
         </div>
@@ -319,6 +306,55 @@
             document.getElementById('categoriesDropdown').classList.toggle('hidden');
         });
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Add User Modal
+        const addUserButton = document.querySelector('[data-modal-toggle="add-user-modal"]');
+        const addUserModal = document.getElementById('add-user-modal');
+        const addUserCloseButton = addUserModal.querySelector('[data-modal-toggle="add-user-modal"]');
+
+        addUserButton.addEventListener('click', () => {
+            addUserModal.classList.remove('hidden');
+        });
+
+        addUserCloseButton.addEventListener('click', () => {
+            addUserModal.classList.add('hidden');
+        });
+
+
+    });
+</script>
+<script>
+    function openModal(id, title, description, image, video, link, author_id) {
+        // Set values of modal fields
+        document.getElementById('modal-category-id').value = id;
+        document.getElementById('modal-title').value = title;
+        document.getElementById('modal-description').value = description;
+        document.getElementById('modal-social-media-link').value = link;
+        document.getElementById('modal-author-id').value = author_id;
+
+        // Show the modal
+        document.getElementById('user-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        // Hide the modal\
+
+        document.getElementById('user-modal').classList.add('hidden');
+    }
+</script>
+<script>
+    function openDeleteModal(id) {
+        document.getElementById('modal-category-id').value = id;
+
+        document.getElementById('delete-user-modal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('delete-user-modal').classList.add('hidden');
+    }
+</script>
+
     <!-- <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="https://demo.themesberg.com/windster/app.bundle.js"></script> -->

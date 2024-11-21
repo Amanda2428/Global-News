@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col">
+            <div class="flex flex-col ">
                 <div class="overflow-x-auto">
                     <div class="align-middle inline-block min-w-full">
                         <div class="shadow overflow-hidden">
@@ -61,7 +61,7 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
+                                <tbody class=" bg-white divide-y divide-gray-200">
                                     @foreach ($category_types as $item )
                                     <tr class="hover:bg-gray-100">
                                         <td class="p-4 w-4">
