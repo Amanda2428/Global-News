@@ -72,6 +72,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // entertainment page search
     Route::get('/admin/category-entertainment-search/{id}', [CategoryController::class, 'EntertainmentPagesearch'])->name('admin.category.EntertainmentPagesearch');
 
+    //author page search
+    Route::get('/admin/author-search/{id}', [AuthorController::class, 'AuthorPagesearch'])->name('admin.author.AuthorPagesearch');
+    //author
+    Route::post('/author/store', [AuthorController::class, 'store'])->name('author.store');
+    Route::get('/admin/author-delete/{id}', [AuthorController::class, 'destroy'])->name('admin.author.destroy');
+    Route::put('/admin/author-update', [AuthorController::class, 'update'])->name('admin.author.update');
+
 });
 
 

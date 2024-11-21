@@ -9,14 +9,7 @@
                     </div>
                     <div class="sm:flex">
                         <div class="hidden sm:flex items-center sm:divide-x sm:divide-gray-100 mb-3 sm:mb-0">
-                            <form class="lg:pr-3" action="#" method="GET">
-                                <label for="users-search" class="sr-only">Search</label>
-                                <div class="mt-1 relative lg:w-64 xl:w-96">
-                                    <input type="text" name="email" id="users-search"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        placeholder="Search for Author">
-                                </div>
-                            </form>
+
                         </div>
                         <div class="flex items-center space-x-2 sm:space-x-3 ml-auto">
                             <button type="button" data-modal-toggle="add-user-modal"
@@ -84,7 +77,14 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    @foreach ($authors as $info )
+                                    @if($authors->isEmpty())
+                                    <tr>
+                                        <td colspan="9" class="text-center p-4 text-gray-500">
+                                            No results found for "{{ isset($query) ? $query : '' }}".
+                                        </td>
+                                    </tr>
+                                    @else
+                                    @foreach ($authors as $info)
                                     <tr class="hover:bg-gray-100">
                                         <td class="p-4 w-4">
                                             <div class="flex items-center">
@@ -97,9 +97,8 @@
                                             {{ $info->id }}
                                         </td>
                                         <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-                                            <img class="h-10 w-10 rounded-full"
-                                                src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
-                                                alt="Neil Sims avatar">
+                                            <img class="h-20 w-20 rounded-full"
+                                                src="{{ asset($info->profile ?? 'images/default-avatar.png') }}" alt="Author Avatar">
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             {{ $info->name }}
@@ -114,194 +113,36 @@
                                             {{ $info->phone }}
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            {{ Str::limit($info->address, 100, '...') }}
+                                            {{ Str::limit($info->address, 50, '...') }}
                                         </td>
                                         <td class="p-4 whitespace-nowrap space-x-2">
-                                            <button type="button" data-modal-toggle="user-modal"
-                                                class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
-                                                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
-                                                    </path>
-                                                    <path fill-rule="evenodd"
-                                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                Edit Author
+                                            <button type="button" onclick="openModal('{{ $info->id }}', '{{ $info->name }}', '{{ $info->email }}', '{{ $info->bio }}', '{{ $info->phone }}', '{{ $info->address }}')" class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                                <i class="fas fa-edit mr-2"></i>Edit Content
                                             </button>
-                                            <button type="button" data-modal-toggle="delete-user-modal"
-                                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
-                                                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                Delete Author
+                                            <button type="button" onclick="openDeleteModal('{{ $info->id }}')" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                                <i class="fas fa-trash-alt mr-2"></i>Delete Content
                                             </button>
                                         </td>
                                     </tr>
                                     @endforeach
-
-
+                                    @endif
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div
-                class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
-                <div class="flex items-center mb-4 sm:mb-0">
-                    <a href="#"
-                        class="text-gray-500 hover:text-gray-900 cursor-pointer p-1 hover:bg-gray-100 rounded inline-flex justify-center">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                    <a href="#"
-                        class="text-gray-500 hover:text-gray-900 cursor-pointer p-1 hover:bg-gray-100 rounded inline-flex justify-center mr-2">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                    <span class="text-sm font-normal text-gray-500">Showing <span
-                            class="text-gray-900 font-semibold">1-20</span> of <span
-                            class="text-gray-900 font-semibold">2290</span></span>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <a href="#"
-                        class="flex-1 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center">
-                        <svg class="-ml-1 mr-1 h-5 w-5"" fill=" currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        Previous
-                    </a>
-                    <a href="#"
-                        class="flex-1 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center">
-                        Next
-                        <svg class="-mr-1 ml-1 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
 
-            <!-- Edit User Modal -->
-            <div class="hidden overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center h-modal sm:h-full"
-                id="user-modal">
-                <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
-                    <!-- Modal content -->
-                    <div class="bg-white rounded-lg shadow relative">
-                        <!-- Modal header -->
-                        <div class="flex items-start justify-between p-5 border-b rounded-t">
-                            <h3 class="text-xl font-semibold">
-                                Edit Author Data
-                            </h3>
-                            <button type="button"
-                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                                data-modal-toggle="user-modal">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <!-- Modal body -->
-                        <div class="p-6 space-y-6">
-                            <form action="#">
-                                <div class="grid grid-cols-1 gap-6">
-                                    <!-- Profile Picture Upload -->
-                                    <div class="flex items-center space-x-6">
-                                        <div class="shrink-0">
-                                            <img id="preview_img_1" class="h-16 w-16 object-cover rounded-full" src="https://lh3.googleusercontent.com/a-/AFdZucpC_6WFBIfaAbPHBwGM9z8SxyM1oV4wB4Ngwp_UyQ=s96-c" alt="Current profile photo" />
-                                        </div>
-                                        <label class="block">
-                                            <span class="sr-only">Choose profile photo</span>
-                                            <input type="file" onchange="loadFile(event, 'preview_img_1')" class="block w-full text-sm text-slate-500
-        file:mr-4 file:py-2 file:px-4
-        file:rounded-full file:border-0
-        file:text-sm file:font-semibold
-        file:bg-violet-50 file:text-violet-700
-        hover:file:bg-violet-100" />
-                                        </label>
-                                    </div>
-
-                                    <!-- Name Field -->
-                                    <div class="col-span-1">
-                                        <label for="name" class="text-sm font-medium text-gray-900 block mb-2">Name</label>
-                                        <input type="text" name="name" id="name"
-                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                            placeholder="Bonnie" required>
-                                    </div>
-
-                                    <!-- Email Field -->
-                                    <div class="col-span-1">
-                                        <label for="email" class="text-sm font-medium text-gray-900 block mb-2">Email</label>
-                                        <input type="email" name="email" id="email"
-                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                            placeholder="example@company.com" required>
-                                    </div>
-
-                                    <!-- Phone Number Field -->
-                                    <div class="col-span-1">
-                                        <label for="phone-number" class="text-sm font-medium text-gray-900 block mb-2">Phone Number</label>
-                                        <input type="tel" name="phone-number" id="phone-number"
-                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                            placeholder="e.g. +1234567890" pattern="[+0-9]{1,15}" required>
-                                    </div>
-
-                                    <!-- Bio Field -->
-                                    <div class="col-span-1">
-                                        <label for="bio" class="text-sm font-medium text-gray-900 block mb-2">Bio</label>
-                                        <input type="text" name="bio" id="bio"
-                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                            placeholder="Write a short bio" maxlength="150" required>
-                                    </div>
-
-                                    <!-- Address Field -->
-                                    <div class="col-span-1">
-                                        <label for="address" class="text-sm font-medium text-gray-900 block mb-2">Address</label>
-                                        <textarea name="address" id="address"
-                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                            placeholder="Street, City, State, Zip Code" rows="3" required></textarea>
-                                    </div>
-                                </div>
-                        </div>
-                        <!-- Modal footer -->
-                        <div class="items-center p-6 border-t border-gray-200 rounded-b">
-                            <button
-                                class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                type="submit">Save all</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
 
             <!-- Add User Modal -->
-            <div class="hidden overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center h-modal sm:h-full"
+            <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
                 id="add-user-modal">
                 <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
                     <!-- Modal content -->
                     <div class="bg-white rounded-lg shadow relative">
                         <!-- Modal header -->
-                        <div class="flex items-start justify-between p-5 border-b rounded-t">
+                        <div class="flex items-start justify-between p-2 border-b rounded-t">
                             <h3 class="text-xl font-semibold">
                                 Add New Author
                             </h3>
@@ -317,26 +158,17 @@
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <div class="p-6 space-y-6">
-                            <form action="#">
+                        <div class="p-2 space-y-3">
+                            <form action="{{ route('author.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="grid grid-cols-1 gap-6">
                                     <!-- Profile Picture Upload -->
-                                    <div class="flex items-center space-x-6">
-                                        <div class="shrink-0">
-                                            <img id="preview_img_2" class="h-16 w-16 object-cover rounded-full" src="https://lh3.googleusercontent.com/a-/AFdZucpC_6WFBIfaAbPHBwGM9z8SxyM1oV4wB4Ngwp_UyQ=s96-c" alt="Current profile photo" />
-                                        </div>
-                                        <label class="block">
-                                            <span class="sr-only">Choose profile photo</span>
-                                            <input type="file" onchange="loadFile(event, 'preview_img_2')" class="block w-full text-sm text-slate-500
-        file:mr-4 file:py-2 file:px-4
-        file:rounded-full file:border-0
-        file:text-sm file:font-semibold
-        file:bg-violet-50 file:text-violet-700
-        hover:file:bg-violet-100" />
-                                        </label>
+                                    <div class="col-span-1">
+                                        <label for="image" class="text-sm font-medium text-gray-900 block mb-2">Image</label>
+                                        <input type="file" name="profile" id="profile"
+                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                                            accept="image/*" required>
                                     </div>
-
-
                                     <!-- Name Field -->
                                     <div class="col-span-1">
                                         <label for="name" class="text-sm font-medium text-gray-900 block mb-2">Name</label>
@@ -356,9 +188,7 @@
                                     <!-- Phone Number Field -->
                                     <div class="col-span-1">
                                         <label for="phone-number" class="text-sm font-medium text-gray-900 block mb-2">Phone Number</label>
-                                        <input type="tel" name="phone-number" id="phone-number"
-                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                            placeholder="e.g. +1234567890" pattern="[+0-9]{1,15}" required>
+                                        <input type="tel" name="phone" id="phone-number" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="e.g. +1234567890" pattern="[+0-9]{1,15}" required>
                                     </div>
 
                                     <!-- Bio Field -->
@@ -389,62 +219,9 @@
                 </div>
             </div>
 
-            <!-- Delete User Modal -->
-            <div class="hidden overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center h-modal sm:h-full"
-                id="delete-user-modal">
-                <div class="relative w-full max-w-md px-4 h-full md:h-auto">
-                    <!-- Modal content -->
-                    <div class="bg-white rounded-lg shadow relative">
-                        <!-- Modal header -->
-                        <div class="flex justify-end p-2">
-                            <button type="button"
-                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                                data-modal-toggle="delete-user-modal">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <!-- Modal body -->
-                        <div class="p-6 pt-0 text-center">
-                            <svg class="w-20 h-20 text-red-600 mx-auto" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to delete
-                                this author data?</h3>
-                            <a href="#"
-                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
-                                Yes, I'm sure
-                            </a>
-                            <a href="#"
-                                class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
-                                data-modal-toggle="delete-user-modal">
-                                No, cancel
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
         </main>
     </div>
-    <script>
-        var loadFile = function(event, previewId) {
-            var input = event.target;
-            var file = input.files[0];
-            var type = file.type;
-
-            var output = document.getElementById(previewId); // Use the unique id passed to the function
-
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-                URL.revokeObjectURL(output.src) // free memory
-            }
-        };
-    </script>
 
 </x-admin-layout>
