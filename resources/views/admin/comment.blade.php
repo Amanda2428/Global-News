@@ -5,7 +5,7 @@
             <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
                 <div class="mb-1 w-full">
                     <div class="mb-4">
-                        <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">All Users</h1>
+                        <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">All Comments</h1>
                     </div>
                     <div class="sm:flex">
                         <div class="hidden sm:flex items-center sm:divide-x sm:divide-gray-100 mb-3 sm:mb-0">

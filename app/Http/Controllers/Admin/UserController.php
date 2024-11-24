@@ -46,4 +46,11 @@ class UserController extends Controller
         $admins = User::where('role', '=', 1)->get();
         return view('dashboard', compact('users', 'admins'));
     }
+
+    public function userPagesearch(Request $request)
+{
+    $query = $request->input('query'); 
+    $users= User::where('email', 'LIKE', "%$query%")->get();
+    return view('admin.user-list', compact( 'query','users'));
+}
 }

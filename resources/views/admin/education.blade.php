@@ -336,7 +336,7 @@
             </div>
 
             <!-- Delete Modal  -->
-            @foreach ($categories as $items )
+   
             <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
                 id="delete-user-modal">
                 <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
@@ -378,7 +378,7 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+        
         </main>
     </div>
 </x-admin-layout>

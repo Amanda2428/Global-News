@@ -9,12 +9,20 @@
                     </div>
                     <div class="sm:flex">
                         <div class="hidden sm:flex items-center sm:divide-x sm:divide-gray-100 mb-3 sm:mb-0">
-                            <form class="lg:pr-3" action="#" method="GET">
-                                <label for="users-search" class="sr-only">Search</label>
+                        <form action="{{ route('admin.user.UserPagesearch') }}" method="GET">
                                 <div class="mt-1 relative lg:w-64 xl:w-96">
-                                    <input type="text" name="email" id="users-search"
+                                    <!-- Search input field -->
+                                    <input type="text" name="query" id="categories-search"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        placeholder="Search for User">
+                                        placeholder="Search for Users with Email" value="{{ request('query') }}">
+
+                                    <!-- Submit button -->
+                                    <button type="submit" class="hidden"></button>
+
+                                    <!-- Cancel button -->
+                                    <a href="{{ route('admin.goToUserList') }}" class="absolute right-2 top-2 bg-gray-300 text-gray-700 rounded px-4 py-1 text-sm hover:bg-gray-400">
+                                        <i class="fas fa-times"></i>
+                                    </a>
                                 </div>
                             </form>
                         </div>

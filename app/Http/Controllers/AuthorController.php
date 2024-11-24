@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Redirect;
 
 class AuthorController extends Controller
 {
@@ -79,6 +81,23 @@ class AuthorController extends Controller
     
         return redirect()->back();
     }
+    public function destroy($id)
+    {
+        // Find the author by ID and delete
+        $author = Author::findOrFail($id);
+        $author->delete();
+    
+        return redirect()->route('admin.goToAuthorList')->with('success', 'Author deleted successfully.');
+    }
+    public function AuthorPagesearch(Request $request)
+    {
+        $query = $request->input('query'); 
+        $authors= Author::where('email', 'LIKE', "%$query%")->get();
+        return view('admin.author-list', compact( 'query','authors'));
+    }
+    
+  
+    
     
     
 }
