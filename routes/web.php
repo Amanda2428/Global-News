@@ -76,9 +76,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/author-search/{id}', [AuthorController::class, 'AuthorPagesearch'])->name('admin.author.AuthorPagesearch');
     //author
     Route::post('/author/store', [AuthorController::class, 'store'])->name('author.store');
-    Route::get('/admin/author-delete/{id}', [AuthorController::class, 'destroy'])->name('admin.author.destroy');
-    Route::put('/admin/author-update', [AuthorController::class, 'update'])->name('admin.author.update');
-
+    Route::get('/author/delete/{id}', [AuthorController::class, 'destroy'])->name('author.destroy');
+    Route::post('/author/update', [AuthorController::class, 'update'])->name('author.update');
 });
 
 
