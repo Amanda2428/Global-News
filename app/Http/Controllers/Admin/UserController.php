@@ -35,6 +35,7 @@ class UserController extends Controller
     public function goToAdminList(): View
     {
         $admins = User::where('role', '=', 1)->get();
+        
         return view('admin.admin-list', compact( 'admins'));
     }
 

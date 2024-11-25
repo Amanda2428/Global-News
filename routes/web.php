@@ -77,18 +77,27 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //author page search
     Route::get('/admin/author-search', [AuthorController::class, 'AuthorPagesearch'])->name('admin.author.AuthorPagesearch');
+
+    //category-types page search
+    Route::get('/admin/category-types-search', [CategoryTypeController::class, 'CategoryTypePagesearch'])->name('admin.CategoryTypePagesearch');
     //author
     Route::post('/author/store', [AuthorController::class, 'store'])->name('author.store');
     Route::get('/author/delete/{id}', [AuthorController::class, 'destroy'])->name('author.destroy');
-    Route::post('/author/update', [AuthorController::class, 'update'])->name('author.update');
+    Route::put('/author/update', [AuthorController::class, 'update'])->name('author.update');
 
 
     //category_type
-
-
     Route::post('/admin/category-types/store', [CategoryTypeController::class, 'store'])->name('category-types.store');
-    Route::put('/admin/category-types', [CategoryTypeController::class, 'update'])->name('category-types.update');
-    Route::get('/admin/category-types/delete', [CategoryTypeController::class, 'destroy'])->name('category-types.destroy');
+    Route::put('/admin/category-types/update', [CategoryTypeController::class, 'update'])->name('category-types.update');
+    Route::get('/admin/category-types-delete/{id}', [CategoryTypeController::class, 'destroy'])->name('category-types.destroy');
+
+    //admin-list
+    Route::post('admin/admin-list/store', [AdminUserController::class, 'store'])->name('admin.store');
+
+
+
+
+
 
     
 });

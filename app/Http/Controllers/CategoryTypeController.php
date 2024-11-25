@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\View\View;
 use App\Models\CategoryType;
 use Illuminate\Http\RedirectResponse;
@@ -12,10 +13,10 @@ class CategoryTypeController extends Controller
 {
     public function goToCategoryTypes(): View
     {
-        $category_types= CategoryType::all();
+        $category_types = CategoryType::all();
         return view('admin.category-types', compact('category_types'));
     }
-    
+
     public function store(Request $request): RedirectResponse
     {
         $data = [
@@ -44,19 +45,26 @@ class CategoryTypeController extends Controller
         // Redirect back to the category types listing page
         return redirect()->route('admin.goToCategoryTypes')->with('success', 'Category type updated successfully!');
     }
-// public function destroy($id)
-// {
 
-//     $category_type = CategoryType::findOrFail($id);
-//     $category_type->delete();
 
-//     return redirect()->route('admin.goToCategoryTypes')->with('success', 'Category type deleted successfully.');
-// }
-    public function destroy(Request $request): RedirectResponse
+    public function destroy($id)
     {
-        $category_type_id = $request->query('category_type_id');
-        $category_type = CategoryType::find($category_type_id);
-        $category_type->delete();
+        // Find the category type by ID and delete
+        $categoryType = CategoryType::findOrFail($id);
+        $categoryType->delete();
+
+        // Redirect back with a success message
         return redirect()->route('admin.goToCategoryTypes')->with('success', 'Category type deleted successfully.');
+    }
+
+    public function CategoryTypePagesearch(Request $request)
+    {
+        $query = $request->input('query'); // Get the search query
+
+        $category_types = CategoryType::where('name', 'LIKE', "%$query%")->get();
+
+
+        // Pass the results and the query back to the view
+        return view('admin.category-types', compact('category_types', 'query'));
     }
 }

@@ -39,49 +39,40 @@ class AuthorController extends Controller
         return view('admin.author-list', compact('authors'));
     }
 
-    public function update(Request $request)
+
+    public function update(Request $request): RedirectResponse
     {
-
-        $id = $request->input('id');
-        $author = Author::findOrFail($id);
-        // Update the author's fields
-
-        $data =[
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'phone' => $request->input('phone'),
-            'bio' => $request->input('bio'),
-            'address' => $request->input('address')
-        ];
+        // Find the author by ID
+        $author = Author::findOrFail($request->id);
     
-        // $author->name = $request->input('name');
-        // $author->bio = $request->input('bio');
-        // $author->phone = $request->input('phone');
-        // $author->email = $request->input('email');
-        // $author->address = $request->input('address');
+        // Update other fields
+        $author->name = $request->input('name');
+        $author->bio = $request->input('bio');
+        $author->phone = $request->input('phone');
+        $author->email = $request->input('email');
+        $author->address = $request->input('address');
     
         // Handle profile image if uploaded
         if ($request->hasFile('profile')) {
             // Delete the old image if it exists
-            if ($author->image && file_exists(public_path('images/' . $author->image))) {
-                unlink(public_path('images/' . $author->image));
+            if ($author->profile && file_exists(public_path('images/' . $author->profile))) {
+                unlink(public_path('images/' . $author->profile));
             }
     
             // Save the new image
             $file = $request->file('profile');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images'), $filename);
-            $data['profile'] = $filename;
-        }
-        else{
-            $data['profile'] = $author->profile;
+            $author->profile = $filename;  // Update the profile field
         }
     
-        $author->update($data);
+        // Save the changes to the author record
+        $author->save();
     
-        return redirect()->back();
+        // Redirect back with success message
+        return redirect()->route('admin.goToAuthorList')->with('success', 'Author data updated successfully!');
     }
-    public function destroy($id)
+        public function destroy($id)
     {
         // Find the author by ID and delete
         $author = Author::findOrFail($id);
