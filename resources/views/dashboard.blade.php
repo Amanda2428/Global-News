@@ -14,8 +14,8 @@
                         </div>
                         <div class="flex-1 text-right md:text-center">
                             <h5 class="font-bold uppercase text-gray-500">Total Users</h5>
-                            <h3 class="font-bold text-3xl">249 <span class="text-pink-500"><i
-                                        class="fas fa-exchange-alt"></i></span></h3>
+                            <h3 class="font-bold text-3xl">{{App\Models\User::count()}}<span class=" ml-2 text-pink-500"><i
+                                        class="fas fa-exchange-alt"></i></h3> </span></h3>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,9 @@
                         </div>
                         <div class="flex-1 text-right md:text-center">
                             <h5 class="font-bold uppercase text-gray-500">Total Posts</h5>
-                            <h3 class="font-bold text-3xl">152 days</h3>
+                            <h3 class="font-bold text-3xl">{{App\Models\Category::count()}}
+                                <i class="ml-2 text-blue-600 fas fa-calendar-plus"></i>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -48,7 +50,7 @@
                         </div>
                         <div class="flex-1 text-right md:text-center">
                             <h5 class="font-bold uppercase text-gray-500">Total Category Types</h5>
-                            <h3 class="font-bold text-3xl">7 tasks</h3>
+                            <h3 class="font-bold text-3xl">{{App\Models\CategoryType::count()}}<i class="ml-2 text-indigo-600 fas fa-list-ul"></i></h3>
                         </div>
                     </div>
                 </div>
@@ -242,34 +244,36 @@
                                         <tbody class="bg-white divide-y divide-gray-200">
 
                                             @foreach ($users as $item)
-                                                <tr class="hover:bg-gray-100">
-                                                    <td class="p-4 w-4">
-                                                        <div class="flex items-center">
-                                                            <input id="checkbox-1" aria-describedby="checkbox-1"
-                                                                type="checkbox"
-                                                                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded">
-                                                            <label for="checkbox-1" class="sr-only">checkbox</label>
-                                                        </div>
-                                                    </td>
-                                                    <td
-                                                        class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-                                                        <img class="h-10 w-10 rounded-full"
-                                                            src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
-                                                            alt="Neil Sims avatar">
-                                                    </td>
-                                                    <td
-                                                        class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                                        {{ $item->name }}</td>
-                                                    <td
-                                                        class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                                        {{ $item->email }}</td>
-                                                    <td
-                                                        class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                                        {{ $item->subscribed ? 'Yes' : 'No' }}
-                                                    </td>
+                                            <tr class="hover:bg-gray-100">
+                                                <td class="p-4 w-4">
+                                                    <div class="flex items-center">
+                                                        <input id="checkbox-1" aria-describedby="checkbox-1"
+                                                            type="checkbox"
+                                                            class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded">
+                                                        <label for="checkbox-1" class="sr-only">checkbox</label>
+                                                    </div>
+                                                </td>
+                                                <td
+                                                    class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
+                                                    <img class="h-10 w-10 rounded-full"
+                                                        src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
+                                                        alt="Neil Sims avatar">
+                                                </td>
+                                                <td
+                                                    class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                                    {{ $item->name }}
+                                                </td>
+                                                <td
+                                                    class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                                    {{ $item->email }}
+                                                </td>
+                                                <td
+                                                    class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
+                                                    {{ $item->subscribed ? 'Yes' : 'No' }}
+                                                </td>
 
 
-                                                </tr>
+                                            </tr>
                                             @endforeach
 
                                         </tbody>

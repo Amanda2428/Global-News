@@ -28,7 +28,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/admin/user-list', [AdminUserController::class, 'goToUserList'])->name('admin.goToUserList');
+
+
     Route::get('/admin/admin-list', [AdminUserController::class, 'goToAdminList'])->name('admin.goToAdminList');
 
     Route::get('/admin/author-list', [AuthorController::class, 'goToAuthorList'])->name('admin.goToAuthorList');
@@ -51,16 +52,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // category
     Route::post('/admin/category/{id}', [CategoryController::class, 'store'])->name('admin.category.store');
     Route::get('admin/category-delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
-    Route::put('/admin/category-update', [CategoryController::class, 'update'])->name('admin.category.update');    
-   
-    // user delete
+    Route::put('/admin/category-update', [CategoryController::class, 'update'])->name('admin.category.update');
+
+    // user
+    Route::get('/admin/user-list', [AdminUserController::class, 'goToUserList'])->name('admin.goToUserList');
     Route::get('/admin/user-delete/{id}', [AdminUserController::class, 'destroy'])->name('admin.user-list.destroy');
 
 
-     // world page search
+    // world page search
     Route::get('/admin/category-search/{id}', [CategoryController::class, 'WorldPagesearch'])->name('admin.category.WorldPagesearch');
 
-     // sport page search
+    // sport page search
     Route::get('/admin/category-sport-search/{id}', [CategoryController::class, 'SportPagesearch'])->name('admin.category.SportPagesearch');
 
     // business page search
@@ -76,14 +78,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/user-search', [AdminUserController::class, 'UserPagesearch'])->name('admin.user.UserPagesearch');
 
     //author page search
-    Route::get('/admin/author-search', [AuthorController::class, 'AuthorPagesearch'])->name('admin.author.AuthorPagesearch');
+
 
     //category-types page search
     Route::get('/admin/category-types-search', [CategoryTypeController::class, 'CategoryTypePagesearch'])->name('admin.CategoryTypePagesearch');
+
+    
     //author
     Route::post('/author/store', [AuthorController::class, 'store'])->name('author.store');
     Route::get('/author/delete/{id}', [AuthorController::class, 'destroy'])->name('author.destroy');
     Route::put('/author/update', [AuthorController::class, 'update'])->name('author.update');
+    Route::get('/admin/author-search', [AuthorController::class, 'AuthorPagesearch'])->name('admin.author.AuthorPagesearch');
 
 
     //category_type
@@ -94,14 +99,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //admin-list
     Route::post('admin/admin-list/store', [AdminUserController::class, 'store'])->name('admin.store');
 
-
-
-
-
-
-    
+    //Comment
+    Route::get('/admin/comment-delete/{id}', [CommentController::class, 'destroy'])->name('admin.commentDelete');
+    Route::get('/admin/comment-search', [CommentController::class, 'CommentsPagesearch'])->name('admin.CommentsPagesearch');
 });
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
