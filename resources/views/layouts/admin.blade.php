@@ -41,7 +41,7 @@
     <nav id="header" class="bg-black fixed w-full z-10 top-0 shadow">
         <div class="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
             <div class="w-1/2 pl-2 md:pl-0">
-                <a class="text-gray-50 text-base xl:text-xl no-underline hover:no-underline font-bold" href="{{ route('admin.goToDashBoard') }}">
+                <a class="text-gray-50 text-base xl:text-xl no-underline hover:no-underline font-bold" href="{{ route('dashboard') }}">
                     Worldview Waves Admin
                 </a>
 
@@ -100,7 +100,7 @@
                 <ul class="list-reset lg:flex flex-1 items-center px-4 md:px-0">
                     <!-- Home -->
                     <li class="mr-6 my-2 md:my-0">
-                        <a href="{{ route('admin.goToDashBoard') }}"
+                        <a href="{{ route('dashboard') }}"
                             class="block py-1 md:py-3 pl-1 align-middle text-pink-600 no-underline hover:text-gray-900 border-b-2 border-orange-600 hover:border-orange-600">
                             <i class="fas fa-home fa-fw mr-3 text-pink-600"></i><span
                                 class="pb-1 md:pb-0 text-sm">Home</span>

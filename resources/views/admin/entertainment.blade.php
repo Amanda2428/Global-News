@@ -27,16 +27,29 @@
                             </form>
                         </div>
                         <div class="flex items-center space-x-2 sm:space-x-3 ml-auto">
-                            <button type="button" data-modal-toggle="add-user-modal"
-                                class="w-1/2 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
-                                <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                Add More News
-                            </button>
+                            @if (Auth::user()->owner == '1' || Auth::user()->category_type == '5')
+                                <button type="button" data-modal-toggle="add-user-modal"
+                                    class="w-1/2 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
+                                    <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    Add More News
+                                </button>
+                            @elseif(Auth::user()->owner == '0' || Auth::user()->category_type == '0')
+                                <button type="button" data-modal-toggle="add-user-modal"
+                                    class="hidden w-1/2 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
+                                    <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    Add More News
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -115,18 +128,26 @@
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             <a href="{{ $items->social_media_link }}" target="_blank">{{ $items->social_media_link }}</a>
                                         </td>
-                                        <!-- <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{ $items->author->name }}</td> -->
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             {{ $items->author->name ?? 'N/A' }}
                                         </td>
 
                                         <td class="p-4 whitespace-nowrap space-x-2">
-                                            <button type="button" onclick="openModal('{{ $items->id }}', '{{ $items->title }}', '{{ $items->description }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{$items->author_id}}')" class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                <i class="fas fa-edit mr-2"></i>Edit Content
-                                            </button>
-                                            <button type="button" onclick="openDeleteModal('{{ $items->id }}')" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                <i class="fas fa-trash-alt mr-2"></i>Delete Content
-                                            </button>
+                                            @if (Auth::user()->owner == '1' || Auth::user()->category_type == '5')
+                                                <button type="button" onclick="openModal('{{ $items->id }}', '{{ $items->title }}', '{{ $items->description }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{$items->author_id}}')" class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                                    <i class="fas fa-edit mr-2"></i>Edit Content
+                                                </button>
+                                                <button type="button" onclick="openDeleteModal('{{ $items->id }}')" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                                    <i class="fas fa-trash-alt mr-2"></i>Delete Content
+                                                </button>
+                                            @elseif(Auth::user()->owner == '0' || Auth::user()->category_type == '0')
+                                                <button type="button" onclick="openModal('{{ $items->id }}', '{{ $items->title }}', '{{ $items->description }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{$items->author_id}}')" class="hidden text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                                    <i class="fas fa-edit mr-2"></i>Edit Content
+                                                </button>
+                                                <button type="button" onclick="openDeleteModal('{{ $items->id }}')" class="hidden text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                                    <i class="fas fa-trash-alt mr-2"></i>Delete Content
+                                                </button>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -379,9 +400,8 @@
                 </div>
             </div>
             @endforeach
-            
-       
+
+
         </main>
     </div>
 </x-admin-layout>
-

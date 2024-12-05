@@ -95,11 +95,11 @@
 
                                         <td class="p-4 whitespace-nowrap space-x-2 text-right">
                                             <button type="button" onclick="openUpdateModal('{{ $item->id }}', '{{ $item->name }}')" class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                <i class="fas fa-edit mr-2"></i>Edit Content
+                                                <i class="fas fa-edit mr-2"></i>Edit Type
                                             </button>
                                             <button type="button" onclick="openingModal('{{ $item->id }}')"
                                                 class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                <i class="fas fa-trash-alt mr-2"></i>Delete Content
+                                                <i class="fas fa-trash-alt mr-2"></i>Delete Type
                                             </button>
 
                                         </td>

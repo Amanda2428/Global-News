@@ -13,9 +13,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="resources\css\app.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet" />
 
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.png') }}">
-<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 </head>
 
 <body class="text-gray-700 pt-9 sm:pt-10">
@@ -31,7 +32,7 @@
                         <ul class="navbar hidden lg:flex lg:flex-row text-gray-400 text-sm items-center font-bold">
                             <li class="active relative border-l border-gray-800 hover:bg-gray-900 ">
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="index.html">Home</a>
-                            </li>   
+                            </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="#">World</a>
                             </li>
@@ -47,9 +48,24 @@
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Entertainment</a>
                             </li>
+                            @if(Auth::check())
+                            <!-- Logout Button -->
+                            <li class="relative border-l border-gray-800 hover:bg-gray-900">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="block py-3 px-6 border-b-2 border-transparent">
+                                        Logout<i class="ml-2 fas fa-sign-out-alt"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            @else
+                            <!-- Register Button -->
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="{{ route('register') }}">Register</a>
                             </li>
+                            @endif
+
+
                         </ul>
 
                         <!-- search form & mobile nav -->

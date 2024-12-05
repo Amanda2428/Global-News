@@ -10,25 +10,19 @@ use App\Http\Controllers\CommentController as CommentController;
 use App\Http\Controllers\ViewController as ViewController;
 
 
-Route::get('/', function () {
-    // return view('admin.user-list');
-    return view('landing');
-    // return view('auth.register');
-    // return view('auth.login');
-})->name('user.home');
+Route::get('/', function () {return view('landing');})->name('user.home');
 
-// Route::get('/dashboard', function () {
-//     return view('/dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-
+    Route::get('/users', [AdminUserController::class, 'listUsers'])->name('listUsers');
 
     Route::get('/admin/admin-list', [AdminUserController::class, 'goToAdminList'])->name('admin.goToAdminList');
 
@@ -36,7 +30,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // admin world
     Route::get('/admin/world/{id}', [CategoryController::class, 'goToWorldPage'])->name('admin.goToWorldPage');
-    // admin world
     Route::get('/admin/sport/{id}', [CategoryController::class, 'goToSportPage'])->name('admin.goToSportPage');
     Route::get('/admin/business/{id}', [CategoryController::class, 'goToBusinessPage'])->name('admin.goToBusinessPage');
     Route::get('/admin/education/{id}', [CategoryController::class, 'goToEducationPage'])->name('admin.goToEducationPage');
@@ -46,7 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/comment', [CommentController::class, 'goToComments'])->name('admin.goToComments');
     Route::get('/admin/view', [ViewController::class, 'goToViews'])->name('admin.goToViews');
 
-    Route::get('/dashboard', [AdminUserController::class, 'goToDashBoard'])->name('admin.goToDashBoard');
+    Route::get('/dashboard', [AdminUserController::class, 'goToDashBoard'])->name('dashboard');
 
 
     // category
@@ -54,36 +47,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admin/category-delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
     Route::put('/admin/category-update', [CategoryController::class, 'update'])->name('admin.category.update');
 
+    //Categories Searching
+    Route::get('/admin/category-search/{id}', [CategoryController::class, 'WorldPagesearch'])->name('admin.category.WorldPagesearch');
+    Route::get('/admin/category-sport-search/{id}', [CategoryController::class, 'SportPagesearch'])->name('admin.category.SportPagesearch');
+    Route::get('/admin/category-business-search/{id}', [CategoryController::class, 'BusinessPagesearch'])->name('admin.category.BusinessPagesearch');
+    Route::get('/admin/category-education-search/{id}', [CategoryController::class, 'EducationPagesearch'])->name('admin.category.EducationPagesearch');
+    Route::get('/admin/category-entertainment-search/{id}', [CategoryController::class, 'EntertainmentPagesearch'])->name('admin.category.EntertainmentPagesearch');
+
     // user
     Route::get('/admin/user-list', [AdminUserController::class, 'goToUserList'])->name('admin.goToUserList');
     Route::get('/admin/user-delete/{id}', [AdminUserController::class, 'destroy'])->name('admin.user-list.destroy');
-
-
-    // world page search
-    Route::get('/admin/category-search/{id}', [CategoryController::class, 'WorldPagesearch'])->name('admin.category.WorldPagesearch');
-
-    // sport page search
-    Route::get('/admin/category-sport-search/{id}', [CategoryController::class, 'SportPagesearch'])->name('admin.category.SportPagesearch');
-
-    // business page search
-    Route::get('/admin/category-business-search/{id}', [CategoryController::class, 'BusinessPagesearch'])->name('admin.category.BusinessPagesearch');
-
-    // education page search
-    Route::get('/admin/category-education-search/{id}', [CategoryController::class, 'EducationPagesearch'])->name('admin.category.EducationPagesearch');
-
-    // entertainment page search
-    Route::get('/admin/category-entertainment-search/{id}', [CategoryController::class, 'EntertainmentPagesearch'])->name('admin.category.EntertainmentPagesearch');
-
-    //user page search
     Route::get('/admin/user-search', [AdminUserController::class, 'UserPagesearch'])->name('admin.user.UserPagesearch');
 
-    //author page search
 
 
-    //category-types page search
-    Route::get('/admin/category-types-search', [CategoryTypeController::class, 'CategoryTypePagesearch'])->name('admin.CategoryTypePagesearch');
-
-    
     //author
     Route::post('/author/store', [AuthorController::class, 'store'])->name('author.store');
     Route::get('/author/delete/{id}', [AuthorController::class, 'destroy'])->name('author.destroy');
@@ -95,9 +72,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/admin/category-types/store', [CategoryTypeController::class, 'store'])->name('category-types.store');
     Route::put('/admin/category-types/update', [CategoryTypeController::class, 'update'])->name('category-types.update');
     Route::get('/admin/category-types-delete/{id}', [CategoryTypeController::class, 'destroy'])->name('category-types.destroy');
+    Route::get('/admin/category-types-search', [CategoryTypeController::class, 'CategoryTypePagesearch'])->name('admin.CategoryTypePagesearch');
 
     //admin-list
-    Route::post('admin/admin-list/store', [AdminUserController::class, 'store'])->name('admin.store');
+    Route::post('admin/admin-list/store', [AdminUserController::class, 'adminStore'])->name('admin.store');
+    Route::put('admin/admin-list/update', [AdminUserController::class, 'adminUpdate'])->name('admin.update');
+    Route::get('/admin/admin-list-delete/{id}', [AdminUserController::class, 'adminDestroy'])->name('admin.destroy');
+    Route::get('/admin/admin-search', [AdminUserController::class, 'adminPageSearch'])->name('admin.adminPageSearch');
+
 
     //Comment
     Route::get('/admin/comment-delete/{id}', [CommentController::class, 'destroy'])->name('admin.commentDelete');

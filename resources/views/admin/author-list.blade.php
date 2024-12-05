@@ -113,8 +113,8 @@
                                             {{ $info->id }}
                                         </td>
                                         <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-                                            <img class="h-20 w-20 rounded-full"
-                                                src="{{ asset($info->profile ?? 'images/default-avatar.png') }}" alt="Author Avatar">
+                                            <img class="h-50 w-50 rounded-full"
+                                                src="{{ asset($info->profile ?? 'images/default-profile.jpg') }}" alt="Author Avatar">
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             {{ $info->name }}
@@ -133,11 +133,11 @@
                                         </td>
                                         <td class="p-4 whitespace-nowrap space-x-2">
                                             <button type="button" onclick="openUpdateModal('{{ $info->id }}', '{{ $info->profile }}', '{{ $info->name }}', '{{ $info->email }}', '{{ $info->phone }}', '{{ $info->bio }}', '{{ $info->address }}')" class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                <i class="fas fa-edit mr-2"></i>Edit Content
+                                                <i class="fas fa-edit mr-2"></i>Edit Author
                                             </button>
                                             <!-- Button to open modal -->
                                             <button type="button" onclick="openModal('{{ $info->id }}')" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                <i class="fas fa-trash-alt mr-2"></i>Delete Content
+                                                <i class="fas fa-trash-alt mr-2"></i>Delete Author
                                             </button>
 
                                         </td>

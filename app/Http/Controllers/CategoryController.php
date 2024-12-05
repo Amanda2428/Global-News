@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function goToWorldPage($id): View
     {
         $categories = Category::where('category_type_id', '=', $id)->with('author')->get();
-        $authors = Author::get();
+        $authors = Author::get();   
         return view('admin.world', compact('categories', 'authors'));
     }
 
@@ -71,7 +71,7 @@ class CategoryController extends Controller
             $data['video'] = $filename;
         }
 
-        $category = Category::create($data);
+        $category = Category::create($data);    
         if ($id == 1) {
             return redirect()->route('admin.goToWorldPage', ['id' => 1]);
         } else if ($id == 2) {

@@ -24,7 +24,9 @@ class User extends Authenticatable
         'password',
         'profile',
         'role',
-        'subscribed'
+        'subscribed',
+        'category_type',
+        'remember_token',
     ];
 
     /**

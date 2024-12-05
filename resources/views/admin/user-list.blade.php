@@ -83,9 +83,8 @@
                                             {{ $item->id }}
                                         </td>
                                         <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-                                            <img class="h-10 w-10 rounded-full"
-                                                src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
-                                                alt="Neil Sims avatar">
+                                        <img class="h-20 w-20 rounded-full"
+                                        src="{{ asset($item->profile ?? 'images/default-profile.jpg') }}" alt="Author Avatar">
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             {{ $item->name }}
@@ -99,7 +98,7 @@
 
                                         <td class="p-4 whitespace-nowrap space-x-2">
                                             <button type="button" onclick="openDeleteModal('{{ $item->id }}')" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                <i class="fas fa-trash-alt mr-2"></i>Delete Content
+                                                <i class="fas fa-trash-alt mr-2"></i>Ban User
                                             </button>
                                         </td>
 
@@ -112,54 +111,7 @@
                     </div>
                 </div>
             </div>
-            <div
-                class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
-                <div class="flex items-center mb-4 sm:mb-0">
-                    <a href="#"
-                        class="text-gray-500 hover:text-gray-900 cursor-pointer p-1 hover:bg-gray-100 rounded inline-flex justify-center">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                    <a href="#"
-                        class="text-gray-500 hover:text-gray-900 cursor-pointer p-1 hover:bg-gray-100 rounded inline-flex justify-center mr-2">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                    <span class="text-sm font-normal text-gray-500">Showing <span
-                            class="text-gray-900 font-semibold">1-20</span> of <span
-                            class="text-gray-900 font-semibold">2290</span></span>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <a href="#"
-                        class="flex-1 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center">
-                        <svg class="-ml-1 mr-1 h-5 w-5" fill=" currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        Previous
-                    </a>
-                    <a href="#"
-                        class="flex-1 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center">
-                        Next
-                        <svg class="-mr-1 ml-1 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+ 
 
             <!-- Delete User Modal -->
             <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
@@ -187,8 +139,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to delete
-                                this data?</h3>
+                            <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to ban this User?</h3>
                             <a id="confirm-delete-link"
                                 class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
                                 Yes, I'm sure
