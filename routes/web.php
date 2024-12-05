@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -8,9 +7,11 @@ use App\Http\Controllers\CategoryController as CategoryController;
 use App\Http\Controllers\CategoryTypeController as CategoryTypeController;
 use App\Http\Controllers\CommentController as CommentController;
 use App\Http\Controllers\ViewController as ViewController;
+use App\Http\Controllers\LandingController as LandingController;
 
 
-Route::get('/', function () {return view('landing');})->name('user.home');
+Route::get('/', [LandingController::class, 'goToLandingPage'])->name('user.home');
+Route::get('/user/categories/{id}', [CategoryController::class, 'goToUserCategories'])->name('user.categories');
 
 
 
@@ -84,7 +85,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Comment
     Route::get('/admin/comment-delete/{id}', [CommentController::class, 'destroy'])->name('admin.commentDelete');
     Route::get('/admin/comment-search', [CommentController::class, 'CommentsPagesearch'])->name('admin.CommentsPagesearch');
-});
+    Route::post('user/submit-comment', [CommentController::class, 'userComment'])->name('user.comment');
+
+    // user site
+
+
+    Route::get('/user/detail/{id}', [CategoryController::class, 'goToDetailPage'])->name('user.detail');
+    
+}); 
 
 
 

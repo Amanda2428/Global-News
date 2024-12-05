@@ -24,6 +24,8 @@ class UserController extends Controller
         return view('admin.user-list', compact('users'));
     }
 
+    
+
 
     public function destroy(Request $request, $id): RedirectResponse
     {
@@ -115,4 +117,5 @@ class UserController extends Controller
 
         return view('admin.admin-list', compact('query', 'admins'));
     }
+
 }

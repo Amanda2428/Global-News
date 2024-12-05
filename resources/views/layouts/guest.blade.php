@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="resources\css\app.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet" />
+    
 
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.png') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
@@ -31,22 +32,22 @@
                         <!-- nav menu -->
                         <ul class="navbar hidden lg:flex lg:flex-row text-gray-400 text-sm items-center font-bold">
                             <li class="active relative border-l border-gray-800 hover:bg-gray-900 ">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="index.html">Home</a>
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="{{route('user.home')}}">Home</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">World</a>
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="{{route('user.categories',['id' => 1])}}">World</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Sport</a>
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="{{route('user.categories',['id' => 2])}}">Sport</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Business</a>
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="{{route('user.categories',['id' => 3])}}">Business</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Education</a>
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="{{route('user.categories',['id' => 4])}}">Education</a>
                             </li>
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
-                                <a class="block py-3 px-6 border-b-2 border-transparent" href="#">Entertainment</a>
+                                <a class="block py-3 px-6 border-b-2 border-transparent" href="{{route('user.categories',['id' => 5])}}">Entertainment</a>
                             </li>
                             @if(Auth::check())
                             <!-- Logout Button -->

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\CategoryType;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\View as ViewModel; // Alias your model to avoid conflicts
 use App\Models\Author;
+use App\Models\Comment;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -190,6 +194,44 @@ public function EducationPagesearch(Request $request, $id)
     $authors = Author::get();
     return view('admin.education', compact('categories', 'query','authors'));
 }
+
+
+//user site
+public function goToUserCategories($id): View
+{
+    $categories = Category::where('category_type_id', '=', $id)->with('author')->get();
+    $category_types = CategoryType::get(); 
+    $authors = Author::get(); 
+    return view(('user.categories'),compact('categories','authors','category_types')); 
+}
+
+public function goToDetailPage($id): \Illuminate\Contracts\View\View
+{
+    $item = Category::findOrFail($id);
+    $latestCategories = Category::latest()->take(5)->get();
+    $comments = Comment::where('category_id', $id)
+        ->with('user')
+        ->latest()
+        ->get();
+
+        if (!ViewModel::where('category_id', $id)
+        ->where('user_id', Auth::id())
+        ->exists()) {
+        ViewModel::create([
+            'category_id' => $id,
+            'user_id' => Auth::id(),
+        ]);
+    }
+    
+    $totalViews = ViewModel::where('category_id', $id)->count();
+
+    return view('user.detail', compact('item', 'latestCategories', 'comments', 'totalViews'));
+}
+
+
+
+
+
 
 
 

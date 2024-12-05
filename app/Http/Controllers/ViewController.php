@@ -6,6 +6,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class ViewController extends Controller
 {
@@ -19,4 +20,6 @@ class ViewController extends Controller
         // Pass the data to the view
         return view('admin.view', compact('views'));
     }
+   
+    
 }
