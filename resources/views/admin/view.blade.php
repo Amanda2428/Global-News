@@ -9,12 +9,20 @@
                     </div>
                     <div class="sm:flex">
                         <div class="hidden sm:flex items-center sm:divide-x sm:divide-gray-100 mb-3 sm:mb-0">
-                            <form class="lg:pr-3" action="#" method="GET">
-                                <label for="users-search" class="sr-only">Search</label>
+                            <form action="{{ route('admin.viewSearch') }}" method="GET">
                                 <div class="mt-1 relative lg:w-64 xl:w-96">
-                                    <input type="text" name="email" id="users-search"
+                                    <!-- Search input field -->
+                                    <input type="text" name="query" id="categories-search"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        placeholder="Search for User">
+                                        placeholder="Search for View with user email" value="{{ request('query') }}">
+
+                                    <!-- Submit button -->
+                                    <button type="submit" class="hidden"></button>
+
+                                    <!-- Cancel button -->
+                                    <a href="{{ route('admin.goToViews') }}" class="absolute right-2 top-2 bg-gray-300 text-gray-700 rounded px-4 py-1 text-sm hover:bg-gray-400">
+                                        <i class="fas fa-times"></i>
+                                    </a>
                                 </div>
                             </form>
                         </div>
@@ -28,63 +36,57 @@
                             <table class="table-fixed min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-100">
                                     <tr>
-                                        <th scope="col" class="p-4">
-                                            <div class="flex items-center">
-                                                <input id="checkbox-all" aria-describedby="checkbox-1"
-                                                    type="checkbox"
-                                                    class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded">
-                                                <label for="checkbox-all" class="sr-only">checkbox</label>
-                                            </div>
+                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                            User ID
                                         </th>
-                                        <th scope="col"
-                                            class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            View ID
-                                        </th>
-                                        <th scope="col"
-                                            class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                                             User Name
                                         </th>
-                                        <th scope="col"
-                                            class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            Category id
+                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                            User Email
                                         </th>
-                                        <th scope="col"
-                                            class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            Category Name
+                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                            Category Title
                                         </th>
-
-                                        <th scope="col" class="p-4">
+                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                            Total Views
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                @if($views->isEmpty())
-    <p>No data available</p>
-@else
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>User Name</th>
-                <th>Category Title</th>
-                <th>Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($views as $view)
-                <tr>
-                    <td>{{ $view->id }}</td>
-                    <td>{{ $view->user->name ?? 'No User' }}</td>
-                    <td>{{ $view->category->title ?? 'No Category' }}</td>
-                    <td>{{ $view->created_at }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endif
+                                    @if($categoryViewCounts->isEmpty())
+                                    <tr>
+                                        <td colspan="5" class="text-center p-4 text-gray-500">
+                                            No views found for any category.
+                                        </td>
+                                    </tr>
+                                    @else
+                                    @foreach ($categoryViewCounts as $categoryViewCount)
+                                    <tr>
+                                        <td class="p-4 text-base font-medium text-gray-900">
+                                            {{ $categoryViewCount->user ? $categoryViewCount->user->id : 'N/A' }}
+                                        </td>
+                                        <td class="p-4 text-base font-medium text-gray-900">
+                                            {{ $categoryViewCount->user ? $categoryViewCount->user->name : 'N/A' }}
+                                        </td>
+                                        <td class="p-4 text-base font-medium text-gray-900">
+                                            {{ $categoryViewCount->user ? $categoryViewCount->user->email : 'N/A' }}
+                                        </td>
 
+                                        <td class="p-4 text-base font-medium text-gray-900">
+                                            {{ $categoryViewCount->category_title }}
+                                        </td>
+                                        <td class="p-4 text-base font-medium text-gray-900">
+                                            {{ $categoryViewCount->total_views }}
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -138,47 +140,6 @@
                 </div>
             </div>
 
-            <!-- Delete User Modal -->
-            <div class="hidden overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center h-modal sm:h-full"
-                id="delete-user-modal">
-                <div class="relative w-full max-w-md px-4 h-full md:h-auto">
-                    <!-- Modal content -->
-                    <div class="bg-white rounded-lg shadow relative">
-                        <!-- Modal header -->
-                        <div class="flex justify-end p-2">
-                            <button type="button"
-                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                                data-modal-toggle="delete-user-modal">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <!-- Modal body -->
-                        <div class="p-6 pt-0 text-center">
-                            <svg class="w-20 h-20 text-red-600 mx-auto" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to delete
-                                this user?</h3>
-                            <a href="#"
-                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
-                                Yes, I'm sure
-                            </a>
-                            <a href="#"
-                                class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
-                                data-modal-toggle="delete-user-modal">
-                                No, cancel
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </main>
     </div>
 </x-admin-layout>

@@ -76,6 +76,12 @@
                         <p class="text-lg mb-4">
                             {{ $item->description }}
                         </p>
+                        <div class="mt-6">
+                            <a href="{{ $item->social_media_link }}" target="_blank" class="text-blue-600 hover:underline">
+                                <i class="fas fa-share-alt"></i> View Source of this Post
+                                </a>
+                            </a>
+                        </div>
                     </div>
                     <!-- Image -->
                     <div class="w-full md:w-1/2 shadow-md">
@@ -90,7 +96,7 @@
                 <div class="flex justify-between items-center bg-white rounded-lg ">
                     <!-- Views -->
                     <div class="text-gray-600 text-lg">
-                    <i class="far fa-eye mr-2"></i>  Views: <span class="font-bold"> {{ number_format($totalViews) }}</span>
+                        <i class="far fa-eye mr-2"></i> Views: <span class="font-bold"> {{ number_format($totalViews) }}</span>
                     </div>
                     <!-- Buttons -->
                     <div class="flex space-x-4">

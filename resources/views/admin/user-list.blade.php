@@ -84,7 +84,7 @@
                                         </td>
                                         <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
                                         <img class="h-20 w-20 rounded-full"
-                                        src="{{ asset($item->profile ?? 'images/default-profile.jpg') }}" alt="Author Avatar">
+                                        src="{{ $item->profile ? asset('storage/' . $item->profile) : asset('images/default-profile.jpg') }}" alt="Author Avatar"> 
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             {{ $item->name }}

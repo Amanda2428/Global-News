@@ -54,22 +54,23 @@
                 </div>
             </form>
         </div> -->
-       
 
-        <div class="mt-4 ">
+
+        <div class="mt-4">
             <x-input-label for="subscribed" :value="__('Are you subscribed?')" />
-            <div class="flex  space-x-4 mt-4 ">
-                <label class="flex items-center space-x-2 mr-5">
-                    <input type="radio" id="subscribed_yes" name="subscribed" value="1" class="rounded text-indigo-600 focus:ring-indigo-500" required />
-                    <span class="text-white">{{ __('Yes') }}</span>
+            <div class="flex  space-x-4 mt-4 block">
+                <label for="subscribed_yes" class="inline-flex items-center">
+                    <input type="radio" id="subscribed_yes" name="subscribed" value="1" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" required />
+                    <span class="ms-2 text-sm text-white">{{ __('Yes') }}</span>
                 </label>
-                <label class="flex items-center space-x-2 ml-5">
-                    <input type="radio" id="subscribed_no" name="subscribed" value="0" class="rounded text-indigo-600 focus:ring-indigo-500" required />
-                    <span class="text-white">{{ __('No') }}</span>
+                <label for="subscribed_no" class="inline-flex items-center">
+                    <input type="radio" id="subscribed_no" name="subscribed" value="0" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" required />
+                    <span class="ms-2 text-sm text-white">{{ __('No') }}</span>
                 </label>
             </div>
             <x-input-error :messages="$errors->get('subscribed')" class="mt-2" />
         </div>
+
 
         <div class="flex items-center justify-end mt-4 ">
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">

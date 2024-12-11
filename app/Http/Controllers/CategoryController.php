@@ -205,6 +205,12 @@ public function goToUserCategories($id): View
     return view(('user.categories'),compact('categories','authors','category_types')); 
 }
 
+/**
+ * Show a category's detail page.
+ *
+ * @param int $id The category's ID
+ * @return \Illuminate\Contracts\View\View
+ */
 public function goToDetailPage($id): \Illuminate\Contracts\View\View
 {
     $item = Category::findOrFail($id);
@@ -214,19 +220,42 @@ public function goToDetailPage($id): \Illuminate\Contracts\View\View
         ->latest()
         ->get();
 
-        if (!ViewModel::where('category_id', $id)
-        ->where('user_id', Auth::id())
-        ->exists()) {
-        ViewModel::create([
-            'category_id' => $id,
-            'user_id' => Auth::id(),
-        ]);
-    }
-    
+    // Record a new view
+    // We use the View model to record the view. The user_id is set to the current user's ID if they are logged in.
+    // If they are a guest, the user_id will be null.
+    ViewModel::create([
+        'category_id' => $id,
+        'user_id' => Auth::id(), // Nullable; you can handle guests separately
+    ]);
+
+    // Get the total number of views
     $totalViews = ViewModel::where('category_id', $id)->count();
 
     return view('user.detail', compact('item', 'latestCategories', 'comments', 'totalViews'));
 }
+public function search(Request $request)
+{
+    $searchTerm = $request->get('query');
+
+    // Search the categories table for the term
+    $categories = Category::where('title', 'like', '%' . $searchTerm . '%')->get();
+
+    // If the request is an AJAX request (i.e., fetch is being used)
+    if ($request->ajax()) {
+        return response()->json($categories);
+    }
+
+    // If a category is found, redirect to the detail page
+    if ($categories->isNotEmpty()) {
+        // Assuming you want the first matching category for simplicity
+        return redirect()->route('user.detail', ['id' => $categories->first()->id]);
+    }
+
+    // If no category is found, return a message or show a different view
+    return redirect()->route('landing')->with('error', 'No categories found');
+}
+
+
 
 
 

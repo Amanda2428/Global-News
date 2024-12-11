@@ -14,7 +14,7 @@
                                     <!-- Search input field -->
                                     <input type="text" name="query" id="categories-search"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        placeholder="Search for Users with name" value="{{ request('query') }}">
+                                        placeholder="Search for Users with name and email" value="{{ request('query') }}">
 
                                     <!-- Submit button -->
                                     <button type="submit" class="hidden"></button>

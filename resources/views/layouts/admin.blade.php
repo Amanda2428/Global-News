@@ -50,10 +50,11 @@
             <div class="w-1/2 pr-0">
                 <div class="flex relative inline-block float-right">
                     <div class="relative text-sm">
-                        <button id="userButton" class="flex items-center focus:outline-none mr-1">
-                            <img class="w-8 h-8 rounded-full mr-4 border-current" src="http://i.pravatar.cc/300"
-                                alt="Avatar of User">
-                            <span class="hidden md:inline-block text-gray-50">Hi, Admin </span>
+                        <button id="userButton" class="flex items-center focus:outline-none">
+                        <img src="{{ Auth::user()->profile ? asset('storage/' . Auth::user()->profile) : asset('images/default-profile.jpg') }}"
+                            alt="User Profile Picture"
+                            class="w-10 h-10 rounded-full object-cover mr-2">
+                            <span class="hidden md:inline-block text-gray-50">Hi,  {{ Auth::user()->name }} </span>
                             <svg class="pl-2 h-2 fill-current text-white" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
                                 <g>

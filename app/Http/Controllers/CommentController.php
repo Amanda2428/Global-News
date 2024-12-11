@@ -47,11 +47,13 @@ class CommentController extends Controller
     public function CommentsPagesearch(Request $request)
     {
         $query = $request->input('query');
-
+    
         $comments = Comment::whereHas('user', function ($q) use ($query) {
-            $q->where('name', 'LIKE', "%$query%");
+            $q->where('name', 'LIKE', "%$query%")
+              ->orWhere('email', 'LIKE', "%$query%");
         })->with(['user', 'category'])->get();
-
+    
         return view('admin.comment', compact('comments', 'query'));
     }
+    
 }

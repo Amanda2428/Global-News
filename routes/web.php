@@ -18,8 +18,8 @@ Route::get('/user/categories/{id}', [CategoryController::class, 'goToUserCategor
 Route::middleware('auth')->group(function () {
 
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile/destory', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -39,6 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/admin/comment', [CommentController::class, 'goToComments'])->name('admin.goToComments');
     Route::get('/admin/view', [ViewController::class, 'goToViews'])->name('admin.goToViews');
+    Route::get('/admin/view/search', [ViewController::class, 'viewSearch'])->name('admin.viewSearch');
 
     Route::get('/dashboard', [AdminUserController::class, 'goToDashBoard'])->name('dashboard');
 
@@ -91,6 +92,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/user/detail/{id}', [CategoryController::class, 'goToDetailPage'])->name('user.detail');
+    Route::get('/search', [CategoryController::class, 'search'])->name('category.search');
+
+
+
     
 }); 
 
