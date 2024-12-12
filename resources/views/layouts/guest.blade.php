@@ -54,13 +54,12 @@
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="{{route('user.categories',['id' => 5])}}">Entertainment</a>
                             </li>
-                            @if(Auth::check())
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
                                 <a href="{{ route('profile.edit') }}"
                                     class="block py-3 px-6 border-b-2 border-transparent">My
                                     account</a>
                             </li>
-                            </li>
+                            @if(Auth::check())
                             <!-- Logout Button -->
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
                                 <form method="POST" action="{{ route('logout') }}">
@@ -71,14 +70,13 @@
                                 </form>
                             </li>
 
-
                             @else
                             <!-- Register Button -->
                             <li class="relative border-l border-gray-800 hover:bg-gray-900">
                                 <a class="block py-3 px-6 border-b-2 border-transparent" href="{{ route('register') }}">Register</a>
                             </li>
                             @endif
-                        </ul>
+                        
                         <!-- Container for the dropdown search form -->
                         <div id="search-container" class="relative hidden">
                             <form id="search-form" action="{{ route('category.search') }}" method="GET" class="flex items-center">
@@ -91,6 +89,7 @@
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
                             </svg>
                         </button>
+                        </ul>
                         <button
                             id="mobile-menu-button"
                             class="hidden md:block py-2 px-5 bg-black text-white rounded-md hover:bg-gray-900 focus:outline-none lg:hidden"

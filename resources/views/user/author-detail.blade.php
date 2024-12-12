@@ -12,7 +12,7 @@
 
                 <div class="flex flex-row flex-wrap -mx-3 w-full">
                     <div class="flex-shrink max-w-full w-full px-3 pb-5">
-                        <div class="p-4 border border-gray-100 bg-gray-100 mb-4">
+                        <div class="p-4 border border-gray-100 bg-gray-200 mb-4 ">
                             <div class="flex flex-row items-center">
                                 <div class="rounded-full overflow-hidden">
                                     <img class="border max-w-full w-20 sm:w-32 rounded-full" src="{{ asset($author->profile ?? 'images/default-profile.jpg') }}" alt="author">
@@ -82,7 +82,7 @@
                         <div class="w-full py-3">
                             <h2 class="text-gray-800 text-2xl font-bold mb-10">
                                 <span class="inline-block h-5 border-l-4 border-red-600 mr-2"></span>
-                                Post by
+                                Posts by
                                 <!-- Display author name -->
                                 @if ($author->categories->isNotEmpty())
                                 {{ $author->name ?? 'Unknown Author' }}
@@ -103,11 +103,8 @@
                                         <h3 class="text-lg font-bold leading-tight mb-2">
                                             <a href="{{ route('user.detail', ['id' => $category->id]) }}">{{ $category->title }}</a>
                                         </h3>
-                                        <p class="hidden md:block text-gray-600 leading-tight mb-1">{{ Str::limit($category->description, 120) }}</p>
-                                        <a class="text-gray-500" href="#">
-                                            <span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
-                                            {{ $author->name ?? 'Unknown Author' }}
-                                        </a>
+                                        <span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>{{ Str::limit($category->description, 120) }}
+                                        
                                     </div>
                                 </div>
                             </div>

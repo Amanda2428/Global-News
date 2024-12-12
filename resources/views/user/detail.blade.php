@@ -11,8 +11,10 @@
                     <img class="w-14 h-14 rounded-full object-cover" src="{{ $item->author->profile ? asset( $item->author->profile) : asset('images/default-profile.jpg')}}" alt="Author Profile">
                 </a>
 
+                <a href="{{route('user.author-list',['id' => $item->author->id])}}">
+                    <span class="underline"> <strong>{{ $item->author->name }}</strong></span>
+                </a>
 
-                <span> <strong>{{ $item->author->name }}</strong></span>
                 <span>•</span>
                 <span>Uploaded on: <time datetime="{{ $item->created_at->toDateString() }}">{{ $item->created_at->format('F j, Y') }}</time></span>
             </div>
@@ -67,10 +69,10 @@
                     </svg>
                 </span>
                 <a href="{{route('user.author-list',['id' => $item->author->id])}}">
-                <p class="ml-16 mb-4">{{ $item->author->bio }}</p>        
-                <footer class="ml-16 text-base">Posted by <cite title="Source Title" class="text-indigo-600">{{ $item->author->name }}</cite></footer>
+                    <p class="ml-16 mb-4">{{ $item->author->bio }}</p>
+                    <footer class="ml-16 text-base">Posted by <cite title="Source Title" class="text-indigo-600 underline">{{ $item->author->name }}</cite></footer>
                 </a>
-                
+
             </blockquote>
             <!-- Combined Container -->
             <div class="flex flex-col bg-white rounded-lg shadow-md p-6 mt-5 mb-8 border-gray-300">
