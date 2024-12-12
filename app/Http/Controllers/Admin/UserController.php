@@ -15,17 +15,9 @@ class UserController extends Controller
 {
     public function listUsers(): View
     {
-        $users = User::where('role', 0)->paginate(10);
+        $users = User::where('role', 0)->get();
         return view('admin.user-list', compact('users'));
     }
-    public function goToUserList(): View
-    {
-        $users = User::get();
-        return view('admin.user-list', compact('users'));
-    }
-
-    
-
 
     public function destroy(Request $request, $id): RedirectResponse
     {

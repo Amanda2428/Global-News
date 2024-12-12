@@ -29,6 +29,10 @@
                     <div class="mx-w-10 text-2xl font-bold capitalize text-white flex items-center">Worldview Wave</div>
 
                     <div class="flex flex-row">
+                        <!-- Go to Top Button -->
+                        <button id="goToTop" class="hidden fixed bottom-4 right-4 bg-gray-500 text-white rounded p-4 shadow-md">
+                        <i class="fas fa-arrow-circle-up text-2xl"></i>
+                        </button>
 
                         <!-- nav menu -->
                         <ul class="navbar hidden lg:flex lg:flex-row text-gray-400 text-sm items-center font-bold">
@@ -82,14 +86,14 @@
                             </form>
                         </div>
                         <!-- Main search button that toggles the visibility of the form -->
-                        <button id="search-button" class="py-2 px-5 bg-black text-white rounded-md hover:bg-gray-900 focus:outline-none">
+                        <button id="search-button" class="py-2 px-5 bg-black  border-l border-gray-800 text-white  hover:bg-gray-900 focus:outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
                             </svg>
                         </button>
                         <button
                             id="mobile-menu-button"
-                            class="hidden md:block py-2 px-5 bg-black text-white rounded-md hover:bg-gray-900 focus:outline-none sm:hidden md:hidden"
+                            class="hidden md:block py-2 px-5 bg-black text-white rounded-md hover:bg-gray-900 focus:outline-none lg:hidden"
                             onclick="toggleMobileMenu()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                                 <path
@@ -111,41 +115,65 @@
 
         <!-- Mobile navbar -->
         <nav id="mobile-nav"
-            class="side-menu flex flex-col right-0 w-64 fixed top-0 bg-white dark:bg-gray-800 h-full overflow-auto z-40">
-            <!-- Close Button (beside the left of the white slide) -->
-            <div class="cursor-pointer text-white absolute top-4 left-[-2.5rem] p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="open bi bi-search" viewBox="0 0 16 16">
-                    <path
-                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
-                    </path>
-                </svg>
-            </div>
+            class="side-menu flex flex-col right-0 w-64 fixed top-0 bg-white  h-full overflow-auto z-40">
+            <i id="close-mobile-nav" class="fas fa-times font-bold font-black text-xl cursor-pointer p-4"></i>
+
             <!-- Navigation links -->
             <div class="mb-auto">
                 <nav class="relative flex flex-wrap">
                     <div class="text-center py-4 w-full font-bold border-b border-gray-100">Worldview Wave</div>
                     <ul id="side-menu" class="w-full float-none flex flex-col">
                         <li class="relative">
-                            <a href="#"
-                                class="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">Home</a>
+                            <a href="{{route('user.home')}}"
+                                class="block py-2 px-5 border-b border-t border-gray-500 hover:bg-gray-500 hover:text-white">Home</a>
                         </li>
                         <li class="relative">
-                            <a href="#"
-                                class="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">Home</a>
+                            <a href="{{route('user.categories',['id' => 1])}}"
+                                class="block py-2 px-5 border-b border-gray-500 hover:bg-gray-500 hover:text-white">World</a>
                         </li>
                         <li class="relative">
-                            <a href="#"
-                                class="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">Home</a>
+                            <a href="{{route('user.categories',['id' => 2])}}"
+                                class="block py-2 px-5 border-b border-gray-500 hover:bg-gray-500 hover:text-white">Sport</a>
                         </li>
                         <li class="relative">
-                            <a href="#"
-                                class="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">Home</a>
+                            <a href="{{route('user.categories',['id' => 3])}}"
+                                class="block py-2 px-5 border-b border-gray-500 hover:bg-gray-500 hover:text-white">Business</a>
                         </li>
                         <li class="relative">
-                            <a href="#"
-                                class="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">Home</a>
+                            <a href="{{route('user.categories',['id' => 4])}}"
+                                class="block py-2 px-5 border-b border-gray-500 hover:bg-gray-500 hover:text-white">Education</a>
                         </li>
+                        <li class="relative">
+                            <a href="{{route('user.categories',['id' => 5])}}"
+                                class="block py-2 px-5 border-b border-gray-500 hover:bg-gray-500 hover:text-white">Entertainement</a>
+                        </li>
+                        @if(Auth::check())
+                        <li class="relative ">
+                            <a href="{{ route('profile.edit') }}"
+                                class="block py-2 px-5 border-b border-gray-500 hover:bg-gray-500 hover:text-white">My
+                                account</a>
+                        </li>
+                        </li>
+                        <!-- Logout Button -->
+                        <li class="relative">
+                            <a href="" class="block py-2 px-5 border-b border-gray-500 hover:bg-gray-500 hover:text-white">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="">
+                                        Logout<i class="ml-2 fas fa-sign-out-alt"></i>
+                                    </button>
+                                </form>
+                            </a>
+
+                        </li>
+
+
+                        @else
+                        <!-- Register Button -->
+                        <li class="relative">
+                            <a class="block py-2 px-5 border-b border-gray-500 hover:bg-gray-500 hover:text-white" href="{{ route('register') }}">Register</a>
+                        </li>
+                        @endif
                     </ul>
                 </nav>
             </div>
@@ -156,7 +184,48 @@
             </div>
         </nav>
     </div>
+    <div class="container mt-1">
+        @if(session('success'))
+        <div class="relative w-full px-5 py-4 mx-auto">
+            <div class="p-6 border-l-4 border-green-600 rounded-r-xl bg-green-100">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="w-5 h-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-sm text-green-600">
+                            <p>{{ session('success') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
 
+        @if(session('error'))
+        <div class="relative w-full px-5 py-4 mx-auto">
+            <div class="p-6 border-l-4 border-red-600 rounded-r-xl bg-red-100">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                            <path fill="currentColor"
+                                d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-sm text-red-700">
+                            <p>{{ session('error') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+    </div>
     <main id="content">
         {{ $slot }}
     </main>
@@ -234,45 +303,37 @@
                         </ul>
                     </div>
                     <div class="flex-shrink max-w-full w-full lg:w-3/5 px-3">
-                        <div class="flex flex-wrap flex-row">
-                            <div class="flex-shrink max-w-full w-1/2 md:w-1/4 mb-6 lg:mb-0">
+                        <div class="flex flex-wrap flex-row algin-center">
+                            <div class="flex-shrink max-w-full w-1/2 md:w-1/3 mb-6 lg:mb-0">
                                 <h4 class="text-base leading-normal mb-3 uppercase text-gray-100">Product</h4>
                                 <ul>
-                                    <li class="py-1 hover:text-white"><a href="#">Landing</a></li>
-                                    <li class="py-1 hover:text-white"><a href="#">Pages</a></li>
-                                    <li class="py-1 hover:text-white"><a href="#">Sections</a></li>
-                                    <li class="py-1 hover:text-white"><a href="#">Sign Up</a></li>
-                                    <li class="py-1 hover:text-white"><a href="#">Login</a></li>
+                                    <li class="py-1 hover:text-white"><a href="{{route('user.home')}}">Landing</a></li>
+                                    <li class="py-1 hover:text-white"><a href="{{route('register')}}">Register</a></li>
+                                    <li class="py-1 hover:text-white"><a href="{{route('login')}}">Log in</a></li>
+                                    <li class="py-1 hover:text-white"><a href="{{route('password.request')}}">Forget Password</a></li>
                                 </ul>
                             </div>
                             <div class="flex-shrink max-w-full w-1/2 md:w-1/4 mb-6 lg:mb-0">
-                                <h4 class="text-base leading-normal mb-3 uppercase text-gray-100">Support</h4>
+                                <h4 class="text-base leading-normal mb-3 uppercase text-gray-100">News</h4>
                                 <ul>
-                                    <li class="py-1 hover:text-white"><a href="#">Documentation</a></li>
-                                    <li class="py-1 hover:text-white"><a href="#">Changelog</a></li>
-                                    <li class="py-1 hover:text-white"><a href="#">Tools</a></li>
-                                    <li class="py-1 hover:text-white"><a href="#">Icons</a></li>
-                                </ul>
-                            </div>
-                            <div class="flex-shrink max-w-full w-1/2 md:w-1/4 mb-6 lg:mb-0">
-                                <h4 class="text-base leading-normal mb-3 uppercase text-gray-100">Includes</h4>
-                                <ul>
-                                    <li class="py-1 hover:text-white"><a href="#">Utilities</a></li>
-                                    <li class="py-1 hover:text-white"><a href="#">Components</a></li>
-                                    <li class="py-1 hover:text-white"><a href="#">Example code</a></li>
-                                    <li class="py-1 hover:text-white"><a href="#">Updates</a></li>
+                                    <li class="py-1 hover:text-white"><a href="{{route('user.categories',['id' => 1])}}">World</a></li>
+                                    <li class="py-1 hover:text-white"><a href="{{route('user.categories',['id' => 2])}}">Sports</a></li>
+                                    <li class="py-1 hover:text-white"><a href="{{route('user.categories',['id' => 3])}}">Business</a></li>
+                                    <li class="py-1 hover:text-white"><a href="{{route('user.categories',['id' => 4])}}">Education</a></li>
+                                    <li class="py-1 hover:text-white"><a href="{{route('user.categories',['id' => 5])}}">Entertainment</a></li>
                                 </ul>
                             </div>
                             <div class="flex-shrink max-w-full w-1/2 md:w-1/4 mb-6 lg:mb-0">
                                 <h4 class="text-base leading-normal mb-3 uppercase text-gray-100">Legal</h4>
                                 <ul>
-                                    <li class="py-1 hover:text-white hover:text-white"><a href="#">Privacy
-                                            Policy</a></li>
+                                    <li class="py-1 hover:text-white hover:text-white"><a href="#">Privacy Policy</a></li>
                                     <li class="py-1 hover:text-white"><a href="#">Terms of Use</a></li>
                                     <li class="py-1 hover:text-white"><a href="#">License</a></li>
                                     <li class="py-1 hover:text-white"><a href="#">GDPR</a></li>
                                 </ul>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -300,11 +361,10 @@
 
 
     <script>
-     function toggleMobileMenu() {
-    const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenu.classList.toggle('hidden');
-}
-
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
     </script>
 
     <script>
@@ -353,6 +413,13 @@
             } else {
                 alert('Please enter a search term');
             }
+        });
+    </script>
+    <script>
+        // JavaScript to close the mobile navigation
+        document.getElementById('close-mobile-nav').addEventListener('click', function() {
+            const mobileNav = document.getElementById('mobileMenu');
+            mobileMenu.style.display = 'none'; // Hide the nav menu
         });
     </script>
 

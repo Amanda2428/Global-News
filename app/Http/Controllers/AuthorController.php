@@ -86,6 +86,23 @@ class AuthorController extends Controller
         $authors= Author::where('email', 'LIKE', "%$query%")->get();
         return view('admin.author-list', compact( 'query','authors'));
     }
+
+// In your controller
+// In your controller method
+public function goToAuthorPage($authorId)
+{
+    // Fetch the author along with their categories
+    $author = Author::with('categories')->findOrFail($authorId);
+
+    // Pass the author and categories to the view
+    return view('user.author-detail', compact('author'));
+}
+
+
+    
+    
+    
+    
     
   
     

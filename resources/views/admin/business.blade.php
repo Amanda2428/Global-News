@@ -28,31 +28,73 @@
                         </div>
                         <div class="flex items-center space-x-2 sm:space-x-3 ml-auto">
                             @if (Auth::user()->owner == '1' || Auth::user()->category_type == '3')
-                                <button type="button" data-modal-toggle="add-user-modal"
-                                    class="w-1/2 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
-                                    <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    Add More News
-                                </button>
+                            <button type="button" data-modal-toggle="add-user-modal"
+                                class="w-1/2 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
+                                <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Add More News
+                            </button>
                             @elseif(Auth::user()->owner == '0' || Auth::user()->category_type == '0')
-                                <button type="button" data-modal-toggle="add-user-modal"
-                                    class="hidden w-1/2 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
-                                    <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    Add More News
-                                </button>
+                            <button type="button" data-modal-toggle="add-user-modal"
+                                class="hidden w-1/2 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
+                                <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Add More News
+                            </button>
                             @endif
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="container mt-1">
+                @if(session('success'))
+                <div class="relative w-full px-5 py-4 mx-auto">
+                    <div class="p-6 border-l-4 border-green-600 rounded-r-xl bg-green-100">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="w-5 h-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <div class="text-sm text-green-600">
+                                    <p>{{ session('success') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                @if(session('error'))
+                <div class="relative w-full px-5 py-4 mx-auto">
+                    <div class="p-6 border-l-4 border-red-600 rounded-r-xl bg-red-100">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                                    <path fill="currentColor"
+                                        d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <div class="text-sm text-red-700">
+                                    <p>{{ session('error') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
             </div>
             <div class="flex flex-col">
                 <div class="overflow-x-auto">
@@ -134,19 +176,19 @@
 
                                         <td class="p-4 whitespace-nowrap space-x-2">
                                             @if (Auth::user()->owner == '1' || Auth::user()->category_type == '3')
-                                                <button type="button" onclick="openModal('{{ $items->id }}', '{{ $items->title }}', '{{ $items->description }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{$items->author_id}}')" class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                    <i class="fas fa-edit mr-2"></i>Edit Content
-                                                </button>
-                                                <button type="button" onclick="openDeleteModal('{{ $items->id }}')" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                    <i class="fas fa-trash-alt mr-2"></i>Delete Content
-                                                </button>
+                                            <button type="button" onclick="openModal('{{ $items->id }}', '{{ $items->title }}', '{{ $items->description }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{$items->author_id}}')" class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                                <i class="fas fa-edit mr-2"></i>Edit Content
+                                            </button>
+                                            <button type="button" onclick="openDeleteModal('{{ $items->id }}')" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                                <i class="fas fa-trash-alt mr-2"></i>Delete Content
+                                            </button>
                                             @elseif(Auth::user()->owner == '0' || Auth::user()->category_type == '0')
-                                                <button type="button" onclick="openModal('{{ $items->id }}', '{{ $items->title }}', '{{ $items->description }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{$items->author_id}}')" class="hidden text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                    <i class="fas fa-edit mr-2"></i>Edit Content
-                                                </button>
-                                                <button type="button" onclick="openDeleteModal('{{ $items->id }}')" class="hidden text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                    <i class="fas fa-trash-alt mr-2"></i>Delete Content
-                                                </button>
+                                            <button type="button" onclick="openModal('{{ $items->id }}', '{{ $items->title }}', '{{ $items->description }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{$items->author_id}}')" class="hidden text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                                <i class="fas fa-edit mr-2"></i>Edit Content
+                                            </button>
+                                            <button type="button" onclick="openDeleteModal('{{ $items->id }}')" class="hidden text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+                                                <i class="fas fa-trash-alt mr-2"></i>Delete Content
+                                            </button>
                                             @endif
                                         </td>
                                     </tr>

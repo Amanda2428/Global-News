@@ -48,7 +48,7 @@
                                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                                             Category Title
                                         </th>
-                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase text-center">
                                             Total Views
                                         </th>
                                     </tr>
@@ -76,7 +76,7 @@
                                         <td class="p-4 text-base font-medium text-gray-900">
                                             {{ $categoryViewCount->category_title }}
                                         </td>
-                                        <td class="p-4 text-base font-medium text-gray-900">
+                                        <td class="p-4 text-base font-medium text-gray-900 text-center">
                                             {{ $categoryViewCount->total_views }}
                                         </td>
                                     </tr>

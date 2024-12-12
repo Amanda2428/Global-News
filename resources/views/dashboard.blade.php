@@ -249,7 +249,7 @@
                         class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
                         <div class="mb-1 w-full">
                             <div class="mb-4">
-                                <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 text-center">All User</h1>
+                                <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 text-center">All Users</h1>
                             </div>
                         </div>
                     </div>
@@ -302,9 +302,8 @@
                                                 </td>
                                                 <td
                                                     class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-                                                    <img class="h-10 w-10 rounded-full"
-                                                        src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
-                                                        alt="Neil Sims avatar">
+                                                    <img class="h-20 w-20 rounded-full"
+                                                    src="{{ $item->profile ? asset('storage/' . $item->profile) : asset('images/default-profile.jpg') }}" alt="Author Avatar"> 
                                                 </td>
                                                 <td
                                                     class="p-4 whitespace-nowrap text-base font-medium text-gray-900">

@@ -12,6 +12,7 @@ use App\Http\Controllers\LandingController as LandingController;
 
 Route::get('/', [LandingController::class, 'goToLandingPage'])->name('user.home');
 Route::get('/user/categories/{id}', [CategoryController::class, 'goToUserCategories'])->name('user.categories');
+Route::get('/user/author/{id}', [AuthorController::class, 'goToAuthorPage'])->name('user.author-list');
 
 
 
@@ -57,7 +58,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/category-entertainment-search/{id}', [CategoryController::class, 'EntertainmentPagesearch'])->name('admin.category.EntertainmentPagesearch');
 
     // user
-    Route::get('/admin/user-list', [AdminUserController::class, 'goToUserList'])->name('admin.goToUserList');
+    Route::get('/admin/user-list', [AdminUserController::class, 'listUsers'])->name('admin.goToUserList');
     Route::get('/admin/user-delete/{id}', [AdminUserController::class, 'destroy'])->name('admin.user-list.destroy');
     Route::get('/admin/user-search', [AdminUserController::class, 'UserPagesearch'])->name('admin.user.UserPagesearch');
 
@@ -93,6 +94,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/user/detail/{id}', [CategoryController::class, 'goToDetailPage'])->name('user.detail');
     Route::get('/search', [CategoryController::class, 'search'])->name('category.search');
+
 
 
 

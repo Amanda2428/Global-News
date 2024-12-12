@@ -1,4 +1,5 @@
 <x-guest-layout>
+
     <!-- hero big grid -->
     <div class="bg-white py-6">
         <div class="xl:container mx-auto px-3 sm:px-4 xl:px-2">
@@ -25,6 +26,7 @@
                         @endif
                     </div>
                 </div>
+
 
                 <!--Start box news-->
                 <div class="flex-shrink max-w-full w-full lg:w-1/2 flex flex-col items-center justify-center">
@@ -57,6 +59,7 @@
         </div>
     </div>
 
+
     <!-- block news -->
     <div class="bg-white">
         <div class="xl:container mx-auto px-3 sm:px-4 xl:px-2">
@@ -65,7 +68,7 @@
                 <div class="flex-shrink max-w-full w-full lg:w-2/3 overflow-hidden">
                     <div class="w-full py-3">
                         <h2 class="text-gray-800 text-2xl font-bold">
-                            <span class="inline-block h-5 border-l-3 border-red-600 mr-2"></span>World News
+                            <span class="inline-block h-5 border-l-4 border-red-600 mr-2"></span>World News
                         </h2>
                     </div>
 
@@ -134,7 +137,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <!-- End of Card -->
                             </div>
@@ -155,7 +158,7 @@
                     <div class="flex-shrink max-w-full w-full py-12 overflow-hidden">
                         <div class="w-full py-3">
                             <h2 class="text-white text-2xl font-bold text-shadow-black">
-                                <span class="inline-block h-5 border-l-3 border-red-600 mr-2"></span>Sports News
+                                <span class="inline-block h-5 border-l-4 border-red-600 mr-2"></span>Sports News
                             </h2>
                         </div>
 
@@ -199,9 +202,9 @@
             <div class="flex flex-row flex-wrap">
                 <div class="flex-shrink max-w-full w-full overflow-hidden">
                     <div class="w-full py-3">
-                        <h2 class="text-gray-800 text-2xl font-bold">
-                            <span class="inline-block h-5 border-l-3 border-red-600 mr-2"></span>
-                            Latest News
+                        <h2 class="text-gray-800 text-2xl font-bold mb-10">
+                            <span class="inline-block h-5 border-l-4 border-red-600 mr-2"></span> Business News
+
                         </h2>
                     </div>
                     <div class="flex flex-row flex-wrap -mx-3">
@@ -241,7 +244,7 @@
                 <div class="flex-shrink max-w-full w-full lg:w-2/3  overflow-hidden">
                     <div class="w-full py-3">
                         <h2 class="text-gray-800 text-2xl font-bold">
-                            <span class="inline-block h-5 border-l-3 border-red-600 mr-2"></span>Education News
+                            <span class="inline-block h-5 border-l-4 border-red-600 mr-2"></span>Education News
                         </h2>
                     </div>
                     <div class="flex flex-row flex-wrap -mx-3">
@@ -322,8 +325,8 @@
                 <!-- post -->
                 <div class="flex-shrink max-w-full w-full lg:w-2/3 overflow-hidden">
                     <div class="w-full py-3">
-                        <h2 class="text-gray-800 text-2xl font-bold">
-                            <span class="inline-block h-5 border-l-3 border-red-600 mr-2"></span>Latest news
+                        <h2 class="text-gray-800 text-2xl font-bold mb-10">
+                            <span class="inline-block h-5 border-l-4 border-red-600 mr-2"></span>Entertainment News
                         </h2>
                     </div>
                     <div class="flex flex-row flex-wrap -mx-3">

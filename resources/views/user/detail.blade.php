@@ -7,7 +7,11 @@
 
             <!-- Author Info -->
             <div class="flex items-center  justify-center space-x-4 mb-8 text-sm text-gray-500">
-                <img src="/images/{{ $item->author->profile }}" alt="Author Image" class="w-10 h-10 rounded-full object-cover">
+                <a href="{{route('user.author-list',['id' => $item->author->id])}}">
+                    <img class="w-14 h-14 rounded-full object-cover" src="{{ $item->author->profile ? asset( $item->author->profile) : asset('images/default-profile.jpg')}}" alt="Author Profile">
+                </a>
+
+
                 <span> <strong>{{ $item->author->name }}</strong></span>
                 <span>•</span>
                 <span>Uploaded on: <time datetime="{{ $item->created_at->toDateString() }}">{{ $item->created_at->format('F j, Y') }}</time></span>
@@ -62,8 +66,11 @@
                         </g>
                     </svg>
                 </span>
-                <p class="ml-16 mb-4">{{ $item->author->bio }}</p>
+                <a href="{{route('user.author-list',['id' => $item->author->id])}}">
+                <p class="ml-16 mb-4">{{ $item->author->bio }}</p>        
                 <footer class="ml-16 text-base">Posted by <cite title="Source Title" class="text-indigo-600">{{ $item->author->name }}</cite></footer>
+                </a>
+                
             </blockquote>
             <!-- Combined Container -->
             <div class="flex flex-col bg-white rounded-lg shadow-md p-6 mt-5 mb-8 border-gray-300">
@@ -79,7 +86,7 @@
                         <div class="mt-6">
                             <a href="{{ $item->social_media_link }}" target="_blank" class="text-blue-600 hover:underline">
                                 <i class="fas fa-share-alt"></i> View Source of this Post
-                                </a>
+                            </a>
                             </a>
                         </div>
                     </div>
@@ -112,11 +119,15 @@
 
 
 
-
             <!-- Existing Comments Section -->
             <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-                <h3 class="text-2xl font-semibold mb-4">Comments Section </h3>
+                <h3 class="text-2xl font-semibold mb-4">Comments Section</h3>
                 <div class="space-y-4">
+                    @if($comments->isEmpty())
+                    <!-- No Comments Message -->
+                    <p class="text-gray-500 text-center">There are no comments yet. Be the first to leave one!</p>
+                    @else
+                    <!-- Comments List -->
                     <div class="space-y-4">
                         <hr>
                         <hr>
@@ -124,25 +135,22 @@
                         <div class="border-b pb-4 flex items-start justify-between">
                             <div class="flex items-center space-x-3">
                                 <!-- User Profile Image -->
-                                <img class="w-10 h-10 rounded-full object-cover" src="{{ $comment->user->profile_image }}" alt="User Profile">
-
+                                <img class="w-14 h-14 rounded-full object-cover" src="{{ $comment->user->profile ? asset('storage/' . $comment->user->profile) : asset('images/default-profile.jpg')}}" alt="User Profile">
                                 <!-- User Name and Comment -->
                                 <div>
                                     <p class="font-semibold">{{ $comment->user->name }}</p>
                                     <p>{{ $comment->description }}</p>
                                 </div>
                             </div>
-
                             <!-- Comment Timestamp -->
                             <span class="text-sm text-gray-500">Posted at: {{ $comment->created_at->diffForHumans() }}</span>
-
                         </div>
                         @endforeach
                     </div>
-
+                    @endif
                 </div>
-
             </div>
+
 
         </div>
 
