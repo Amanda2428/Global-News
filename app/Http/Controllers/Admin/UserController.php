@@ -51,7 +51,7 @@ class UserController extends Controller
             'role' => 1,
             'category_type' => $request->input('category_type'),
             'remember_token' => Str::random(60),
-            'email_verified_at' => Carbon::now() ,
+            'email_verified_at' => Carbon::now(),
         ];
         $admin = User::create($data);
 
@@ -85,7 +85,7 @@ class UserController extends Controller
         $admin->name = $request->input('name');
         $admin->email = $request->input('email');
         $admin->category_type = $request->input('category_type');
-        
+
 
         $admin->save();
 
@@ -110,4 +110,22 @@ class UserController extends Controller
         return view('admin.admin-list', compact('query', 'admins'));
     }
 
+    //for chart
+    public function getSubscriptionStats()
+    {
+        // Constants for subscription status
+        $SUBSCRIBED_YES = 1; // "Yes"
+        $SUBSCRIBED_NO = 0;  // "No"
+    
+        // Count the number of users in each category
+        $yesCount = User::where('subscribed', $SUBSCRIBED_YES)->count();
+        $noCount = User::where('subscribed', $SUBSCRIBED_NO)->count();
+    
+        // Return the counts as JSON response
+        return response()->json([
+            'yes' => $yesCount,
+            'no' => $noCount,
+        ]);
+    }
+    
 }

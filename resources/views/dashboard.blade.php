@@ -79,14 +79,14 @@
                         </div>
                         <div class="flex-1 text-right md:text-center">
                             <h5 class="font-bold uppercase text-gray-500">Total Category Types</h5>
-                            <h3 class="font-bold text-3xl">{{App\Models\CategoryType::count()}}  <i class="fas fa-exchange-alt text-indigo-600"></i></h3>
+                            <h3 class="font-bold text-3xl">{{App\Models\CategoryType::count()}} <i class="fas fa-exchange-alt text-indigo-600"></i></h3>
                         </div>
                     </div>
                 </div>
                 <!--/Metric Card-->
             </div>
 
-        
+
 
             <div class="w-full md:w-1/2 xl:w-1/3 p-3">
                 <!--Metric Card-->
@@ -109,136 +109,37 @@
         <hr class="border-b-2 border-gray-400 my-8 mx-4">
 
         <div class="flex flex-row flex-wrap flex-grow mt-2">
-
             <div class="w-full md:w-1/2 p-3">
-                <!--Graph Card-->
-                <div class="bg-white border rounded shadow">
-                    <div class="border-b p-3">
-                        <h5 class="font-bold uppercase text-gray-600">Graph</h5>
-                    </div>
-                    <div class="p-5">
-                        <canvas id="chartjs-7" class="chartjs" width="undefined" height="undefined"></canvas>
-                        <script>
-                            new Chart(document.getElementById("chartjs-7"), {
-                                "type": "bar",
-                                "data": {
-                                    "labels": ["January", "February", "March", "April"],
-                                    "datasets": [{
-                                        "label": "Page Impressions",
-                                        "data": [10, 20, 30, 40],
-                                        "borderColor": "rgb(255, 99, 132)",
-                                        "backgroundColor": "rgba(255, 99, 132, 0.2)"
-                                    }, {
-                                        "label": "Adsense Clicks",
-                                        "data": [5, 15, 10, 30],
-                                        "type": "line",
-                                        "fill": false,
-                                        "borderColor": "rgb(54, 162, 235)"
-                                    }]
-                                },
-                                "options": {
-                                    "scales": {
-                                        "yAxes": [{
-                                            "ticks": {
-                                                "beginAtZero": true
-                                            }
-                                        }]
-                                    }
-                                }
-                            });
-                        </script>
-                    </div>
+                <!-- Most-Viewed Categories -->
+                <div class="bg-white border rounded shadow p-5">
+                    <h6 class="font-bold uppercase text-gray-600 mb-3">Most-Viewed Categories</h6>
+                    <canvas id="most-viewed-chart" class="chartjs"></canvas>
                 </div>
-                <!--/Graph Card-->
+            </div>
+            <div class="w-full md:w-1/2 p-3">
+                <div class="bg-white border rounded shadow p-5">
+                    <h6 class="font-bold uppercase text-gray-600 mb-3">Subscription Status</h6>
+                    <canvas id="subscription-chart" class="chartjs"></canvas>
+                </div>
             </div>
 
             <div class="w-full md:w-1/2 p-3">
-                <!--Graph Card-->
-                <div class="bg-white border rounded shadow">
-                    <div class="border-b p-3">
-                        <h5 class="font-bold uppercase text-gray-600">Graph</h5>
-                    </div>
-                    <div class="p-5">
-                        <canvas id="chartjs-0" class="chartjs" width="undefined" height="undefined"></canvas>
-                        <script>
-                            new Chart(document.getElementById("chartjs-0"), {
-                                "type": "line",
-                                "data": {
-                                    "labels": ["January", "February", "March", "April", "May", "June", "July"],
-                                    "datasets": [{
-                                        "label": "Views",
-                                        "data": [65, 59, 80, 81, 56, 55, 40],
-                                        "fill": false,
-                                        "borderColor": "rgb(75, 192, 192)",
-                                        "lineTension": 0.1
-                                    }]
-                                },
-                                "options": {}
-                            });
-                        </script>
-                    </div>
+                <!-- Categories Count Per Type -->
+                <div class="bg-white border rounded shadow p-5">
+                    <h6 class="font-bold uppercase text-gray-600 mb-3">Categories Count Per Type</h6>
+                    <canvas id="categories-type-chart" class="chartjs"></canvas>
                 </div>
-                <!--/Graph Card-->
             </div>
-
-            <div class="w-full md:w-1/2 xl:w-1/3 p-3">
-                <!--Graph Card-->
-                <div class="bg-white border rounded shadow">
-                    <div class="border-b p-3">
-                        <h5 class="font-bold uppercase text-gray-600">Graph</h5>
-                    </div>
-                    <div class="p-5">
-                        <canvas id="chartjs-1" class="chartjs" width="undefined" height="undefined"></canvas>
-                        <script>
-                            new Chart(document.getElementById("chartjs-1"), {
-                                "type": "bar",
-                                "data": {
-                                    "labels": ["January", "February", "March", "April", "May", "June", "July"],
-                                    "datasets": [{
-                                        "label": "Likes",
-                                        "data": [65, 59, 80, 81, 56, 55, 40],
-                                        "fill": false,
-                                        "backgroundColor": ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)",
-                                            "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)",
-                                            "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"
-                                        ],
-                                        "borderColor": ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)",
-                                            "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)",
-                                            "rgb(201, 203, 207)"
-                                        ],
-                                        "borderWidth": 1
-                                    }]
-                                },
-                                "options": {
-                                    "scales": {
-                                        "yAxes": [{
-                                            "ticks": {
-                                                "beginAtZero": true
-                                            }
-                                        }]
-                                    }
-                                }
-                            });
-                        </script>
-                    </div>
+            <div class="w-full md:w-1/2 p-3">
+                <!-- Most-Commented Categories -->
+                <div class="bg-white border rounded shadow p-5">
+                    <h6 class="font-bold uppercase text-gray-600 mb-3">Most-Commented Categories</h6>
+                    <canvas id="most-commented-chart" class="chartjs"></canvas>
                 </div>
-                <!--/Graph Card-->
             </div>
 
 
 
-            <div class="w-full md:w-1/2 xl:w-1/3 p-3">
-                <!--Template Card-->
-                <div class="bg-white border rounded shadow">
-                    <div class="border-b p-3">
-                        <h5 class="font-bold uppercase text-gray-600">Template</h5>
-                    </div>
-                    <div class="p-5">
-
-                    </div>
-                </div>
-                <!--/Template Card-->
-            </div>
 
             <div class="w-full p-3">
                 <!--Table Card-->
@@ -303,7 +204,7 @@
                                                 <td
                                                     class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
                                                     <img class="h-20 w-20 rounded-full"
-                                                    src="{{ $item->profile ? asset('storage/' . $item->profile) : asset('images/default-profile.jpg') }}" alt="Author Avatar"> 
+                                                        src="{{ $item->profile ? asset('storage/' . $item->profile) : asset('images/default-profile.jpg') }}" alt="Author Avatar">
                                                 </td>
                                                 <td
                                                     class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
@@ -337,9 +238,129 @@
             </div>
 
 
+
         </div>
 
-        <!--/ Console Content-->
 
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/category-analytics')
+                .then(response => response.json())
+                .then(data => {
+                    // Most-Viewed Categories Chart
+                    new Chart(document.getElementById("most-viewed-chart"), {
+                        type: "bar",
+                        data: {
+                            labels: data.mostViewedCategories.map(item => item.title),
+                            datasets: [{
+                                label: "Views",
+                                data: data.mostViewedCategories.map(item => item.views_count),
+                                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                                borderColor: "rgb(75, 192, 192)",
+                                borderWidth: 1,
+                            }],
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            },
+                        },
+                    });
+
+                    // Most-Commented Categories Chart
+                    new Chart(document.getElementById("most-commented-chart"), {
+                        type: "bar",
+                        data: {
+                            labels: data.mostCommentedCategories.map(item => item.title),
+                            datasets: [{
+                                label: "Comments",
+                                data: data.mostCommentedCategories.map(item => item.comments_count),
+                                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                                borderColor: "rgb(255, 99, 132)",
+                                borderWidth: 1,
+                            }],
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            },
+                        },
+                    });
+
+                    // Categories Count Per Type Chart
+                    new Chart(document.getElementById("categories-type-chart"), {
+                        type: "doughnut",
+                        data: {
+                            labels: data.categoriesPerType.map(item => item.name),
+                            datasets: [{
+                                label: "Categories",
+                                data: data.categoriesPerType.map(item => item.categories_count),
+                                backgroundColor: [
+                                    "rgba(255, 99, 132, 0.2)",
+                                    "rgba(54, 162, 235, 0.2)",
+                                    "rgba(255, 206, 86, 0.2)",
+                                    "rgba(75, 192, 192, 0.2)",
+                                ],
+                                borderColor: [
+                                    "rgb(255, 99, 132)",
+                                    "rgb(54, 162, 235)",
+                                    "rgb(255, 206, 86)",
+                                    "rgb(75, 192, 192)",
+                                ],
+                                borderWidth: 1,
+                            }],
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top'
+                                },
+                            },
+                        },
+                    });
+                });
+        });
+    </script>
+    <script>
+        // Fetch subscription data from the server
+        fetch('/api/subscription-stats')
+            .then(response => response.json())
+            .then(data => {
+                // Create the chart
+                new Chart(document.getElementById('subscription-chart'), {
+                    type: 'pie', // You can also use 'bar' or 'doughnut'
+                    data: {
+                        labels: ['Subscribed (Yes)', 'Not Subscribed (No)'],
+                        datasets: [{
+                            label: 'User Subscriptions',
+                            data: [data.yes, data.no],
+                            backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(255, 99, 132, 0.2)"], // Colors for Yes and No
+                            borderColor: [
+                                "rgb(75, 192, 192)",
+                                "rgb(255, 99, 132)"
+                            ],
+                            borderWidth: 1,
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                        },
+                    },
+                });
+            })
+            .catch(error => console.error('Error fetching subscription stats:', error));
+    </script>
 </x-admin-layout>

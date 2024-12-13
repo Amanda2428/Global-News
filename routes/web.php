@@ -8,6 +8,9 @@ use App\Http\Controllers\CategoryTypeController as CategoryTypeController;
 use App\Http\Controllers\CommentController as CommentController;
 use App\Http\Controllers\ViewController as ViewController;
 use App\Http\Controllers\LandingController as LandingController;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\CategoryType;
 
 
 Route::get('/', [LandingController::class, 'goToLandingPage'])->name('user.home');
@@ -95,8 +98,31 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user/detail/{id}', [CategoryController::class, 'goToDetailPage'])->name('user.detail');
     Route::get('/search', [CategoryController::class, 'search'])->name('category.search');
 
+    Route::get('/category-analytics', function () {
+        // Most-viewed categories
+        $mostViewedCategories = Category::withCount('views')
+            ->orderByDesc('views_count')
+            ->take(5) 
+            ->get(['id', 'title', 'views_count']);
+    
+        // Categories with the most comments
+        $mostCommentedCategories = Category::withCount('comments')
+            ->orderByDesc('comments_count')
+            ->take(5) 
+            ->get(['id', 'title', 'comments_count']);
+    
+        // Categories count per category type
+        $categoriesPerType = CategoryType::withCount('categories')
+            ->get(['id', 'name', 'categories_count']);
+    
+        return response()->json([
+            'mostViewedCategories' => $mostViewedCategories,
+            'mostCommentedCategories' => $mostCommentedCategories,
+            'categoriesPerType' => $categoriesPerType,
+        ]);
+    });
 
-
+    Route::get('/api/subscription-stats', [AdminUserController::class, 'getSubscriptionStats']);
 
     
 }); 
