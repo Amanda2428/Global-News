@@ -5,13 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <title>{{ config('app.name', 'Worldview Wave') }}</title>
+    <title>{{ config('app.name', 'Worldview Wave') }}</title>
     <meta name="description" content="description here">
     <meta name="keywords" content="keywords,here">
     <link rel="canonical" href="https://themesberg.com/product/tailwind-css/dashboard-windster">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet" />
-    
 
+    <style>
+        /* Style for the dropdowns */
+        #adminDropdown,
+        #categoriesDropdown {
+            width: 100%;
+            z-index: 50;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .shadow-lg {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        
+        .list-reset li a {
+            width: 100%;
+        }
+    </style>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,10 +75,10 @@
                 <div class="flex relative inline-block float-right">
                     <div class="relative text-sm">
                         <button id="userButton" class="flex items-center focus:outline-none">
-                        <img src="{{ Auth::user()->profile ? asset('storage/' . Auth::user()->profile) : asset('images/default-profile.jpg') }}"
-                            alt="User Profile Picture"
-                            class="w-10 h-10 rounded-full object-cover mr-2">
-                            <span class="hidden md:inline-block text-gray-50">Hi,  {{ Auth::user()->name }} </span>
+                            <img src="{{ Auth::user()->profile ? asset('storage/' . Auth::user()->profile) : asset('images/default-profile.jpg') }}"
+                                alt="User Profile Picture"
+                                class="w-10 h-10 rounded-full object-cover mr-2">
+                            <span class="hidden md:inline-block text-gray-50">Hi, {{ Auth::user()->name }} </span>
                             <svg class="pl-2 h-2 fill-current text-white" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
                                 <g>
@@ -116,19 +140,21 @@
                                 class="fas fa-sort-down ml-2"></i>
                         </a>
                         <div id="adminDropdown"
-                            class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
-                            <ul class="list-reset w p-2">
+                            class="absolute left-0 mt-2 w-full lg:w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
+                            <ul class="list-reset w-full">
                                 <li><a href="{{ route('admin.goToUserList') }}"
                                         class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-user mr-2"></i>Users</a></li>
                                 <li><a href="{{ route('admin.goToAdminList') }}"
                                         class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-users-cog mr-2"></i>Admins</a></li>
-                                <li><a href="{{ route('admin.goToAuthorList') }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
-                                            class="fas fa-user-edit mr-2"></i>Authors Listing</a></li>
+                                <li><a href="{{ route('admin.goToAuthorList') }}"
+                                        class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                            class="fas fa-user-edit mr-2"></i>Authors</a></li>
                             </ul>
                         </div>
                     </li>
+
 
                     <li class="mr-6 my-2 md:my-0">
                         <a href="#"
@@ -145,26 +171,32 @@
                                 class="fas fa-sort-down ml-2"></i>
                         </a>
                         <div id="categoriesDropdown"
-                            class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
-                            <ul class="list-reset p-2">
-                                <li><a href="{{ route('admin.goToWorldPage',['id' => 1]) }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                            class="absolute left-5 mt-2 w-full lg:w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
+                            <ul class="list-reset w-full">
+                                <li><a href="{{ route('admin.goToWorldPage',['id' => 1]) }}"
+                                        class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-globe-asia mr-2"></i>World</a></li>
-                                <li><a href="{{ route('admin.goToSportPage',['id' => 2]) }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToSportPage',['id' => 2]) }}"
+                                        class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-futbol mr-2"></i>Sport</a></li>
-                                <li><a href="{{ route('admin.goToBusinessPage',['id' => 3]) }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToBusinessPage',['id' => 3]) }}"
+                                        class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-briefcase mr-2"></i>Business</a></li>
-                                <li><a href="{{ route('admin.goToEducationPage',['id' => 4]) }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                <li><a href="{{ route('admin.goToEducationPage',['id' => 4]) }}"
+                                        class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
                                             class="fas fa-book mr-2"></i>Education</a></li>
-                                <li><a href="{{ route('admin.goToEntertainmentPage',['id' => 5]) }}" class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
-                                            class="fas fa-film mr-2"></i>Entertainment</a></li>
+                                <li><a href="{{ route('admin.goToEntertainmentPage',['id' => 5]) }}"
+                                        class="block py-1 px-2 text-gray-700 hover:bg-gray-200"><i
+                                            class="fas fa-film mr-2"></i>Entertain</a></li>
                             </ul>
                         </div>
                     </li>
 
+
                     <li class="mr-6 my-2 md:my-0">
                         <a href="{{ route('admin.goToComments') }}"
                             class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
-                            <i class="fas fa-comments mr-2"></i></i><span class="pb-1 md:pb-0 text-sm">Comments  Manage</span>
+                            <i class="fas fa-comments mr-2"></i></i><span class="pb-1 md:pb-0 text-sm">Comments Manage</span>
                         </a>
                     </li>
                     <li class="mr-6 my-2 md:my-0">
@@ -182,7 +214,7 @@
                     </li>
                 </ul>
 
-                
+
             </div>
 
         </div>
@@ -308,53 +340,53 @@
         });
     </script>
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Add User Modal
-        const addUserButton = document.querySelector('[data-modal-toggle="add-user-modal"]');
-        const addUserModal = document.getElementById('add-user-modal');
-        const addUserCloseButton = addUserModal.querySelector('[data-modal-toggle="add-user-modal"]');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add User Modal
+            const addUserButton = document.querySelector('[data-modal-toggle="add-user-modal"]');
+            const addUserModal = document.getElementById('add-user-modal');
+            const addUserCloseButton = addUserModal.querySelector('[data-modal-toggle="add-user-modal"]');
 
-        addUserButton.addEventListener('click', () => {
-            addUserModal.classList.remove('hidden');
+            addUserButton.addEventListener('click', () => {
+                addUserModal.classList.remove('hidden');
+            });
+
+            addUserCloseButton.addEventListener('click', () => {
+                addUserModal.classList.add('hidden');
+            });
+
+
         });
+    </script>
+    <script>
+        function openModal(id, title, description, image, video, link, author_id) {
+            // Set values of modal fields
+            document.getElementById('modal-category-id').value = id;
+            document.getElementById('modal-title').value = title;
+            document.getElementById('modal-description').value = description;
+            document.getElementById('modal-social-media-link').value = link;
+            document.getElementById('modal-author-id').value = author_id;
 
-        addUserCloseButton.addEventListener('click', () => {
-            addUserModal.classList.add('hidden');
-        });
+            // Show the modal
+            document.getElementById('user-modal').classList.remove('hidden');
+        }
 
+        function closeModal() {
+            // Hide the modal\
 
-    });
-</script>
-<script>
-    function openModal(id, title, description, image, video, link, author_id) {
-        // Set values of modal fields
-        document.getElementById('modal-category-id').value = id;
-        document.getElementById('modal-title').value = title;
-        document.getElementById('modal-description').value = description;
-        document.getElementById('modal-social-media-link').value = link;
-        document.getElementById('modal-author-id').value = author_id;
+            document.getElementById('user-modal').classList.add('hidden');
+        }
+    </script>
+    <script>
+        function openDeleteModal(id) {
+            document.getElementById('modal-category-id').value = id;
 
-        // Show the modal
-        document.getElementById('user-modal').classList.remove('hidden');
-    }
+            document.getElementById('delete-user-modal').classList.remove('hidden');
+        }
 
-    function closeModal() {
-        // Hide the modal\
-
-        document.getElementById('user-modal').classList.add('hidden');
-    }
-</script>
-<script>
-    function openDeleteModal(id) {
-        document.getElementById('modal-category-id').value = id;
-
-        document.getElementById('delete-user-modal').classList.remove('hidden');
-    }
-
-    function closeDeleteModal() {
-        document.getElementById('delete-user-modal').classList.add('hidden');
-    }
-</script>
+        function closeDeleteModal() {
+            document.getElementById('delete-user-modal').classList.add('hidden');
+        }
+    </script>
 
     <!-- <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
