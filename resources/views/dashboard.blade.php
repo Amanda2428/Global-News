@@ -244,92 +244,101 @@
 
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('/category-analytics')
-                .then(response => response.json())
-                .then(data => {
-                    // Most-Viewed Categories Chart
-                    new Chart(document.getElementById("most-viewed-chart"), {
-                        type: "bar",
-                        data: {
-                            labels: data.mostViewedCategories.map(item => item.title),
-                            datasets: [{
-                                label: "Views",
-                                data: data.mostViewedCategories.map(item => item.views_count),
-                                backgroundColor: "rgba(75, 192, 192, 0.2)",
-                                borderColor: "rgb(75, 192, 192)",
-                                borderWidth: 1,
-                            }],
-                        },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    display: false
-                                }
-                            },
-                        },
-                    });
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    fetch('/category-analytics')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.mostViewedCategories || !data.mostCommentedCategories || !data.categoriesPerType) {
+                console.error("Data is missing or invalid");
+                return;
+            }
 
-                    // Most-Commented Categories Chart
-                    new Chart(document.getElementById("most-commented-chart"), {
-                        type: "bar",
-                        data: {
-                            labels: data.mostCommentedCategories.map(item => item.title),
-                            datasets: [{
-                                label: "Comments",
-                                data: data.mostCommentedCategories.map(item => item.comments_count),
-                                backgroundColor: "rgba(255, 99, 132, 0.2)",
-                                borderColor: "rgb(255, 99, 132)",
-                                borderWidth: 1,
-                            }],
-                        },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    display: false
-                                }
-                            },
-                        },
-                    });
+            // Most-Viewed Categories Chart
+            new Chart(document.getElementById("most-viewed-chart"), {
+                type: "bar",
+                data: {
+                    labels: data.mostViewedCategories.map(item => item.title),
+                    datasets: [{
+                        label: "Views",
+                        data: data.mostViewedCategories.map(item => item.views_count),
+                        backgroundColor: "rgba(75, 192, 192, 0.2)",
+                        borderColor: "rgb(75, 192, 192)",
+                        borderWidth: 1,
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                },
+            });
 
-                    // Categories Count Per Type Chart
-                    new Chart(document.getElementById("categories-type-chart"), {
-                        type: "doughnut",
-                        data: {
-                            labels: data.categoriesPerType.map(item => item.name),
-                            datasets: [{
-                                label: "Categories",
-                                data: data.categoriesPerType.map(item => item.categories_count),
-                                backgroundColor: [
-                                    "rgba(255, 99, 132, 0.2)",
-                                    "rgba(54, 162, 235, 0.2)",
-                                    "rgba(255, 206, 86, 0.2)",
-                                    "rgba(75, 192, 192, 0.2)",
-                                ],
-                                borderColor: [
-                                    "rgb(255, 99, 132)",
-                                    "rgb(54, 162, 235)",
-                                    "rgb(255, 206, 86)",
-                                    "rgb(75, 192, 192)",
-                                ],
-                                borderWidth: 1,
-                            }],
+            // Most-Commented Categories Chart
+            new Chart(document.getElementById("most-commented-chart"), {
+                type: "bar",
+                data: {
+                    labels: data.mostCommentedCategories.map(item => item.title),
+                    datasets: [{
+                        label: "Comments",
+                        data: data.mostCommentedCategories.map(item => item.comments_count),
+                        backgroundColor: "rgba(255, 99, 132, 0.2)",
+                        borderColor: "rgb(255, 99, 132)",
+                        borderWidth: 1,
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                },
+            });
+
+            // Categories Count Per Type Chart
+            new Chart(document.getElementById("categories-type-chart"), {
+                type: "doughnut",
+                data: {
+                    labels: data.categoriesPerType.map(item => item.name),
+                    datasets: [{
+                        label: "Categories",
+                        data: data.categoriesPerType.map(item => item.categories_count),
+                        backgroundColor: [
+                            "rgba(255, 99, 132, 0.2)",
+                            "rgba(54, 162, 235, 0.2)",
+                            "rgba(255, 206, 86, 0.2)",
+                            "rgba(75, 192, 192, 0.2)",
+                        ],
+                        borderColor: [
+                            "rgb(255, 99, 132)",
+                            "rgb(54, 162, 235)",
+                            "rgb(255, 206, 86)",
+                            "rgb(75, 192, 192)",
+                        ],
+                        borderWidth: 1,
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top'
                         },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    position: 'top'
-                                },
-                            },
-                        },
-                    });
-                });
+                    },
+                },
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching category analytics data:", error);
         });
-    </script>
+});
+
+</script>
     <script>
         // Fetch subscription data from the server
         fetch('/api/subscription-stats')

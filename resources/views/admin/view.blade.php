@@ -30,67 +30,90 @@
                 </div>
             </div>
             <div class="flex flex-col">
-                <div class="overflow-x-auto">
-                    <div class="align-middle inline-block min-w-full">
-                        <div class="shadow overflow-hidden">
-                            <table class="table-fixed min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-100">
-                                    <tr>
-                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            User ID
-                                        </th>
-                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            User Name
-                                        </th>
-                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            User Email
-                                        </th>
-                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                            Category Title
-                                        </th>
-                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase text-center">
-                                            Total Views
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    @if($categoryViewCounts->isEmpty())
-                                    <tr>
-                                        <td colspan="5" class="text-center p-4 text-gray-500">
-                                            No views found for any category.
-                                        </td>
-                                    </tr>
-                                    @else
-                                    @foreach ($categoryViewCounts as $categoryViewCount)
-                                    <tr>
-                                        <td class="p-4 text-base font-medium text-gray-900">
-                                            {{ $categoryViewCount->user ? $categoryViewCount->user->id : 'N/A' }}
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900">
-                                            {{ $categoryViewCount->user ? $categoryViewCount->user->name : 'N/A' }}
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900">
-                                            {{ $categoryViewCount->user ? $categoryViewCount->user->email : 'N/A' }}
-                                        </td>
-
-                                        <td class="p-4 text-base font-medium text-gray-900">
-                                            {{ $categoryViewCount->category_title }}
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 text-center">
-                                            {{ $categoryViewCount->total_views }}
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-
-
-
-                        </div>
-                    </div>
-                </div>
+    <div class="overflow-x-auto">
+        <div class="align-middle inline-block min-w-full">
+            <div class="shadow overflow-hidden">
+                <table class="table-fixed min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th scope="col" class="p-4">
+                                <div class="flex items-center">
+                                    <input id="checkbox-all" aria-describedby="checkbox-1"
+                                        type="checkbox"
+                                        class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded">
+                                    <label for="checkbox-all" class="sr-only">checkbox</label>
+                                </div>
+                            </th>
+                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                User ID
+                            </th>
+                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                User Profile
+                            </th>
+                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                User Name
+                            </th>
+                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                User Email
+                            </th>
+                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                Category Title
+                            </th>
+                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase text-center">
+                                Total Views
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @if($categoryViewCounts->isEmpty())
+                        <tr>
+                            <td colspan="7" class="text-center p-4 text-gray-500">
+                                No views found for any category.
+                            </td>
+                        </tr>
+                        @else
+                        @foreach ($categoryViewCounts as $categoryViewCount)
+                        <tr>
+                            <th scope="row" class="p-4">
+                                <div class="flex items-center">
+                                    <input id="checkbox-all" aria-describedby="checkbox-1"
+                                        type="checkbox"
+                                        class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded">
+                                    <label for="checkbox-all" class="sr-only">checkbox</label>
+                                </div>
+                            </th>
+                            <td class="p-4 text-base font-medium text-gray-900">
+                                {{ $categoryViewCount->user ? $categoryViewCount->user->id : 'N/A' }}
+                            </td>
+                            <td class="p-4 text-base font-medium text-gray-900">
+                                @if($categoryViewCount->user && $categoryViewCount->user->profile)
+                                <img src="{{ asset('storage/' . $categoryViewCount->user->profile) }}" alt="Profile Image" class="w-16 h-16 rounded-full">
+                                @else
+                                N/A
+                                @endif
+                            </td>
+                            <td class="p-4 text-base font-medium text-gray-900">
+                                {{ $categoryViewCount->user ? $categoryViewCount->user->name : 'N/A' }}
+                            </td>
+                            <td class="p-4 text-base font-medium text-gray-900">
+                                {{ $categoryViewCount->user ? $categoryViewCount->user->email : 'N/A' }}
+                            </td>
+                            <td class="p-4 text-base font-medium text-gray-900">
+                                {{ $categoryViewCount->category_title }}
+                            </td>
+                            <td class="p-4 text-base font-medium text-gray-900 text-center">
+                                {{ $categoryViewCount->total_views }}
+                            </td>
+                        </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
             </div>
+        </div>
+    </div>
+</div>
+
             <div
                 class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
                 <div class="flex items-center mb-4 sm:mb-0">
