@@ -19,18 +19,11 @@ class ViewController extends Controller
         $categoryViewCounts = ViewModel::join('categories', 'views.category_id', '=', 'categories.id')  // Join with the categories table to get category titles
             ->select('views.user_id', 'views.category_id', DB::raw('COUNT(*) as total_views'), 'categories.title as category_title')
             ->groupBy('views.user_id', 'views.category_id', 'categories.title')
-            ->get();
+            ->paginate(5);
 
         return view('admin.view', compact('categoryViewCounts'));
     }
 
-
-    /**
-     * Search for views based on user email.
-     *
-     * @param Request $request
-     * @return View
-     */
 
     public function viewSearch(Request $request)
     {
@@ -45,13 +38,13 @@ class ViewController extends Controller
                 ->orWhere('users.email', 'LIKE', "%{$query}%")
                 ->select('views.user_id', 'views.category_id', DB::raw('COUNT(*) as total_views'), 'categories.title as category_title', 'users.name', 'users.email')
                 ->groupBy('views.user_id', 'views.category_id', 'categories.title', 'users.name', 'users.email')
-                ->get();
+                ->paginate(5);
         } else {
             // If no query is entered, fetch all records
             $categoryViewCounts = ViewModel::join('categories', 'views.category_id', '=', 'categories.id')
                 ->select('views.user_id', 'views.category_id', DB::raw('COUNT(*) as total_views'), 'categories.title as category_title')
                 ->groupBy('views.user_id', 'views.category_id', 'categories.title')
-                ->get();
+                ->peginate(5);
         }
 
         // Pass the filtered or all data to the view

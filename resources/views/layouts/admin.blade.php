@@ -227,7 +227,7 @@
     </div>
     <!--/container-->
     <!-- =========={ FOOTER }==========  -->
-    <footer class="bg-black text-gray-400">
+    <footer class="bg-black text-gray-400 ">
         <!--Footer content-->
         <div id="footer-content" class="relative pt-8 xl:pt-16 pb-6 xl:pb-12">
             <div class="xl:container mx-auto px-3 sm:px-4 xl:px-2 overflow-hidden">
@@ -351,7 +351,7 @@
         </div>
 
         <!--Start footer copyright-->
-        <div class="footer-dark">
+        <div class="footer-dark ">
             <div class="container py-4 border-t border-gray-200 border-opacity-10">
                 <div class="row">
                     <div class="col-12 col-md text-center">

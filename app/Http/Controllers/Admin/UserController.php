@@ -15,8 +15,15 @@ class UserController extends Controller
 {
     public function listUsers(): View
     {
-        $users = User::where('role', 0)->get();
+        // Apply the where clause before paginating
+        $users = User::where('role', 0)->paginate(5);
         return view('admin.user-list', compact('users'));
+    }
+
+    public function goToAdminList(): View
+    {
+        $admins = User::where('role', 1)->paginate(5); 
+        return view('admin.admin-list', compact('admins'));
     }
 
     public function destroy(Request $request, $id): RedirectResponse
@@ -34,12 +41,6 @@ class UserController extends Controller
 
 
 
-    public function goToAdminList(): View
-    {
-        $admins = User::where('role', '=', 1)->get();
-
-        return view('admin.admin-list', compact('admins'));
-    }
 
     public function adminStore(Request $request): RedirectResponse
     {
@@ -63,15 +64,14 @@ class UserController extends Controller
 
     public function goToDashBoard(): View
     {
-        $users = User::get();
-        $admins = User::where('role', '=', 1)->get();
-        return view('dashboard', compact('users', 'admins'));
+        $users = User::paginate(5);
+        return view('dashboard', compact('users'));
     }
 
     public function userPagesearch(Request $request)
     {
         $query = $request->input('query');
-        $users = User::where('email', 'LIKE', "%$query%")->get();
+        $users = User::where('email', 'LIKE', "%$query%")->paginate(5);
         return view('admin.user-list', compact('query', 'users'));
     }
 
@@ -79,7 +79,6 @@ class UserController extends Controller
     {
 
         $admin = User::where('role', '=', 1)->findOrFail($request->id);
-
 
         // Update other fields
         $admin->name = $request->input('name');
@@ -100,12 +99,12 @@ class UserController extends Controller
         return redirect()->route('admin.goToAdminList')->with('success', 'Admin deleted successfully.');
     }
 
-    public function adminPageSearch(Request $request)
+    public function adminPageSearch(Request $request): View
     {
         $query = $request->input('query');
         $admins = User::where('role', 1)
             ->where('email', 'LIKE', "%$query%")
-            ->get();
+            ->paginate(2); // Ensure paginate is used here
 
         return view('admin.admin-list', compact('query', 'admins'));
     }
@@ -113,19 +112,28 @@ class UserController extends Controller
     //for chart
     public function getSubscriptionStats()
     {
-        // Constants for subscription status
-        $SUBSCRIBED_YES = 1; // "Yes"
-        $SUBSCRIBED_NO = 0;  // "No"
-    
-        // Count the number of users in each category
+        $SUBSCRIBED_YES = 1;
+        $SUBSCRIBED_NO = 0;
         $yesCount = User::where('subscribed', $SUBSCRIBED_YES)->count();
         $noCount = User::where('subscribed', $SUBSCRIBED_NO)->count();
-    
-        // Return the counts as JSON response
+
         return response()->json([
             'yes' => $yesCount,
             'no' => $noCount,
         ]);
     }
-    
+    public function getUserIncreaseStats()
+    {
+
+        $users = User::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+
+
+        return response()->json([
+            'dates' => $users->pluck('date'),
+            'users' => $users->pluck('count'),
+        ]);
+    }
 }

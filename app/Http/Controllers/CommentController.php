@@ -16,7 +16,7 @@ class CommentController extends Controller
         // Validate the incoming data
         $validated = $request->validate([
             'comment' => 'required|string',
-            'category_id' => 'required|exists:categories,id', 
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         // Create and insert the comment into the database
@@ -31,7 +31,7 @@ class CommentController extends Controller
     }
     public function goToComments(): View
     {
-        $comments = Comment::with('category', 'user')->get();
+        $comments = Comment::with('category', 'user')->paginate(5);
         $categories = Category::all();
         $users = User::all();
         return view('admin.comment', compact('comments', 'categories', 'users'));
@@ -47,13 +47,12 @@ class CommentController extends Controller
     public function CommentsPagesearch(Request $request)
     {
         $query = $request->input('query');
-    
+
         $comments = Comment::whereHas('user', function ($q) use ($query) {
             $q->where('name', 'LIKE', "%$query%")
-              ->orWhere('email', 'LIKE', "%$query%");
-        })->with(['user', 'category'])->get();
-    
+                ->orWhere('email', 'LIKE', "%$query%");
+        })->with(['user', 'category'])->paginate(5);
+
         return view('admin.comment', compact('comments', 'query'));
     }
-    
 }

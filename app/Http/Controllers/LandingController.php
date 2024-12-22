@@ -24,6 +24,7 @@ class LandingController extends Controller
                 $postsByCategoryType1 = Category::where('category_type_id', 1)
                         ->with('author')
                         ->latest('created_at')
+                        ->skip(1)
                         ->take(6)
                         ->get();
 

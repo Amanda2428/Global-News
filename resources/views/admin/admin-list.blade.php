@@ -37,7 +37,7 @@
                                         d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                Add More News
+                                Add Admin
                             </button>
                             @elseif(Auth::user()->owner == '0' )
                             <button type="button" data-modal-toggle="add-user-modal"
@@ -48,7 +48,7 @@
                                         d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                Add More News
+                                Add Admin
                             </button>
                             @endif
                         </div>
@@ -221,6 +221,42 @@
                     </div>
                 </div>
             </div>
+            <div class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
+                <div class="flex items-center mb-4 sm:mb-0">
+                    <a href="{{ $admins->previousPageUrl() }}" class="text-gray-500 hover:text-gray-900 cursor-pointer p-1 hover:bg-gray-100 rounded inline-flex justify-center">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <a href="{{ $admins->nextPageUrl() }}" class="text-gray-500 hover:text-gray-900 cursor-pointer p-1 hover:bg-gray-100 rounded inline-flex justify-center mr-2">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <span class="text-sm font-normal text-gray-500">Showing <span class="text-gray-900 font-semibold">{{ $admins->firstItem() }}-{{$admins->lastItem() }}</span> of <span class="text-gray-900 font-semibold">{{ $admins->total() }}</span></span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    @if ($admins->onFirstPage())
+                    <span class="flex-1 text-white bg-gray-300 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center cursor-not-allowed">
+                        Previous
+                    </span>
+                    @else
+                    <a href="{{ $admins->previousPageUrl() }}" class="flex-1 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center">
+                        Previous
+                    </a>
+                    @endif
+                    @if ($admins->hasMorePages())
+                    <a href="{{ $admins->nextPageUrl() }}" class="flex-1 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center">
+                        Next
+                    </a>
+                    @else
+                    <span class="flex-1 text-white bg-gray-300 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center cursor-not-allowed">
+                        Next
+                    </span>
+                    @endif
+
+                </div>
+            </div>
 
             <!-- Add User Modal -->
             <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
@@ -328,7 +364,7 @@
                                     <div class="col-span-6">
                                         <label for="name"
                                             class="text-sm font-medium text-gray-900 block mb-2">Name</label>
-                                        <input type="text" name="name" id="name"
+                                        <input type="text" name="name" id="modal-admin-name"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="Bonnie" required>
                                     </div>
@@ -336,13 +372,13 @@
                                     <div class="col-span-6">
                                         <label for="email"
                                             class="text-sm font-medium text-gray-900 block mb-2">Email</label>
-                                        <input type="email" name="email" id="email"
+                                        <input type="email" name="email" id="modal-admin-email"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="example@company.com" required>
                                     </div>
                                     <div class="col-span-6">
                                         <label for="category_type" class="text-sm font-medium text-gray-900 block mb-2">Role</label>
-                                        <select name="category_type" id="category_type" class="block w-full border border-gray-300 rounded-lg p-2.5">
+                                        <select name="category_type" id="modal-admin-category-type" class="block w-full border border-gray-300 rounded-lg p-2.5">
                                             <option value="" disabled selected>Select Category Type</option>
                                             <option value="1">World Admin</option>
                                             <option value="2">Sport Admin</option>
@@ -398,9 +434,15 @@
         function openUpdateModal(id, name, email, category_type) {
             console.log(id, name, email, category_type); // Debugging the values
             document.getElementById('modal-admin-id').value = id;
-            document.getElementById('name').value = name;
-            document.getElementById('email').value = email;
-            document.getElementById('category_type').value = category_type;
+            document.getElementById('modal-admin-name').value = name;
+            document.getElementById('modal-admin-email').value = email;
+            var select = document.getElementById('modal-admin-category-type');
+            for (var i = 0; i < select.options.length; i++) {
+                if (select.options[i].value == category_type) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
             document.getElementById('update-user-modal').classList.remove('hidden');
         }
 

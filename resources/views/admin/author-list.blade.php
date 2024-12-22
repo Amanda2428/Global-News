@@ -194,7 +194,42 @@
                     </div>
                 </div>
             </div>
+            <div class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
+                <div class="flex items-center mb-4 sm:mb-0">
+                    <a href="{{ $authors->previousPageUrl() }}" class="text-gray-500 hover:text-gray-900 cursor-pointer p-1 hover:bg-gray-100 rounded inline-flex justify-center">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <a href="{{ $authors->nextPageUrl() }}" class="text-gray-500 hover:text-gray-900 cursor-pointer p-1 hover:bg-gray-100 rounded inline-flex justify-center mr-2">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <span class="text-sm font-normal text-gray-500">Showing <span class="text-gray-900 font-semibold">{{ $authors->firstItem() }}-{{$authors->lastItem() }}</span> of <span class="text-gray-900 font-semibold">{{ $authors->total() }}</span></span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    @if ($authors->onFirstPage())
+                    <span class="flex-1 text-white bg-gray-300 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center cursor-not-allowed">
+                        Previous
+                    </span>
+                    @else
+                    <a href="{{ $authors->previousPageUrl() }}" class="flex-1 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center">
+                        Previous
+                    </a>
+                    @endif
+                    @if ($authors->hasMorePages())
+                    <a href="{{ $authors->nextPageUrl() }}" class="flex-1 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center">
+                        Next
+                    </a>
+                    @else
+                    <span class="flex-1 text-white bg-gray-300 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center cursor-not-allowed">
+                        Next
+                    </span>
+                    @endif
 
+                </div>
+            </div>
             <!-- Edit User Modal -->
             <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm" id="update-user-modal">
                 <div class="relative w-full max-w-2xl px-4 h-full md:h-auto ">
@@ -219,36 +254,36 @@
                                 <div class="grid grid-cols-1 gap-6">
                                     <div class="col-span-1">
                                         <label for="image" class="text-sm font-medium text-gray-900 block mb-2">Image</label>
-                                        <input type="file" name="profile" id="profile"
+                                        <input type="file" name="profile" id="modal-profile"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             accept="image/*" required>
                                     </div>
                                     <div class="col-span-1">
                                         <label for="name" class="text-sm font-medium text-gray-900 block mb-2">Name</label>
-                                        <input type="text" name="name" id="name"
+                                        <input type="text" name="name" id="modal-name"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="Bonnie" required>
                                     </div>
                                     <div class="col-span-1">
                                         <label for="email" class="text-sm font-medium text-gray-900 block mb-2">Email</label>
-                                        <input type="email" name="email" id="email"
+                                        <input type="email" name="email" id="modal-email"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="example@company.com" required>
                                     </div>
                                     <div class="col-span-1">
                                         <label for="bio" class="text-sm font-medium text-gray-900 block mb-2">Bio</label>
-                                        <input type="text" name="bio" id="bio"
+                                        <input type="text" name="bio" id="modal-bio"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="Write a short bio" maxlength="150" required>
                                     </div>
                                     <div class="col-span-1">
                                         <label for="phone-number" class="text-sm font-medium text-gray-900 block mb-2">Phone Number</label>
-                                        <input type="tel" name="phone" id="phone" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="e.g. +1234567890" pattern="[+0-9]{1,15}" required>
+                                        <input type="tel" name="phone" id="modal-phone" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="e.g. +1234567890" pattern="[+0-9]{1,15}" required>
                                     </div>
 
                                     <div class="col-span-1">
                                         <label for="address" class="text-sm font-medium text-gray-900 block mb-2">Address</label>
-                                        <textarea name="address" id="address"
+                                        <textarea name="address" id="modal-address"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="Street, City, State, Zip Code" rows="3" required></textarea>
                                     </div>
@@ -349,7 +384,7 @@
                 </div>
             </div>
 
-            @foreach ($authors as $info)
+            @foreach($authors as $info)
             <!-- Delete User Modal -->
             <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm" id="delete-user-modal-{{ $info->id }}">
                 <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
@@ -384,6 +419,7 @@
 
 
 
+
         </main>
     </div>
     <script>
@@ -391,15 +427,15 @@
             // Set values of modal fields
             document.getElementById('modal-author-id').value = id;
 
-            document.getElementById('name').value = name;
-            document.getElementById('email').value = email;
-            document.getElementById('bio').value = bio;
-            document.getElementById('phone').value = phone;
+            document.getElementById('modal-name').value = name;
+            document.getElementById('modal-email').value = email;
+            document.getElementById('modal-bio').value = bio;
+            document.getElementById('modal-phone').value = phone;
 
-            document.getElementById('address').value = address;
+            document.getElementById('modal-address').value = address;
 
             // Clear the file input (no need to set value for profile image)
-            document.getElementById('profile').value = '';
+            document.getElementById('modal-profile').value = '';
 
             // Show the modal
             document.getElementById('update-user-modal').classList.remove('hidden');

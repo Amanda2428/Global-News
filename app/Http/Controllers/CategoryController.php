@@ -16,35 +16,35 @@ class CategoryController extends Controller
 {
     public function goToWorldPage($id): View
     {
-        $categories = Category::where('category_type_id', '=', $id)->with('author')->get();
+        $categories = Category::where('category_type_id', '=', $id)->with('author')->paginate(5);
         $authors = Author::get();
         return view('admin.world', compact('categories', 'authors'));
     }
 
     public function goToSportPage($id): View
     {
-        $categories = Category::where('category_type_id', '=', $id)->with('author')->get();
+        $categories = Category::where('category_type_id', '=', $id)->with('author')->paginate(5);
         $authors = Author::get();
         return view('admin.sport', compact('categories', 'authors'));
     }
 
     public function goToBusinessPage($id): View
     {
-        $categories = Category::where('category_type_id', '=', $id)->with('author')->get();
+        $categories = Category::where('category_type_id', '=', $id)->with('author')->paginate(5);
         $authors = Author::get();
         return view('admin.business', compact('categories', 'authors'));
     }
 
     public function goToEducationPage($id): View
     {
-        $categories = Category::where('category_type_id', '=', $id)->with('author')->get();
+        $categories = Category::where('category_type_id', '=', $id)->with('author')->paginate(5);
         $authors = Author::get();
         return view('admin.education', compact('categories', 'authors'));
     }
 
     public function goToEntertainmentPage($id): View
     {
-        $categories = Category::where('category_type_id', '=', $id)->with('author')->get();
+        $categories = Category::where('category_type_id', '=', $id)->with('author')->paginate(5);
         $authors = Author::get();
         return view('admin.entertainment', compact('categories', 'authors'));
     }
@@ -160,7 +160,7 @@ class CategoryController extends Controller
     public function WorldPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
-        $categories = Category::where('title', 'LIKE', "%$query%")->get();
+        $categories = Category::where('title', 'LIKE', "%$query%")->paginate(5);
         $authors = Author::get();
 
         return view('admin.world', compact('categories', 'query', 'authors'));
@@ -169,7 +169,7 @@ class CategoryController extends Controller
     public function SportPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
-        $categories = Category::where('title', 'LIKE', "%$query%")->get();
+        $categories = Category::where('title', 'LIKE', "%$query%")->paginate(5);
         $authors = Author::get();
         return view('admin.sport', compact('categories', 'query', 'authors'));
     }
@@ -177,7 +177,7 @@ class CategoryController extends Controller
     public function BusinessPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
-        $categories = Category::where('title', 'LIKE', "%$query%")->get();
+        $categories = Category::where('title', 'LIKE', "%$query%")->paginate(5);
         $authors = Author::get();
         return view('admin.business', compact('categories', 'query', 'authors'));
     }
@@ -185,7 +185,7 @@ class CategoryController extends Controller
     public function EntertainmentPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
-        $categories = Category::where('title', 'LIKE', "%$query%")->get();
+        $categories = Category::where('title', 'LIKE', "%$query%")->paginate(5);
         $authors = Author::get();
         return view('admin.entertainment', compact('categories', 'query', 'authors'));
     }
@@ -193,7 +193,7 @@ class CategoryController extends Controller
     public function EducationPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
-        $categories = Category::where('title', 'LIKE', "%$query%")->get();
+        $categories = Category::where('title', 'LIKE', "%$query%")->paginate(5);
         $authors = Author::get();
         return view('admin.education', compact('categories', 'query', 'authors'));
     }

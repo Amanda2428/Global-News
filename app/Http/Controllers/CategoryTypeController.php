@@ -13,7 +13,7 @@ class CategoryTypeController extends Controller
 {
     public function goToCategoryTypes(): View
     {
-        $category_types = CategoryType::all();
+        $category_types = CategoryType::paginate(5);
         return view('admin.category-types', compact('category_types'));
     }
 
@@ -61,7 +61,7 @@ class CategoryTypeController extends Controller
     {
         $query = $request->input('query'); // Get the search query
 
-        $category_types = CategoryType::where('name', 'LIKE', "%$query%")->get();
+        $category_types = CategoryType::where('name', 'LIKE', "%$query%")->paginate(5);
 
 
         // Pass the results and the query back to the view

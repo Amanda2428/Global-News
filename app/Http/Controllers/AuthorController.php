@@ -12,7 +12,7 @@ class AuthorController extends Controller
 {
     public function goToAuthorList(): View
     {
-        $authors = Author::get();
+        $authors = Author::paginate(5);
         return view('admin.author-list', compact('authors'));
     }
 
@@ -42,6 +42,7 @@ class AuthorController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
+
         // Find the author by ID
         $author = Author::findOrFail($request->id);
     
@@ -69,7 +70,6 @@ class AuthorController extends Controller
         // Save the changes to the author record
         $author->save();
     
-        // Redirect back with success message
         return redirect()->route('admin.goToAuthorList')->with('success', 'Author data updated successfully!');
     }
         public function destroy($id)
@@ -83,12 +83,11 @@ class AuthorController extends Controller
     public function AuthorPagesearch(Request $request)
     {
         $query = $request->input('query'); 
-        $authors= Author::where('email', 'LIKE', "%$query%")->get();
+        $authors= Author::where('email', 'LIKE', "%$query%")->paginate(5);
         return view('admin.author-list', compact( 'query','authors'));
     }
 
-// In your controller
-// In your controller method
+// for author details
 public function goToAuthorPage($authorId)
 {
     // Fetch the author along with their categories
@@ -97,6 +96,22 @@ public function goToAuthorPage($authorId)
     // Pass the author and categories to the view
     return view('user.author-detail', compact('author'));
 }
+public function getAuthorsCategoryStats()
+{
+    $data = Author::with(['categories.categoryType'])
+        ->get()
+        ->map(function ($author) {
+            return [
+                'author' => $author->name,
+                'category_counts' => $author->categories
+                    ->groupBy(fn($category) => $category->categoryType->name)
+                    ->map->count(),
+            ];
+        });
+
+    return response()->json($data);
+}
+
 
 
     

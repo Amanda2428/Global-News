@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\CommentController as CommentController;
 use App\Http\Controllers\ViewController as ViewController;
 use App\Http\Controllers\LandingController as LandingController;
 use App\Models\User;
+use App\Models\Author;
 use App\Models\Category;
 use App\Models\CategoryType;
 
@@ -103,9 +105,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/api/subscription-stats', [AdminUserController::class, 'getSubscriptionStats']);
     Route::get('/admin/analysis', [LandingController::class, 'goToAnalysisPage'])->name('admin.goToAnalysis');
-
+    Route::get('/api/user-increase', [AdminUserController::class, 'getUserIncreaseStats']);
+    Route::get('/api/authors-category-type', [AuthorController::class, 'getAuthorsCategoryStats']);
     
-}); 
+});
 
 
 
