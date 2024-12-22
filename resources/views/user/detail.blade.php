@@ -8,7 +8,9 @@
             <!-- Author Info -->
             <div class="flex items-center  justify-center space-x-4 mb-8 text-sm text-gray-500">
                 <a href="{{route('user.author-list',['id' => $item->author->id])}}">
-                    <img class="w-14 h-14 rounded-full object-cover" src="{{ $item->author->profile ? asset( $item->author->profile) : asset('images/default-profile.jpg')}}" alt="Author Profile">
+                    <img class="h-14 w-14 rounded-full object-cover"
+                                                src="{{ asset('images/' . ($item->author->profile ?? 'default-profile.jpg')) }}"
+                                                alt="Author Avatar">
                 </a>
 
                 <a href="{{route('user.author-list',['id' => $item->author->id])}}">

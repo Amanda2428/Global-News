@@ -155,8 +155,8 @@
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             {{ $info->id }}
                                         </td>
-                                        <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-                                            <img class="h-50 w-50 rounded-full"
+                                        <td class="p-4 h-25 w-25 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
+                                            <img class=" max-w-full w-25 sm:w-32 rounded-full "
                                                 src="{{ asset('images/' . ($info->profile ?? 'default-profile.jpg')) }}"
                                                 alt="Author Avatar">
                                         </td>
@@ -272,26 +272,26 @@
                                             placeholder="example@company.com" required>
                                     </div>
                                     <div class="col-span-1">
+                                        <label for="phone-number" class="text-sm font-medium text-gray-900 block mb-2">Phone Number</label>
+                                        <input type="tel" name="phone" id="modal-phone" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="e.g. +1234567890" pattern="[+0-9]{1,15}" required>
+                                    </div>
+                                    <div class="col-span-1">
                                         <label for="bio" class="text-sm font-medium text-gray-900 block mb-2">Bio</label>
                                         <input type="text" name="bio" id="modal-bio"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                             placeholder="Write a short bio" maxlength="150" required>
                                     </div>
-                                    <div class="col-span-1">
-                                        <label for="phone-number" class="text-sm font-medium text-gray-900 block mb-2">Phone Number</label>
-                                        <input type="tel" name="phone" id="modal-phone" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="e.g. +1234567890" pattern="[+0-9]{1,15}" required>
-                                    </div>
-
+                                
                                     <div class="col-span-1">
                                         <label for="address" class="text-sm font-medium text-gray-900 block mb-2">Address</label>
                                         <textarea name="address" id="modal-address"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                            placeholder="Street, City, State, Zip Code" rows="3" required></textarea>
+                                            placeholder="Street, City, State, Zip Code" rows="2" required></textarea>
                                     </div>
                                 </div>
                             </div>
                             <!-- Modal footer -->
-                            <div class="items-center p-6 border-t border-gray-200 rounded-b">
+                            <div class="items-center p-3 border-t border-gray-200 rounded-b">
                                 <button class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Save</button>
                             </div>
                         </form>
@@ -425,13 +425,14 @@
         </main>
     </div>
     <script>
-        function openUpdateModal(id, profile, name, email, bio, phone, address) {
+        function openUpdateModal(id, profile, name, email,phone, bio,  address) {
             // Set values of modal fields
             document.getElementById('modal-author-id').value = id;
             document.getElementById('modal-name').value = name;
             document.getElementById('modal-email').value = email;
-            document.getElementById('modal-bio').value = bio;
             document.getElementById('modal-phone').value = phone;
+            document.getElementById('modal-bio').value = bio;
+    
             document.getElementById('modal-address').value = address;
 
             // Clear the file input (no need to set value for profile image)
@@ -440,6 +441,10 @@
             // Show the modal
             document.getElementById('update-user-modal').classList.remove('hidden');
         }
+        function closeUpdateModal() {
+        // Hide the modal
+        document.getElementById('update-user-modal').classList.add('hidden');
+    }
     </script>
 
     <script>

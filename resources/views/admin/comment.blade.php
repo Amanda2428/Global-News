@@ -1,7 +1,7 @@
 <x-admin-layout>
     <div id="main-content" class="h-full w-full bg-gray-50 ">
         <main>
-
+   
             <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
                 <div class="mb-1 w-full">
                     <div class="mb-4">
@@ -30,7 +30,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="container mt-1">
+                
+            </div>
+            <div class="container mt-1">
                     @if(session('success'))
                     <div class="relative w-full px-5 py-4 mx-auto">
                         <div class="p-6 border-l-4 border-green-600 rounded-r-xl bg-green-100">
@@ -72,7 +74,6 @@
                     @endif
 
                 </div>
-            </div>
             <div class="flex flex-col">
                 <div class="overflow-x-auto">
                     <div class="align-middle inline-block min-w-full">

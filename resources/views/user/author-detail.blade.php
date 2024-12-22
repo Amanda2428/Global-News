@@ -15,7 +15,9 @@
                         <div class="p-4 border border-gray-100 bg-gray-200 mb-4 ">
                             <div class="flex flex-row items-center">
                                 <div class="rounded-full overflow-hidden">
-                                    <img class="border max-w-full w-20 sm:w-32 rounded-full" src="{{ asset($author->profile ?? 'images/default-profile.jpg') }}" alt="author">
+                                    <img class="border max-w-full w-20 sm:w-32 rounded-full"  src="{{ asset('images/' . ($author->profile ?? 'default-profile.jpg')) }}"
+                                    alt="Author Avatar">
+                                   
                                 </div>
                                 <div class="ml-8">
                                     <h4 class="text-2xl">

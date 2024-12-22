@@ -62,6 +62,7 @@ class LandingController extends Controller
                         ->limit(5)
                         ->get();
                 $popularPostsFor5 = Category::withCount('views')
+                        ->where('category_type_id', 5)
                         ->orderBy('views_count', 'desc')
                         ->limit(5)
                         ->get();
