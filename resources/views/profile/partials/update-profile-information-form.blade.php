@@ -60,7 +60,7 @@
             <div class="mt-1 flex items-center gap-1">
                 <!-- Current Profile Picture -->
                 <img id="profilePreview"
-                    src="{{ $user->profile ? asset('storage/' . $user->profile) : asset('images/default-profile.jpg') }}"
+                    src="{{ $user-> profile ? asset('storage/' . $user->profile) : asset('images/default-profile.jpg') }}"
                     alt="Profile Picture Preview"
                     class="w-16 h-16 rounded-full object-cover border border-gray-300 " />
 

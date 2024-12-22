@@ -453,27 +453,31 @@
         });
     </script>
     <script>
-        function openModal(id, title, description, image, video, link, author_id) {
-            // Set values of modal fields
+        // Open modal and populate fields with data
+        function openModal(id, title, description, image, video, social_media_link, author_id) {
+            // Set values for the modal inputs
             document.getElementById('modal-category-id').value = id;
             document.getElementById('modal-title').value = title;
             document.getElementById('modal-description').value = description;
-            document.getElementById('modal-social-media-link').value = link;
+            document.getElementById('modal-image').value = ''; // Reset image input (cannot set file input value with JS)
+            document.getElementById('modal-video').value = ''; // Reset video input (cannot set file input value with JS)
+            document.getElementById('modal-social-media-link').value = social_media_link;
             document.getElementById('modal-author-id').value = author_id;
 
             // Show the modal
             document.getElementById('user-modal').classList.remove('hidden');
         }
 
+        // Close the modal
         function closeModal() {
-            // Hide the modal\
-
             document.getElementById('user-modal').classList.add('hidden');
         }
     </script>
     <script>
-        function openDeleteModal(id) {
-            document.getElementById('modal-category-id').value = id;
+        function openDeleteModal(categoryId) {
+            const deleteRoute = "{{ route('admin.category.destroy') }}";
+            const deleteLink = `${deleteRoute}?category_id=${categoryId}`;
+            document.getElementById('modal-delete-link').setAttribute('href', deleteLink);
 
             document.getElementById('delete-user-modal').classList.remove('hidden');
         }
@@ -482,6 +486,7 @@
             document.getElementById('delete-user-modal').classList.add('hidden');
         }
     </script>
+
 
     <!-- <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>

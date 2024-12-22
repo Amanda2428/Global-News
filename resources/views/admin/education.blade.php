@@ -223,7 +223,7 @@
                             </table>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
 
             <div class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
@@ -278,7 +278,7 @@
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <form method="POST" action="{{ route('admin.category.update' ) }}">
+                        <form method="POST" action="{{ route('admin.category.update') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="p-2 space-y-3">
@@ -296,6 +296,7 @@
                                         <label for="image" class="text-sm font-medium text-gray-900 block mb-2">Image</label>
                                         <input type="file" name="image" id="modal-image" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" accept="image/*">
                                     </div>
+
                                     <div class="col-span-6">
                                         <label for="video" class="text-sm font-medium text-gray-900 block mb-2">Video</label>
                                         <input type="file" name="video" id="modal-video" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" accept="video/*">
@@ -409,8 +410,8 @@
                 </div>
             </div>
 
-            <!-- Delete Modal  -->
-            <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
+              <!-- Delete Modal  -->
+              <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
                 id="delete-user-modal">
                 <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
                     <!-- Modal content -->
@@ -437,7 +438,8 @@
                             </svg>
                             <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to delete
                                 this data?</h3>
-                            <a href="{{ route('admin.category.destroy', [ 'id' => 4 ])}}?category_id={{ $items->id }}"
+                            <!-- Dynamic delete link -->
+                            <a id="modal-delete-link"
                                 class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
                                 Yes, I'm sure
                             </a>

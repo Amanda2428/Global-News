@@ -157,7 +157,8 @@
                                         </td>
                                         <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
                                             <img class="h-50 w-50 rounded-full"
-                                                src="{{ asset($info->profile ?? 'images/default-profile.jpg') }}" alt="Author Avatar">
+                                                src="{{ asset('images/' . ($info->profile ?? 'default-profile.jpg')) }}"
+                                                alt="Author Avatar">
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             {{ $info->name }}
@@ -245,7 +246,7 @@
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <form method="POST" action="{{ route('author.update') }}">
+                        <form method="POST" action="{{ route('author.update') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="p-2 space-y-3">
@@ -325,6 +326,7 @@
                         <!-- Modal body -->
                         <div class="p-2 space-y-3">
                             <form action="{{ route('author.store') }}" method="POST" enctype="multipart/form-data">
+
                                 @csrf
                                 <div class="grid grid-cols-1 gap-6">
                                     <!-- Profile Picture Upload -->
@@ -426,12 +428,10 @@
         function openUpdateModal(id, profile, name, email, bio, phone, address) {
             // Set values of modal fields
             document.getElementById('modal-author-id').value = id;
-
             document.getElementById('modal-name').value = name;
             document.getElementById('modal-email').value = email;
             document.getElementById('modal-bio').value = bio;
             document.getElementById('modal-phone').value = phone;
-
             document.getElementById('modal-address').value = address;
 
             // Clear the file input (no need to set value for profile image)
@@ -439,13 +439,6 @@
 
             // Show the modal
             document.getElementById('update-user-modal').classList.remove('hidden');
-        }
-
-
-
-        function closeUpdateModal() {
-            // Hide the modal
-            document.getElementById('update-user-modal').classList.add('hidden');
         }
     </script>
 

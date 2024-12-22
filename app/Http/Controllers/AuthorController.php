@@ -18,31 +18,49 @@ class AuthorController extends Controller
 
     public function store(Request $request)
     {
-
         // Get all other data except the image
         $data = $request->only(['name', 'email', 'phone', 'bio', 'address']);
-
+    
         // Check if the image (profile picture) is uploaded
         if ($request->hasFile('profile')) {
             $file = $request->file('profile');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-
+    
+            // Move the file to the 'images' folder
             $file->move(public_path('images'), $filename);
-
-            $data['profile'] = 'images/' . $filename;
+    
+            // Add the image filename to the data array
+            $data['profile'] = $filename;
         }
-
-        $author = Author::create($data);
-
-        $authors = Author::all();
-
-        return view('admin.author-list', compact('authors'));
+    
+        // Create a new author
+        Author::create($data);
+    
+        // Get the current page number from the query string, defaulting to 1
+        $page = $request->get('page', 1);
+    
+        // Paginate the authors (assuming you want 5 authors per page)
+        $authors = Author::paginate(5);
+    
+        // Return the view with the paginated authors and preserve the page parameter
+        return redirect()->route('admin.goToAuthorList', ['page' => $page])->with('success', 'Author added successfully!');
     }
-
+    
+    
+    
 
     public function update(Request $request): RedirectResponse
     {
-
+        // Validate the incoming request
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:authors,email,' . $request->id,
+            'bio' => 'required|string|max:150',
+            'phone' => 'required|regex:/^\+?[0-9]{1,15}$/',
+            'address' => 'required|string',
+            'profile' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate image upload
+        ]);
+    
         // Find the author by ID
         $author = Author::findOrFail($request->id);
     
@@ -64,7 +82,7 @@ class AuthorController extends Controller
             $file = $request->file('profile');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images'), $filename);
-            $author->profile = $filename;  // Update the profile field
+            $author->profile = $filename;  // Save only the filename in the database
         }
     
         // Save the changes to the author record
@@ -72,6 +90,8 @@ class AuthorController extends Controller
     
         return redirect()->route('admin.goToAuthorList')->with('success', 'Author data updated successfully!');
     }
+    
+    
         public function destroy($id)
     {
         // Find the author by ID and delete
