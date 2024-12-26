@@ -13,7 +13,8 @@
                                 @foreach ($categories->unique('category_type_id') as $items)
                                 <h2 class="text-gray-800 text-2xl font-bold">
 
-                                    <span class="inline-block h-5 border-l-2 border-red-600 mr-2 "></span>{{ $items->categoryType->name }}
+                                <span class="inline-block h-5 border-l-2 border-red-600 mr-2 "></span>{{ optional($items->categoryType)->name ?? 'Unknown' }}
+
                                 </h2>
                                 @endforeach
                             </div>

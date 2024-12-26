@@ -94,6 +94,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/comment-delete/{id}', [CommentController::class, 'destroy'])->name('admin.commentDelete');
     Route::get('/admin/comment-search', [CommentController::class, 'CommentsPagesearch'])->name('admin.CommentsPagesearch');
     Route::post('user/submit-comment', [CommentController::class, 'userComment'])->name('user.comment');
+    Route::delete('/user/comment/{id}', [CommentController::class, 'destroyCommentUser'])->name('user.comment.destroy');
+    Route::patch('/user/comment/{id}', [CommentController::class, 'updateCommentUser'])->name('user.comment.update');
+    
+
 
     // user site
 
@@ -107,7 +111,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/analysis', [LandingController::class, 'goToAnalysisPage'])->name('admin.goToAnalysis');
     Route::get('/api/user-increase', [AdminUserController::class, 'getUserIncreaseStats']);
     Route::get('/api/authors-category-type', [AuthorController::class, 'getAuthorsCategoryStats']);
-    
 });
 
 

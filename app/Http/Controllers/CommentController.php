@@ -29,6 +29,34 @@ class CommentController extends Controller
 
         return redirect()->back()->with('success', 'Comment added successfully!');
     }
+    public function updateCommentUser(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'comment' => 'required|string|max:1000',
+        ]);
+
+        $comment = Comment::findOrFail($id);
+        $comment->description = $validated['comment'];
+        $comment->save();
+        return redirect()->back()->with('status', 'Comment updated successfully!');
+
+    }
+
+
+    public function destroyCommentUser($id)
+    {
+        // Find the comment by ID
+        $comment = Comment::findOrFail($id);
+        if ($comment->user_id !== Auth::id()) {
+            return redirect()->back()->with('error', 'You are not authorized to delete this comment.');
+        }
+
+        // Delete the comment
+        $comment->delete();
+
+        return redirect()->back()->with('success', 'Comment deleted successfully!');
+    }
+
     public function goToComments(): View
     {
         $comments = Comment::with('category', 'user')->paginate(5);

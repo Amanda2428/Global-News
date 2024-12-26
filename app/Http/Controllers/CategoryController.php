@@ -173,16 +173,24 @@ class CategoryController extends Controller
     public function WorldPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
-        $categories = Category::where('title', 'LIKE', "%$query%")->paginate(5);
+    
+        // Filter categories by title and category_type_id
+        $categories = Category::where('category_type_id', $id)
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(5);
+    
         $authors = Author::get();
-
+    
         return view('admin.world', compact('categories', 'query', 'authors'));
     }
+    
 
     public function SportPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
-        $categories = Category::where('title', 'LIKE', "%$query%")->paginate(5);
+        $categories = Category::where('category_type_id', $id)
+        ->where('title', 'LIKE', "%$query%")
+        ->paginate(5);
         $authors = Author::get();
         return view('admin.sport', compact('categories', 'query', 'authors'));
     }
@@ -190,7 +198,9 @@ class CategoryController extends Controller
     public function BusinessPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
-        $categories = Category::where('title', 'LIKE', "%$query%")->paginate(5);
+        $categories = Category::where('category_type_id', $id)
+        ->where('title', 'LIKE', "%$query%")
+        ->paginate(5);
         $authors = Author::get();
         return view('admin.business', compact('categories', 'query', 'authors'));
     }
@@ -198,7 +208,9 @@ class CategoryController extends Controller
     public function EntertainmentPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
-        $categories = Category::where('title', 'LIKE', "%$query%")->paginate(5);
+        $categories = Category::where('category_type_id', $id)
+        ->where('title', 'LIKE', "%$query%")
+        ->paginate(5);
         $authors = Author::get();
         return view('admin.entertainment', compact('categories', 'query', 'authors'));
     }
@@ -206,7 +218,9 @@ class CategoryController extends Controller
     public function EducationPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
-        $categories = Category::where('title', 'LIKE', "%$query%")->paginate(5);
+        $categories = Category::where('category_type_id', $id)
+        ->where('title', 'LIKE', "%$query%")
+        ->paginate(5);
         $authors = Author::get();
         return view('admin.education', compact('categories', 'query', 'authors'));
     }
