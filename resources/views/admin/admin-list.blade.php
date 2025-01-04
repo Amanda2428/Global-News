@@ -284,7 +284,7 @@
                         <div class="p-2 space-y-3">
                             <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="grid grid-cols-6 gap-6">
+                                <div class="grid grid-cols-6 gap-4">
                                     <div class="col-span-6">
                                         <label for="name"
                                             class="text-sm font-medium text-gray-900 block mb-2">Name</label>

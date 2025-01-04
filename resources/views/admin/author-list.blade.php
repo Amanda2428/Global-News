@@ -257,7 +257,7 @@
                                         <label for="image" class="text-sm font-medium text-gray-900 block mb-2">Image</label>
                                         <input type="file" name="profile" id="modal-profile"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                            accept="image/*" required>
+                                            accept="image/*" >
                                     </div>
                                     <div class="col-span-1">
                                         <label for="name" class="text-sm font-medium text-gray-900 block mb-2">Name</label>

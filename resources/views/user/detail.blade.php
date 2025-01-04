@@ -3,7 +3,9 @@
     <body class="bg-gray-100 text-gray-800">
         <div class="container mx-auto px-4 py-8">
             <!-- News Title -->
-            <h1 class="text-4xl font-bold text-center mb-6">{{ $item->title }}</h1>
+            <h1 class="text-4xl  font-bold text-indigo-500 text-center  mb-5">({{$item->categoryType->name}})</h1>
+            <h2 class="text-4xl font-bold text-center mb-6">{{ $item->title }}</h2>
+            
 
             <!-- Author Info -->
             <div class="flex items-center  justify-center space-x-4 mb-8 text-sm text-gray-500">
@@ -20,6 +22,7 @@
                 <span>•</span>
                 <span>Uploaded on: <time
                         datetime="{{ $item->created_at->toDateString() }}">{{ $item->created_at->format('F j, Y') }}</time></span>
+              
             </div>
 
 

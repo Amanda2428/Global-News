@@ -250,7 +250,7 @@
                             <div class="p-2 space-y-3">
                                 <!-- Hidden input for the category ID -->
                                 <input type="hidden" name="id" id="modal-category-id" value="">
-                                <div class="grid grid-cols-6 gap-6">
+                                <div class="grid grid-cols-6 gap-4">
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="category-type-name" class="text-sm font-medium text-gray-900 block mb-2">Category Types Name</label>
                                         <input type="text" name="category-type-name" id="category-type-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Enter category type name" required>
@@ -291,7 +291,7 @@
                         <div class="p-2 space-y-3">
                             <form action="{{ route('category-types.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="grid grid-cols-6 gap-6">
+                                <div class="grid grid-cols-6 gap-4">
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="category-type-name" class="text-sm font-medium text-gray-900 block mb-2">Category Types Name</label>
                                         <input type="text" name="category-type-name" id="category-type-name"

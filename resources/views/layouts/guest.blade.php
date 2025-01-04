@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Worldview Wave') }}</title>
+    <title>{{ config('app.name', 'Worldview Waves') }}</title>
 
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
@@ -26,7 +26,7 @@
         <nav class="bg-black">
             <div class="xl:container mx-auto px-3 sm:px-4 xl:px-2">
                 <div class="flex justify-between">
-                    <div class="mx-w-10 text-2xl font-bold capitalize text-white flex items-center">Worldview Wave</div>
+                    <div class="mx-w-10 text-2xl font-bold capitalize text-white flex items-center">Worldview Waves</div>
 
                     <div class="flex flex-row">
                         <!-- Go to Top Button -->
@@ -120,7 +120,7 @@
             <!-- Navigation links -->
             <div class="mb-auto">
                 <nav class="relative flex flex-wrap">
-                    <div class="text-center py-4 w-full font-bold border-b border-gray-100">Worldview Wave</div>
+                    <div class="text-center py-4 w-full font-bold border-b border-gray-100">Worldview Waves</div>
                     <ul id="side-menu" class="w-full float-none flex flex-col">
                         <li class="relative">
                             <a href="{{route('user.home')}}"

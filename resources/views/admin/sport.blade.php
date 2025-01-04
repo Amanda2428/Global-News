@@ -1,4 +1,5 @@
 <x-admin-layout>
+
     <div id="main-content" class="h-full w-full bg-gray-50 ">
         <main>
 
@@ -117,7 +118,7 @@
                                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                                             Video
                                         </th>
-                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase ">
                                             Title
                                         </th>
                                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
@@ -142,6 +143,7 @@
                                     </tr>
                                     @else
                                     @foreach ($categories as $items)
+
                                     <tr class="hover:bg-gray-100">
                                         <td class="p-4 w-4">
                                             <div class="flex items-center">
@@ -152,47 +154,49 @@
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{ $items->id }}</td>
                                         <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-                                            <img class="h-30 w-30" src="/images/{{ $items->image }}" alt="Image">
+                                            <div class="aspect-w-16 aspect-h-9 w-36">
+                                                <img class="w-36 h-36 object-cover" src="/images/{{ $items->image }}" alt="Image">
+                                            </div>
                                         </td>
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            <video class="h-50 w-50" controls>
-                                                <source src="/videos/{{ $items->video }}" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
+                                            <div class="aspect-w-20 aspect-h-9 w-36">
+                                                <video class="object-cover" controls>
+                                                    <source src="/videos/{{ $items->video }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            </div>
                                         </td>
-                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{ $items->title }}</td>
-                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            {{ Str::limit($items->description, 40, '...') }}
+                                        <td class="p-4 whitespace-normal break-words text-base font-medium text-gray-900">
+                                            {!! Str::limit($items->title, 100) !!}
                                         </td>
-                                        <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-                                            <a href="{{ $items->social_media_link }}" target="_blank">{{ $items->social_media_link }}</a>
+                                        <td class="p-4 whitespace-normal break-words text-base font-medium text-gray-900">
+                                            {!! Str::limit($items->description, 100) !!}
                                         </td>
+                                        <td class="p-4 whitespace-normal text-base break-words font-medium text-gray-900 text-blue-500 underline hover:text-blue-700">
+                                            <a href="{{ $items->social_media_link }}" target="_blank">
+                                                {!! Str::limit($items->social_media_link, 20) !!}
+                                            </a>
+                                        </td>
+
                                         <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">
                                             {{ $items->author->name ?? 'N/A' }}
                                         </td>
-
                                         <td class="p-4 whitespace-nowrap space-x-2">
                                             @if (Auth::user()->owner == '1' || Auth::user()->category_type == '2')
                                             <button type="button"
-                                                onclick="openModal('{{ $items->id }}', '{{ $items->title }}', '{{ $items->description }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{ $items->author_id }}')"
+                                                onclick="openModal('{{ $items->id }}', '{{ json_encode($items->title) }}', '{{ json_encode($items->description) }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{ $items->author_id }}')"
                                                 class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
                                                 <i class="fas fa-edit mr-2"></i>Edit Content
                                             </button>
-                                            <button type="button" onclick="openDeleteModal('{{ $items->id }}')" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                <i class="fas fa-trash-alt mr-2"></i>Delete Content
-                                            </button>
-                                            @elseif(Auth::user()->owner == '0' || Auth::user()->category_type == '0')
-                                            <button type="button"
-                                                onclick="openModal('{{ $items->id }}', '{{ $items->title }}', '{{ $items->description }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{ $items->author_id }}')"
-                                                class="hidden text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                <i class="fas fa-edit mr-2"></i>Edit Content
-                                            </button>
-                                            <button type="button" onclick="openDeleteModal('{{ $items->id }}')" class="hidden text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
+
+                                            <button type="button" onclick="openDeleteModal('{{ $items->id }}')"
+                                                class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
                                                 <i class="fas fa-trash-alt mr-2"></i>Delete Content
                                             </button>
                                             @endif
                                         </td>
                                     </tr>
+
                                     @endforeach
                                     @endif
                                 </tbody>
@@ -240,7 +244,7 @@
             </div>
 
 
-          
+
             <!-- Edit User Modal -->
             <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm" id="user-modal">
 
@@ -256,20 +260,21 @@
                                 </svg>
                             </button>
                         </div>
+
                         <!-- Modal body -->
                         <form method="POST" action="{{ route('admin.category.update') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="p-2 space-y-3">
                                 <input type="hidden" name="id" id="modal-category-id" value="">
-                                <div class="grid grid-cols-6 gap-6">
+                                <div class="grid grid-cols-6 gap-4">
                                     <div class="col-span-6">
                                         <label for="title" class="text-sm font-medium text-gray-900 block mb-2">Title</label>
                                         <input type="text" name="title" id="modal-title" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" required>
                                     </div>
                                     <div class="col-span-6">
                                         <label for="description" class="text-sm font-medium text-gray-900 block mb-2">Description</label>
-                                        <textarea name="description" id="modal-description" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" rows="2" required></textarea>
+                                        <textarea name="description" id="modal-description" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" rows="4" required></textarea>
                                     </div>
                                     <div class="col-span-6">
                                         <label for="image" class="text-sm font-medium text-gray-900 block mb-2">Image</label>
@@ -333,7 +338,7 @@
                         <div class="p-2 space-y-3">
                             <form action="{{ route('admin.category.store', ['id' => 2 ]) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="grid grid-cols-6 gap-6">
+                                <div class="grid grid-cols-6 gap-4">
                                     <div class="col-span-6">
                                         <label for="title" class="text-sm font-medium text-gray-900 block mb-2">Title</label>
                                         <input type="text" name="title" id="title"
@@ -345,7 +350,7 @@
                                         <label for="description" class="text-sm font-medium text-gray-900 block mb-2">Description</label>
                                         <textarea name="description" id="description"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                            placeholder="Enter description" rows="3" required></textarea>
+                                            placeholder="Enter description" rows="4" required></textarea>
                                     </div>
 
                                     <div class="col-span-6">
@@ -389,8 +394,8 @@
                 </div>
             </div>
 
-           <!-- Delete Modal  -->
-           <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
+            <!-- Delete Modal  -->
+            <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm"
                 id="delete-user-modal">
                 <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
                     <!-- Modal content -->

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Worldview Wave'),
+    'name' => env('APP_NAME', 'Worldview Waves'),
 
     /*
     |--------------------------------------------------------------------------

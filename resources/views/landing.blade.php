@@ -12,15 +12,13 @@
                         <a href="{{route('user.detail', ['id' => $latestPost->id])}}">
                             <img class="max-w-full w-full align-middle h-full  object-cover mx-auto" src="{{ asset('images/' . $latestPost->image) }}" alt="{{ $latestPost->title }}">
                         </a>
-                        <div class="absolute px-5 pt-6 pb-5 bottom-0 w-full bg-gray-800 bg-opacity-40">
-                            <h2 class="text-4xl font-bold capitalize text-white mb-3">{{ $latestPost->title }}</h2>
+                        <div class="absolute px-5 pt-6 pb-5 bottom-0 w-full bg-gray-800 bg-opacity-30">
+                            <h2 class="text-3xl font-bold capitalize text-white mb-3">{{ $latestPost->title }}</h2>
                             <p class="text-white hidden sm:inline-block text-base">
                                 {{ Str::limit($latestPost->description, 120, '...') }}
                             </p>
-                            <div class="pt-2">
-                                <div class="text-white ">
-                                    <div class="inline-block h-4 border-l-2 border-red-600 mr-2"></div> {{ $latestPost->author->name ?? 'Unknown Author' }}
-                                </div>
+                            <div class="pt-1 text-white">
+                                <div class="inline-block h-4 border-l-2 border-red-600 mr-2"></div> {{ $latestPost->CategoryType->name ?? 'Unknown Author' }}
                             </div>
                         </div>
                         @endif
@@ -32,10 +30,12 @@
                 <div class="flex-shrink max-w-full w-full lg:w-1/2 flex flex-col items-center justify-center">
                     <div class="mt-2 box-one flex flex-row flex-wrap flex-1 items-stretch justify-center">
                         @foreach($latestPostsByCategories as $post)
-                        <div class=" max-w-full w-full sm:w-1/2 flex flex-col ">
-                            <div class="relative hover-img max-h-48 overflow-hidden">
-                                <a href="{{route('user.detail', ['id' => $post->id])}}" class="w-full h-full block">
-                                    <img class="w-full h-full object-contain" src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}">
+                        <div class="max-w-full w-full sm:w-1/2 flex flex-col">
+                            <div class="relative hover-img  h-52 overflow-hidden">
+                                <a href="{{ route('user.detail', ['id' => $post->id]) }}" class="w-full h-full block">
+                                    <img class="w-full h-full object-cover"
+                                        src="{{ asset('images/' . $post->image) }}"
+                                        alt="{{ $post->title }}">
                                 </a>
                                 <div class="absolute px-4 pt-2 pb-2 bottom-0 w-full bg-gradient-cover bg-gray-800 bg-opacity-40">
                                     <a href="#">
@@ -43,7 +43,8 @@
                                     </a>
                                     <div class="pt-1">
                                         <div class="text-gray-100">
-                                            <div class="inline-block h-3 border-l-2 border-red-600 mr-2 mb-2"></div> {{ $post->author->name ?? 'Unknown Author' }}
+                                            <div class="inline-block h-3 border-l-2 border-red-600 mr-2 "></div>
+                                            {{ $post->CategoryType->name ?? 'Unknown Author' }}
                                         </div>
                                     </div>
                                 </div>
@@ -76,8 +77,12 @@
                         @foreach($postsByCategoryType1 as $post)
                         <div class="flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100">
                             <div class="flex flex-row sm:block hover-img">
-                                <a href="{{ route('user.detail', ['id' => $post->id]) }}" class="w-full h-64 block">
-                                    <img class="w-full h-full object-contain mx-auto" src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}">
+                                <a href="{{ route('user.detail', ['id' => $post->id]) }}" class="w-full h-62 block">
+                                    <div class="relative w-full h-0 pb-[56.25%]">
+                                        <img class="absolute inset-0 w-full h-full object-cover "
+                                            src="{{ asset('images/' . $post->image) }}"
+                                            alt="{{ $post->title }}">
+                                    </div>
                                 </a>
                                 <div class="py-0 sm:py-3 pl-3 sm:pl-0">
                                     <h3 class="text-lg font-bold leading-tight mb-2">
@@ -86,13 +91,14 @@
                                     <p class="hidden md:block text-gray-600 leading-tight mb-1">{{ Str::limit($post->description, 80, '...') }}</p>
                                     <a class="text-gray-500" href="#">
                                         <span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
-                                        {{ $post->categoryType->name ?? 'Unknown Category' }}
+                                        {{ $post->author->name ?? 'Unknown Author' }}
                                     </a>
                                 </div>
                             </div>
                         </div>
                         @endforeach
                     </div>
+
 
 
                 </div>
@@ -170,7 +176,7 @@
                                         <div class="w-full pb-3">
                                             <div class="hover-img bg-white">
                                                 <a href="{{route('user.detail', ['id' => $post->id])}}">
-                                                    <img class="max-w-full w-full mx-auto h-80 object-contain"
+                                                    <img class="max-w-full w-full mx-auto h-80 object-cover"
                                                         src="/images/{{ $post->image }}"
                                                         alt="{{ $post->title }}">
                                                 </a>
@@ -212,21 +218,28 @@
                         @foreach ($categoryType3Posts as $post)
                         <div class="flex-shrink max-w-full w-full sm:w-1/2 lg:w-1/4 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100">
                             <div class="flex flex-row sm:block hover-img">
-                                <a href="{{ route('user.detail', ['id' => $post->id]) }}">
-                                    <img class="w-full h-48 object-cover mx-auto" src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}">
+                                <a href="{{ route('user.detail', ['id' => $post->id]) }}" class="w-full block">
+                                    <div class="relative w-full h-0 pb-[56.25%]"> <!-- Aspect ratio for 16:9 -->
+                                        <img class="absolute inset-0 w-full h-full object-cover "
+                                            src="{{ asset('images/' . $post->image) }}"
+                                            alt="{{ $post->title }}">
+                                    </div>
                                 </a>
                                 <div class="py-0 sm:py-3 pl-3 sm:pl-0">
                                     <h3 class="text-lg font-bold leading-tight mb-2">
                                         <a href="{{ route('user.detail', ['id' => $post->id]) }}">{{ $post->title }}</a>
                                     </h3>
-                                    <p class="hidden md:block text-gray-600 leading-tight mb-1">{{ Str::limit($post->description, 120) }}</p>
+                                    <p class="hidden md:block text-gray-600 leading-tight mb-1">
+                                        {{ Str::limit($post->description, 80, '...') }}
+                                    </p>
                                     <a class="text-gray-500" href="#">
                                         <span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
-                                        {{ $post->author->name ?? 'Unknown Author' }}
+                                        {{ $post->categoryType->name ?? 'Unknown Category' }}
                                     </a>
                                 </div>
                             </div>
                         </div>
+
                         @endforeach
                     </div>
                 </div>
@@ -248,23 +261,24 @@
                         </h2>
                     </div>
                     <div class="flex flex-row flex-wrap -mx-3">
-                        <div class="flex-shrink max-w-full w-full px-3 pb-5">
+                        <div class="flex-shrink max-w-full w-full px-3 pb-5 ">
                             <div class="relative hover-img max-h-98 overflow-hidden">
                                 <!-- thumbnail -->
-                                <a href="{{ route('user.detail', ['id' => $latestCategoryType4Post->id]) }}">
-                                    <img class="w-full h-80 object-cover mx-auto" src="{{ asset('images/' . $latestCategoryType4Post->image) }}" alt="{{ $latestCategoryType4Post->title }}">
+                                <a href="{{ route('user.detail', ['id' => $latestCategoryType4Post->id]) }}" class="">
+                                    <img class="w-full h-96 object-cover mx-auto" src="{{ asset('images/' . $latestCategoryType4Post->image) }}" alt="{{ $latestCategoryType4Post->title }}">
                                 </a>
-                                <div class="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
+
+                                <div class="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover bg-gray-800 bg-opacity-30 ">
                                     <!-- title -->
                                     <a href="{{ route('user.detail', ['id' => $latestCategoryType4Post->id]) }}">
-                                        <h2 class="text-3xl font-bold capitalize text-black mb-3">
+                                        <h2 class="text-3xl font-bold capitalize text-white mb-3">
                                             {{ $latestCategoryType4Post->title }}
                                         </h2>
                                     </a>
-                                    <p class="text-gray-800 hidden sm:inline-block">{{ Str::limit($latestCategoryType4Post->description, 120) }}</p>
+                                    <p class="text-white hidden sm:inline-block">{{ Str::limit($latestCategoryType4Post->description, 120) }}</p>
                                     <!-- author and date -->
                                     <div class="pt-2">
-                                        <div class="text-gray-800">
+                                        <div class="text-white">
                                             <div class="inline-block h-3 border-l-2 border-red-600 mr-2"></div>
                                             {{ $latestCategoryType4Post->author->name ?? 'Unknown Author' }}
                                         </div>
@@ -277,8 +291,12 @@
                         @foreach($categoryType4Posts as $post)
                         <div class="flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100">
                             <div class="flex flex-row sm:block hover-img">
-                                <a href="{{ route('user.detail', ['id' => $post->id]) }}" class="w-full h-64 block">
-                                    <img class="w-full h-full object-contain mx-auto" src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}">
+                                <a href="{{ route('user.detail', ['id' => $post->id]) }}" class="w-full h-62 block">
+                                    <div class="relative w-full h-0 pb-[56.25%]">
+                                        <img class="absolute inset-0 w-full h-full object-cover "
+                                            src="{{ asset('images/' . $post->image) }}"
+                                            alt="{{ $post->title }}">
+                                    </div>
                                 </a>
                                 <div class="py-0 sm:py-3 pl-3 sm:pl-0">
                                     <h3 class="text-lg font-bold leading-tight mb-2">
@@ -287,7 +305,7 @@
                                     <p class="hidden md:block text-gray-600 leading-tight mb-1">{{ Str::limit($post->description, 80, '...') }}</p>
                                     <a class="text-gray-500" href="#">
                                         <span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
-                                        {{ $post->categoryType->name ?? 'Unknown Category' }}
+                                        {{ $post->author->name ?? 'Unknown Author' }}
                                     </a>
                                 </div>
                             </div>
@@ -300,10 +318,11 @@
                     <div class="w-full bg-white  border-2 border-gray-200 rounded-lg overflow-hidden ">
                         <div class="mb-6">
                             <div class="p-4 dark:bg-gray-300">
-                                <h2 class="text-lg font-bold">Most Popular</h2>
+                                <h2 class="text-lg font-bold">Most Popular Education News</h2>
                             </div>
                             <ul class="post-number">
                                 @foreach($popularPostsFor4 as $post)
+
                                 <li class="border-b border-gray-300 hover:bg-gray-50">
                                     <a class="text-lg font-bold px-6 py-3 flex flex-row items-center" href="{{ route('user.detail', $post->id) }}">
                                         {{ $post->title }}
@@ -319,34 +338,67 @@
     </div>
 
     <!-- block news -->
-    <div class="bg-gray-50 py-6">
+    <div class="bg-gray-50 py-2">
         <div class="xl:container mx-auto px-3 sm:px-4 xl:px-2">
+            <div class="w-full py-3">
+                <h2 class="text-gray-800 text-2xl font-bold mb-5">
+                    <span class="inline-block h-5 border-l-4 border-red-600 mr-2"></span>Entertainment News
+                </h2>
+            </div>
             <div class="flex flex-row flex-wrap">
-                <!-- post -->
-                <div class="flex-shrink max-w-full w-full lg:w-2/3 overflow-hidden">
-                    <div class="w-full py-3">
-                        <h2 class="text-gray-800 text-2xl font-bold mb-10">
-                            <span class="inline-block h-5 border-l-4 border-red-600 mr-2"></span>Entertainment News
-                        </h2>
+                <!-- sidebar (Most Popular) on the left -->
+                <div class="flex-shrink max-w-full w-full lg:w-1/3 lg:pl-4 lg:pr-8  lg:pb-8 order-first lg:order-first">
+                    <div class="w-full bg-white border-2 border-gray-200 rounded-lg overflow-hidden">
+                        <div class="mb-6">
+                            <div class="p-4 dark:bg-gray-300">
+                                <h2 class="text-lg font-bold">Most Popular Entertainment News</h2>
+                            </div>
+                            <ul class="post-number">
+                                @foreach($popularPostsFor5 as $post)
+                                <li class="border-b border-gray-300 hover:bg-gray-50 p-4 flex">
+                                    <!-- Post Image -->
+                                    <div class="w-1/3">
+                                        <img src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}" class="w-full h-auto object-cover">
+                                    </div>
+                                    <!-- Post Details -->
+                                    <div class="w-2/3 px-4 py-3">
+                                        <a href="{{ route('user.detail', $post->id) }}" class="text-lg font-bold hover:underline">
+                                            {{ $post->title }}
+                                        </a>
+                                        <div class="text-sm text-gray-500">
+                                            {{ $post->created_at->format('d M Y') }} | {{ $post->CategoryType->name ?? 'Unknown Category' }}
+                                        </div>
+                                    </div>
+                                </li>
+                                @endforeach
+
+                            </ul>
+                        </div>
                     </div>
+                </div>
+
+
+                <!-- post content on the right -->
+                <div class="flex-shrink max-w-full w-full lg:w-2/3 overflow-hidden">
+
                     <div class="flex flex-row flex-wrap -mx-3">
                         <div class="flex-shrink max-w-full w-full px-3 pb-5">
                             <div class="relative hover-img max-h-98 overflow-hidden">
                                 <!-- thumbnail -->
-                                <a href="{{ route('user.detail', ['id' => $latestCategoryType5Post->id]) }}">
-                                    <img class="w-full h-80 object-cover mx-auto" src="{{ asset('images/' . $latestCategoryType5Post->image) }}" alt="{{ $latestCategoryType4Post->title }}">
+                                <a href="{{ route('user.detail', ['id' => $latestCategoryType5Post->id]) }}" class="">
+                                    <img class="w-full h-96 object-cover mx-auto" src="{{ asset('images/' . $latestCategoryType5Post->image) }}" alt="{{ $latestCategoryType5Post->title }}">
                                 </a>
-                                <div class="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
+                                <div class="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover bg-gray-800 bg-opacity-30 ">
                                     <!-- title -->
                                     <a href="{{ route('user.detail', ['id' => $latestCategoryType5Post->id]) }}">
-                                        <h2 class="text-3xl font-bold capitalize text-black mb-3">
+                                        <h2 class="text-3xl font-bold capitalize text-white mb-3">
                                             {{ $latestCategoryType5Post->title }}
                                         </h2>
                                     </a>
-                                    <p class="text-gray-800 hidden sm:inline-block">{{ Str::limit($latestCategoryType5Post->description, 120) }}</p>
+                                    <p class="text-white hidden sm:inline-block">{{ Str::limit($latestCategoryType5Post->description, 120) }}</p>
                                     <!-- author and date -->
                                     <div class="pt-2">
-                                        <div class="text-gray-800">
+                                        <div class="text-white">
                                             <div class="inline-block h-3 border-l-2 border-red-600 mr-2"></div>
                                             {{ $latestCategoryType5Post->author->name ?? 'Unknown Author' }}
                                         </div>
@@ -357,8 +409,12 @@
                         @foreach($categoryType5Posts as $post)
                         <div class="flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100">
                             <div class="flex flex-row sm:block hover-img">
-                                <a href="{{ route('user.detail', ['id' => $post->id]) }}" class="w-full h-64 block">
-                                    <img class="w-full h-full object-contain mx-auto" src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}">
+                                <a href="{{ route('user.detail', ['id' => $post->id]) }}" class="w-full h-62 block">
+                                    <div class="relative w-full h-0 pb-[56.25%]">
+                                        <img class="absolute inset-0 w-full h-full object-cover "
+                                            src="{{ asset('images/' . $post->image) }}"
+                                            alt="{{ $post->title }}">
+                                    </div>
                                 </a>
                                 <div class="py-0 sm:py-3 pl-3 sm:pl-0">
                                     <h3 class="text-lg font-bold leading-tight mb-2">
@@ -367,37 +423,18 @@
                                     <p class="hidden md:block text-gray-600 leading-tight mb-1">{{ Str::limit($post->description, 80, '...') }}</p>
                                     <a class="text-gray-500" href="#">
                                         <span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
-                                        {{ $post->categoryType->name ?? 'Unknown Category' }}
+                                        {{ $post->author->name ?? 'Unknown Author' }}
                                     </a>
                                 </div>
                             </div>
                         </div>
                         @endforeach
-
-                    </div>
-                </div>
-                <!-- sidebar -->
-                <div class="flex-shrink max-w-full w-full lg:w-1/3 lg:pl-8 lg:pt-14 lg:pb-8 order-first lg:order-last">
-                    <div class="w-full bg-white  border-2 border-gray-200 rounded-lg overflow-hidden ">
-                        <div class="mb-6">
-                            <div class="p-4 dark:bg-gray-300">
-                                <h2 class="text-lg font-bold">Most Popular</h2>
-                            </div>
-                            <ul class="post-number">
-                                @foreach($popularPostsFor5 as $post)
-                                <li class="border-b border-gray-300 hover:bg-gray-50">
-                                    <a class="text-lg font-bold px-6 py-3 flex flex-row items-center" href="{{ route('user.detail', $post->id) }}">
-                                        {{ $post->title }}
-                                    </a>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     {{-- </main><!-- end main --> --}}
 </x-guest-layout>
 <script>

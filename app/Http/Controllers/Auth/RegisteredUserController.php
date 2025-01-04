@@ -41,7 +41,7 @@ class RegisteredUserController extends Controller
                     ->letters() // At least one letter
                     ->mixedCase() // Both uppercase and lowercase letters
                     ->numbers() // At least one number
-                    ->symbols() // At least one special character
+
             ],
             'subscribed' => ['required', 'integer'],
         ]);
