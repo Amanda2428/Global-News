@@ -89,7 +89,7 @@
                                 @if($categoryViewCount->user && $categoryViewCount->user->profile)
                                 <img src="{{ asset('storage/' . $categoryViewCount->user->profile) }}" alt="Profile Image" class="w-16 h-16 rounded-full">
                                 @else
-                                N/A
+                                <img src="{{ asset('images/default-profile.jpg') }}" alt="Profile Image" class="w-16 h-16 rounded-full">
                                 @endif
                             </td>
                             <td class="p-4 text-base font-medium text-gray-900">

@@ -272,16 +272,16 @@
             fetch('/category-analytics')
                 .then(response => response.json())
                 .then(data => {
-                    if (!data.mostViewedCategories || !data.mostCommentedCategories || !data.categoriesPerType) {
-                        console.error("Data is missing or invalid");
-                        return;
+                    // Function to truncate text to 40 characters
+                    function truncateText(text, maxLength = 15) {
+                        return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
                     }
 
                     // Most-Viewed Categories Chart
                     new Chart(document.getElementById("most-viewed-chart"), {
                         type: "bar",
                         data: {
-                            labels: data.mostViewedCategories.map(item => item.title),
+                            labels: data.mostViewedCategories.map(item => truncateText(item.title)),
                             datasets: [{
                                 label: "Views",
                                 data: data.mostViewedCategories.map(item => item.views_count),
@@ -304,7 +304,7 @@
                     new Chart(document.getElementById("most-commented-chart"), {
                         type: "bar",
                         data: {
-                            labels: data.mostCommentedCategories.map(item => item.title),
+                            labels: data.mostCommentedCategories.map(item => truncateText(item.title)),
                             datasets: [{
                                 label: "Comments",
                                 data: data.mostCommentedCategories.map(item => item.comments_count),
@@ -327,7 +327,7 @@
                     new Chart(document.getElementById("categories-type-chart"), {
                         type: "doughnut",
                         data: {
-                            labels: data.categoriesPerType.map(item => item.name),
+                            labels: data.categoriesPerType.map(item => truncateText(item.name)),
                             datasets: [{
                                 label: "Categories",
                                 data: data.categoriesPerType.map(item => item.categories_count),
@@ -355,9 +355,6 @@
                             },
                         },
                     });
-                })
-                .catch(error => {
-                    console.error("Error fetching category analytics data:", error);
                 });
         });
     </script>

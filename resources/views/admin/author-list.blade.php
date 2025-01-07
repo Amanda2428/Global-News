@@ -355,7 +355,7 @@
                                     <!-- Phone Number Field -->
                                     <div class="col-span-1">
                                         <label for="phone-number" class="text-sm font-medium text-gray-900 block mb-2">Phone Number</label>
-                                        <input type="tel" name="phone" id="phone-number" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="e.g. +1234567890" pattern="[+0-9]{1,15}" required>
+                                        <input type="tel" name="phone" id="phone-number" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="e.g. 12615541541" pattern="[+0-9]{1,15}" required>
                                     </div>
 
                                     <!-- Bio Field -->

@@ -234,7 +234,7 @@
                                     </p>
                                     <a class="text-gray-500" href="#">
                                         <span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
-                                        {{ $post->categoryType->name ?? 'Unknown Category' }}
+                                        {{ $post->author->name ?? 'Unknown Category' }}
                                     </a>
                                 </div>
                             </div>

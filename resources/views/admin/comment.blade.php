@@ -93,6 +93,7 @@
                                             class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                                             Comment ID
                                         </th>
+
                                         <th scope="col"
                                             class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                                             User Name
