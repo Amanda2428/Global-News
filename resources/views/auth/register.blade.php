@@ -1,4 +1,46 @@
 <x-auth-layout>
+<div class="container mt-1">
+                        @if(session('success'))
+                        <div class="relative w-full px-5 py-4 mx-auto">
+                            <div class="p-6 border-l-4 border-green-600 rounded-r-xl bg-green-100">
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <svg class="w-5 h-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm text-green-600">
+                                            <p>{{ session('success') }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if(session('error'))
+                        <div class="relative w-full px-5 py-4 mx-auto">
+                            <div class="p-6 border-l-4 border-red-600 rounded-r-xl bg-red-100">
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                                            <path fill="currentColor"
+                                                d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm text-red-700">
+                                            <p>{{ session('error') }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+                    </div>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -38,22 +80,6 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
-
-
-        <!-- <div class="mt-4">
-            <x-input-label for="profile_picture" :value="__('Profile Picture')" class="mb-2"/>
-            <form>
-                <div class="flex items-center space-x-6">
-                        <div class="shrink-0">
-                            <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="https://lh3.googleusercontent.com/a-/AFdZucpC_6WFBIfaAbPHBwGM9z8SxyM1oV4wB4Ngwp_UyQ=s96-c" alt="Current profile photo" />
-                        </div>
-                    <label class="block">
-                        <span class="sr-only">Choose profile photo</span>
-                        <input type="file" onchange="loadFile(event)" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 " />
-                    </label>
-                </div>
-            </form>
-        </div> -->
 
 
         <div class="mt-4">

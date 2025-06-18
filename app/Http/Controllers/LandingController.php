@@ -53,8 +53,8 @@ class LandingController extends Controller
                 $categoryType4Posts = Category::where('category_type_id', 4)
                         ->with('author')
                         ->latest('created_at')
-                        ->skip(1) // Skipping the first post (latest one already fetched)
-                        ->take(6)
+                        ->skip(1) 
+                        ->take(3)
                         ->get();
                 $popularPostsFor4 = Category::withCount('views')
                         ->where('category_type_id', 4)
@@ -97,6 +97,7 @@ class LandingController extends Controller
                 $categoriesPerType = CategoryType::withCount('categories')
                         ->get(['id', 'name', 'categories_count']);
 
+                        
                 return response()->json([
                         'mostViewedCategories' => $mostViewedCategories,
                         'mostCommentedCategories' => $mostCommentedCategories,

@@ -99,18 +99,18 @@ class CategoryController extends Controller
     {
         $category_id = $request->query('category_id');
         $category = Category::find($category_id);
-    
+
         if ($category) {
             $category->delete();
             session()->flash('success', 'Category has been successfully deleted.');
         } else {
             session()->flash('error', 'Category not found.');
         }
-    
+
         // Redirect to the previous page
         return redirect()->back();
     }
-    
+
 
     public function update(Request $request)
     {
@@ -173,24 +173,24 @@ class CategoryController extends Controller
     public function WorldPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
-    
+
         // Filter categories by title and category_type_id
         $categories = Category::where('category_type_id', $id)
             ->where('title', 'LIKE', "%$query%")
             ->paginate(5);
-    
+
         $authors = Author::get();
-    
+
         return view('admin.world', compact('categories', 'query', 'authors'));
     }
-    
+
 
     public function SportPagesearch(Request $request, $id)
     {
         $query = $request->input('query');
         $categories = Category::where('category_type_id', $id)
-        ->where('title', 'LIKE', "%$query%")
-        ->paginate(5);
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(5);
         $authors = Author::get();
         return view('admin.sport', compact('categories', 'query', 'authors'));
     }
@@ -199,8 +199,8 @@ class CategoryController extends Controller
     {
         $query = $request->input('query');
         $categories = Category::where('category_type_id', $id)
-        ->where('title', 'LIKE', "%$query%")
-        ->paginate(5);
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(5);
         $authors = Author::get();
         return view('admin.business', compact('categories', 'query', 'authors'));
     }
@@ -209,8 +209,8 @@ class CategoryController extends Controller
     {
         $query = $request->input('query');
         $categories = Category::where('category_type_id', $id)
-        ->where('title', 'LIKE', "%$query%")
-        ->paginate(5);
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(5);
         $authors = Author::get();
         return view('admin.entertainment', compact('categories', 'query', 'authors'));
     }
@@ -219,8 +219,8 @@ class CategoryController extends Controller
     {
         $query = $request->input('query');
         $categories = Category::where('category_type_id', $id)
-        ->where('title', 'LIKE', "%$query%")
-        ->paginate(5);
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(5);
         $authors = Author::get();
         return view('admin.education', compact('categories', 'query', 'authors'));
     }
@@ -233,8 +233,10 @@ class CategoryController extends Controller
         return view(('user.categories'), compact('categories', 'authors', 'category_types'));
     }
 
-    public function goToDetailPage($id): \Illuminate\Contracts\View\View
+    public function goToDetailPage($id): mixed
     {
+
+
         $item = Category::findOrFail($id);
         $latestCategories = Category::latest()->take(5)->get();
         $comments = Comment::where('category_id', $id)->with('user')->latest()->get();
@@ -248,6 +250,7 @@ class CategoryController extends Controller
 
         return view('user.detail', compact('item', 'latestCategories', 'comments', 'totalViews'));
     }
+
     public function search(Request $request)
     {
         $searchTerm = $request->get('query');

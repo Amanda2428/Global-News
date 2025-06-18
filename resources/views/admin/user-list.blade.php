@@ -1,4 +1,4 @@
-<x-admin-layout>
+    <x-admin-layout>
     <div id="main-content" class="h-full w-full bg-gray-50 ">
         <main>
 

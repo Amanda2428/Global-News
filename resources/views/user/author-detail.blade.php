@@ -125,9 +125,5 @@
             </div>
         </div>
     </main>
-
-
-
-
 </x-guest-layout>
 <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>

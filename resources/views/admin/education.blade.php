@@ -207,7 +207,7 @@
                                             {{ $items->author->name ?? 'N/A' }}
                                         </td>
                                         <td class="p-4 whitespace-nowrap space-x-2">
-                                            @if (Auth::user()->owner == '1' || Auth::user()->category_type == '2')
+                                            @if (Auth::user()->owner == '1' || Auth::user()->category_type == '4')
                                             <button type="button"
                                                 onclick="openModal('{{ $items->id }}', '{{ json_encode($items->title) }}', '{{ json_encode($items->description) }}', '{{ $items->image }}', '{{ $items->video }}', '{{ $items->social_media_link }}', '{{ $items->author_id }}')"
                                                 class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">

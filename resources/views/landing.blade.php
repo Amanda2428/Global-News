@@ -38,13 +38,13 @@
                                         alt="{{ $post->title }}">
                                 </a>
                                 <div class="absolute px-4 pt-2 pb-2 bottom-0 w-full bg-gradient-cover bg-gray-800 bg-opacity-40">
-                                    <a href="#">
+                                    <a href="">
                                         <h2 class="text-lg font-bold capitalize leading-tight text-white mb-1">{{ $post->title }}</h2>
                                     </a>
                                     <div class="pt-1">
                                         <div class="text-gray-100">
                                             <div class="inline-block h-3 border-l-2 border-red-600 mr-2 "></div>
-                                            {{ $post->CategoryType->name ?? 'Unknown Author' }}
+                                            {{ $post->CategoryType->name ?? 'Category Type' }}
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                         <a href="{{ route('user.detail', ['id' => $post->id]) }}">{{ $post->title }}</a>
                                     </h3>
                                     <p class="hidden md:block text-gray-600 leading-tight mb-1">{{ Str::limit($post->description, 80, '...') }}</p>
-                                    <a class="text-gray-500" href="#">
+                                    <a class="text-gray-500" href="{{route('user.author-list', ['id' => $post->author->id])}}">
                                         <span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
                                         {{ $post->author->name ?? 'Unknown Author' }}
                                     </a>
@@ -184,7 +184,7 @@
                                                     <h3 class="text-lg font-bold leading-tight mb-2">
                                                         <a href="{{route('user.detail', ['id' => $post->id])}}">{{ $post->title }}</a>
                                                     </h3>
-                                                    <a class="text-gray-500" href="#"><span
+                                                    <a class="text-gray-500" href="{{route('user.author-list', ['id' => $post->author->id])}}"><span
                                                             class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>{{ $post->author->name ?? 'Unknown Author' }}</a>
                                                 </div>
                                             </div>
@@ -232,7 +232,7 @@
                                     <p class="hidden md:block text-gray-600 leading-tight mb-1">
                                         {{ Str::limit($post->description, 80, '...') }}
                                     </p>
-                                    <a class="text-gray-500" href="#">
+                                    <a class="text-gray-500" href="{{route('user.author-list', ['id' => $post->author->id])}}">
                                         <span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
                                         {{ $post->author->name ?? 'Unknown Category' }}
                                     </a>
@@ -303,7 +303,7 @@
                                         <a href="{{ route('user.detail', ['id' => $post->id]) }}">{{ $post->title }}</a>
                                     </h3>
                                     <p class="hidden md:block text-gray-600 leading-tight mb-1">{{ Str::limit($post->description, 80, '...') }}</p>
-                                    <a class="text-gray-500" href="#">
+                                    <a class="text-gray-500" href="{{route('user.author-list', ['id' => $post->author->id])}}">
                                         <span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
                                         {{ $post->author->name ?? 'Unknown Author' }}
                                     </a>
@@ -421,7 +421,7 @@
                                         <a href="{{ route('user.detail', ['id' => $post->id]) }}">{{ $post->title }}</a>
                                     </h3>
                                     <p class="hidden md:block text-gray-600 leading-tight mb-1">{{ Str::limit($post->description, 80, '...') }}</p>
-                                    <a class="text-gray-500" href="#">
+                                    <a class="text-gray-500" href="{{route('user.author-list', ['id' => $post->author->id])}}">
                                         <span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
                                         {{ $post->author->name ?? 'Unknown Author' }}
                                     </a>

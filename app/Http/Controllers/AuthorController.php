@@ -6,6 +6,7 @@ use App\Models\Author;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 use Redirect;
 
 class AuthorController extends Controller
@@ -110,12 +111,19 @@ class AuthorController extends Controller
 // for author details
 public function goToAuthorPage($authorId)
 {
-    // Fetch the author along with their categories
+    // Check if the user is logged in
+    if (!Auth::check()) {
+        // Redirect to login page if not logged in
+        return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+
+    }
+
     $author = Author::with('categories')->findOrFail($authorId);
 
     // Pass the author and categories to the view
     return view('user.author-detail', compact('author'));
 }
+
 public function getAuthorsCategoryStats()
 {
     $data = Author::with(['categories.categoryType'])
@@ -131,16 +139,6 @@ public function getAuthorsCategoryStats()
 
     return response()->json($data);
 }
-
-
-
-    
-    
-    
-    
-    
-  
-    
-    
+   
     
 }
